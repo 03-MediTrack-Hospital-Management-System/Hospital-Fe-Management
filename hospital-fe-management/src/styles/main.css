@@ -185,10 +185,11 @@ body {
 }
 
 .container {
-  max-width: 1500px;   /* or 1280px */
-  margin: 0 50px 0 80px;
-  padding: 0 20px;
+  max-width: 1280px;
+  margin: 0 auto;      /* CENTER ALWAYS */
+  padding: 0 20px;    /* MOBILE SAFE */
 }
+
 /* ================= ABOUT SECTION ================= */
 
 .hero-about-section {
@@ -233,7 +234,7 @@ body {
   border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   text-align: center;
-  border: 1px solid #eef2f5;
+  border: 1px solid #eef2f5;  
 }
 
 /* Icon placeholder (matches image style) */
@@ -579,4 +580,279 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+/* =========================
+   SPECIALTIES SECTION
+========================= */
+
+.hero-specailits-section {
+  padding: 100px 20px;
+  background: #ffffff;
+}
+
+.specialties {
+  max-width: 1280px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+.section-title {
+  text-align: center;
+  color: #2fb6a6; /* Medico green */
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* Small pill heading */
+.specialties::before {
+  content: "CENTRES OF EXCELLENCE";
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2aa7a1;
+  background: #e8f7f6;
+  border-radius: 20px;
+}
+
+/* Main heading */
+.specialities-heading {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.specialities-heading span {
+  color: #56c5c1;
+}
+
+/* Description text */
+.specialties p {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #6b7c85;
+  line-height: 1.6;
+}
+
+/* =========================
+   CARDS GRID
+========================= */
+
+.specialties-cards {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+/* Individual card */
+.specialty-card {
+  background: #ffffff;
+  border: 1px solid #e6edf1;
+  border-radius: 18px;
+  padding: 30px 26px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Icon box */
+.specialty-card::before {
+  content: "";
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
+  border-radius: 14px;
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* Title */
+.specialty-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #0f2f3f;
+}
+
+/* Subtitle */
+.specialty-card p {
+  font-size: 14px;
+  color: #6b7c85;
+  line-height: 1.5;
+}
+
+/* Bottom stats */
+.specialty-card::after {
+  content: "Patients Treated";
+  display: block;
+  margin-top: 25px;
+  padding-top: 12px;
+  border-top: 1px solid #eef2f5;
+  font-size: 13px;
+  color: #6b7c85;
+}
+
+/* Hover effect */
+.specialty-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+  .specialties-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .specialities-heading {
+    font-size: 30px;
+  }
+
+  .specialties-cards {
+    grid-template-columns: 1fr;
+  }
+}
+.vv-footer {
+  background: #063c40;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===== TOP CTA ===== */
+.footer-top {
+  background: linear-gradient(135deg, #0b5c63, #5fc4c6);
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.footer-top h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.footer-top p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+.footer-cta {
+  background: #ffffff;
+  color: #0b5c63;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-cta:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== FOOTER CONTENT ===== */
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 70px 8%;
+}
+
+.footer-brand h3 {
+  margin: 15px 0 10px;
+}
+
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  background: #5fc4c6;
+  color: #063c40;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  margin-bottom: 15px;
+}
+
+.footer-links a {
+  display: block;
+  color: #d1f3f3;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #5fc4c6;
+}
+
+.footer-contact p {
+  margin-bottom: 10px;
+  color: #d1f3f3;
+}
+
+/* ===== BOTTOM ===== */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 20px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-policy a {
+  margin-left: 20px;
+  color: #d1f3f3;
+  text-decoration: none;
+}
+
+.footer-policy a:hover {
+  color: #5fc4c6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-top h2 {
+    font-size: 2rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .footer-policy a {
+    margin: 0 10px;
+  }
 }
