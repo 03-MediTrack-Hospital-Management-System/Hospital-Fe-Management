@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { CiHeart } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import hospitalImg from "../assets/hospital1.jpg";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -24,104 +26,155 @@ function Login() {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const existingUser = users.find(
-      (user) =>
-        user.email === formData.email &&
-        user.password === formData.password
+    const user = users.find(
+      (u) => u.email === formData.email && u.password === formData.password
     );
 
-    if (!existingUser) {
-      alert("Invalid email or password");
-      return;
-    }
+    if (!user) return alert("Invalid email or password");
 
-  
-    localStorage.setItem("loggedInUser", JSON.stringify(existingUser));
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
 
-    
-    switch (existingUser.role) {
-      case "PATIENT":
-        navigate("/patient-dashboard");
-        break;
-      case "DOCTOR":
-        navigate("/doctor-dashboard");
-        break;
-      case "ADMIN":
-        navigate("/admin-dashboard");
-        break;
-      default:
-        navigate("/");
-    }
+    if (user.role === "PATIENT") navigate("/patient-dashboard");
+    if (user.role === "DOCTOR") navigate("/doctor-dashboard");
+    if (user.role === "ADMIN") navigate("/admin-dashboard");
   };
 
   return (
-    <div className="Login-container">
-      <div className="login-card-left">
-        <div>
-          <div className="login-hero-icon">
-            <CiHeart />
-            <h2 className="login-card-left-head">VV Care</h2>
-          </div>
-          <h6>Hospitals</h6>
-        </div>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexWrap: "wrap",
+        width: "100%",
+        fontFamily: "Inter, sans-serif",
+      }}
+    >
+ {/* LEFT PANEL */}
+<div
+  style={{
+    flex: "1 1 300px",
+    background: "linear-gradient(135deg,#0b5c63,#5fc4c6)",
+    color: "#fff",
+    padding: "40px",
+    display: "flex",
+    flexDirection: "column",
+  }}
+>
+  {/* TOP CONTENT */}
+  <div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        fontSize: "1.5rem",
+        fontWeight: "700",
+      }}
+    >
+      <CiHeart /> VV Care
+    </div>
+    <small>Hospitals</small>
 
-        <div className="login-left-card-hero">
-          <h3>Your Health</h3>
-          <h3>Our Priority</h3>
-          <p>
-            Experience seamless healthcare management with advanced technology.
+    <div style={{ marginTop: "40px" }}>
+      <h2 style={{ fontSize: "2rem", marginBottom: "5px" }}>
+        Your Health
+      </h2>
+      <h2 style={{ fontSize: "2rem" }}>Our Priority</h2>
+      <p style={{ marginTop: "10px", maxWidth: "280px" }}>
+        Experience seamless healthcare management with advanced technology.
+      </p>
+    </div>
+  </div>
+
+  {/* IMAGE AREA (BOTTOM FILL) */}
+  <div
+    style={{
+      marginTop: "30px",
+      flex: 1,                       // 🔥 fills empty space
+      backgroundImage: `url(${hospitalImg})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      borderRadius: "12px",
+    }}
+  />
+</div>
+
+
+      {/* RIGHT PANEL */}
+      <div
+        style={{
+          flex: "1 1 300px",
+          backgroundColor: "#ffffff",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "20px",
+        }}
+      >
+        <div style={{ width: "100%", maxWidth: "380px" }}>
+          <h2 style={{ marginBottom: "5px" }}>Welcome Back</h2>
+          <p style={{ color: "#555", marginBottom: "25px" }}>
+            Sign in to access your health portal
           </p>
+
+          <form onSubmit={handleSubmit}>
+            <label>Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              style={inputStyle}
+            />
+
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              style={inputStyle}
+            />
+
+            <button style={buttonStyle}>Login</button>
+
+            <p style={{ textAlign: "center", marginTop: "10px" }}>
+              <a href="#" style={{ color: "#0b5c63" }}>
+                Forgot Password?
+              </a>
+            </p>
+          </form>
         </div>
-      </div>
-
-      <div className="login-card-right">
-        <div className="login-card-left-head">
-          <h2>Welcome Back</h2>
-          <p>Sign in to access your health portal</p>
-        </div>
-
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label>Email Address</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-
-          <button type="submit" className="login-btn">
-            Login
-          </button>
-
-          <p>
-            <a href="#">Forgot Password?</a>
-          </p>
-        </form>
       </div>
     </div>
   );
 }
+
+const inputStyle = {
+  width: "100%",
+  padding: "12px",
+  margin: "8px 0 18px",
+  borderRadius: "8px",
+  border: "1px solid #ccc",
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: "14px",
+  backgroundColor: "#0b5c63",
+  color: "#fff",
+  border: "none",
+  borderRadius: "8px",
+  fontWeight: "600",
+  cursor: "pointer",
+};
 
 export default Login;
