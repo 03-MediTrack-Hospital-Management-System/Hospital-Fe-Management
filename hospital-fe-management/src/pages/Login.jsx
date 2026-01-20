@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { CiHeart } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import hospitalImg from "../assets/hospital1.jpg";
+// import "../styles/Login.css";
+import "../styles/Login.css";
+
 
 function Login() {
   const navigate = useNavigate();
@@ -10,6 +13,9 @@ function Login() {
     email: "",
     password: "",
   });
+
+  const [loginError, setLoginError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const users = JSON.parse(localStorage.getItem("users"));
@@ -27,116 +33,143 @@ function Login() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setLoginError(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // Simulate API call
+    setTimeout(() => {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const user = users.find(
-      (u) =>
-        u.email === formData.email.trim() &&
-        u.password === formData.password.trim()
-    );
+      const user = users.find(
+        (u) =>
+          u.email === formData.email.trim() &&
+          u.password === formData.password.trim()
+      );
 
-    if (!user) {
-      alert("Invalid email or password");
-      return;
-    }
+      if (!user) {
+        setLoginError(true);
+        setIsLoading(false);
+        return;
+      }
 
-    // Save logged in user
-    localStorage.setItem("currentUser", JSON.stringify(user));
+    
+      localStorage.setItem("currentUser", JSON.stringify(user));
 
-    if (user.role === "PATIENT") navigate("/patient");
-    if (user.role === "DOCTOR") navigate("/doctor");
-    if (user.role === "ADMIN") navigate("/admin");
+      
+      document.querySelector('.login-success').classList.add('show');
+      
+      setTimeout(() => {
+        if (user.role === "PATIENT") navigate("/patient");
+        if (user.role === "DOCTOR") navigate("/doctor");
+        if (user.role === "ADMIN") navigate("/admin");
+      }, 1500);
+    }, 800);
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexWrap: "wrap" }}>
-      {/* LEFT */}
-      <div
-        style={{
-          flex: "1 1 300px",
-          background: "linear-gradient(135deg,#0b5c63,#5fc4c6)",
-          color: "#fff",
-          padding: "40px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div>
-          <h2><CiHeart /> VV Care</h2>
-          <p>Your Health, Our Priority</p>
-        </div>
-
-        <div
-          style={{
-            flex: 1,
-            backgroundImage: `url(${hospitalImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            borderRadius: "12px",
-            marginTop: "30px",
-          }}
-        />
+    <div className="login-page-wrapper">
+      
+      <div className="login-success">
+        <div className="success-icon">✓</div>
+        <h3>Welcome Back!</h3>
+        <p>Redirecting to your dashboard...</p>
       </div>
 
-      {/* RIGHT */}
-      <div
-        style={{
-          flex: "1 1 300px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <form onSubmit={handleSubmit} style={{ width: "320px" }}>
-          <h2>Welcome Back</h2>
+      <div className="login-container-enhanced">
+        {/* LEFT */}
+        <div className="login-left-panel-enhanced">
+          <div className="login-left-content">
+            <div className="login-brand">
+              <h2><CiHeart className="brand-heart" /> VV Care</h2>
+              <p className="brand-tagline">Your Health, Our Priority</p>
+            </div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            style={inputStyle}
-          />
+            <div
+              className="login-bg-image-enhanced"
+              style={{
+                backgroundImage: `url(${hospitalImg})`,
+              }}
+            />
+          </div>
+        </div>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            style={inputStyle}
-          />
+        {/* RIGHT */}
+        <div className="login-right-panel-enhanced">
+          <form onSubmit={handleSubmit} className="login-form-enhanced">
+            <div className="form-header">
+              <h2>Welcome Back</h2>
+              <p className="form-subtitle">Sign in to access your healthcare dashboard</p>
+            </div>
 
-          <button style={buttonStyle}>Login</button>
-        </form>
+            {loginError && (
+              <div className="error-message">
+                Invalid email or password. Please try again.
+              </div>
+            )}
+
+            <div className="input-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className={`login-input ${loginError ? 'error' : ''}`}
+              />
+              <div className="input-icon">✉️</div>
+            </div>
+
+            <div className="input-group">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className={`login-input ${loginError ? 'error' : ''}`}
+              />
+              <div className="input-icon">🔒</div>
+            </div>
+
+            <div className="form-options">
+              <div className="remember-me">
+                <input type="checkbox" id="remember" />
+                <label htmlFor="remember">Remember me</label>
+              </div>
+              <a href="#forgot" className="forgot-password">Forgot Password?</a>
+            </div>
+
+            <button 
+              type="submit" 
+              className={`login-button ${isLoading ? 'loading' : ''}`}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <span className="button-spinner"></span>
+                  Signing In...
+                </>
+              ) : (
+                'Login'
+              )}
+            </button>
+
+         
+
+            <div className="signup-link">
+              Don't have an account? <a href="/signup">Sign up here</a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 }
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  marginBottom: "15px",
-  borderRadius: "8px",
-  border: "1px solid #ccc",
-};
-
-const buttonStyle = {
-  width: "100%",
-  padding: "12px",
-  backgroundColor: "#0b5c63",
-  color: "#fff",
-  border: "none",
-  borderRadius: "8px",
-};
 
 export default Login;

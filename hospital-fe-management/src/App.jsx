@@ -14,6 +14,7 @@ import Doctor from "./pages/Doctor";
 import PatientDashboard from "./pages/PatientDashboard";
 import Admin from "./pages/Admin";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserProfilePage from "./pages/UserProfile";
 
 function Layout() {
   const location = useLocation();
@@ -23,7 +24,8 @@ function Layout() {
     location.pathname === "/signup" ||
     location.pathname === "/patient" ||
     location.pathname === "/doctor" ||
-    location.pathname === "admin";
+     location.pathname === "admin"||
+    location.pathname === "/profile";
 
   return (
     <>
@@ -34,7 +36,7 @@ function Layout() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route   path="/patient"element={ <ProtectedRoute role="PATIENT"><PatientDashboard />  </ProtectedRoute> } />
-
+             <Route path="/profile" element={<UserProfilePage />} />
         <Route
           path="/doctor"
           element={
@@ -44,7 +46,7 @@ function Layout() {
           }
         />
 
-        <Route
+        <Route                                  
           path="/admin"
           element={
             <ProtectedRoute role="ADMIN">

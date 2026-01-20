@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import hospitalImg from "../assets/hospital1.jpg";
+import "../styles/Signup.css";
 
 function Signup() {
   const [showPersonal, setShowPersonal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -22,97 +25,220 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // Simulate API call
+    setTimeout(() => {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const exists = users.find((u) => u.email === formData.email);
+      
+      if (exists) {
+        setIsLoading(false);
+        alert("User already exists");
+        return;
+      }
 
-    const exists = users.find((u) => u.email === formData.email);
-    if (exists) return alert("User already exists");
+      users.push({
+        email: formData.email,
+        password: formData.password,
+        role: "PATIENT",
+        profile: formData,
+      });
 
-    users.push({
-      email: formData.email,
-      password: formData.password,
-      role: "PATIENT",
-      profile: formData,
-    });
-
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("Signup successful! You can login now.");
+      localStorage.setItem("users", JSON.stringify(users));
+      
+      // Show success state
+      setIsLoading(false);
+      setShowSuccess(true);
+      
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 2000);
+    }, 1000);
   };
 
   return (
-    <div className="signup-container">
-     {/* LEFT */}
-<div
-  className="signup-left"
-  style={{
-    background: "linear-gradient(135deg,#0b5c63,#5fc4c6)",
-    color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    padding: "40px",
-  }}
->
-  {/* TOP CONTENT */}
-  <div>
-    <h2 style={{ fontWeight: "700" }}>VV Care Hospitals</h2>
-    <h1 style={{ marginTop: "30px" }}>Your Health, Our Priority</h1>
-    <p>Experience seamless healthcare management.</p>
-  </div>
+    <div className="signup-page-wrapper">
+     
+      {showSuccess && (
+        <div className="signup-success show">
+          <div className="signup-success-icon">✓</div>
+          <h3>Account Created!</h3>
+          <p>Redirecting to login page...</p>
+        </div>
+      )}
 
-  {/* IMAGE FILL */}
-  <div
-    style={{
-      marginTop: "30px",
-      flex: 1,
-      backgroundImage: `url(${hospitalImg})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      borderRadius: "12px",
-    }}
-  />
-</div>
+      <div className="signup-container-enhanced">
+        {/* LEFT */}
+        <div className="signup-left-panel-enhanced">
+          <div className="signup-left-content">
+            <div className="signup-brand">
+              <h2>VV Care Hospitals</h2>
+              <h1>Your Health, Our Priority</h1>
+              <p>Experience seamless healthcare management.</p>
+            </div>
 
+            <div
+              className="signup-bg-image-enhanced"
+              style={{
+                backgroundImage: `url(${hospitalImg})`,
+              }}
+            />
+          </div>
+        </div>
 
-      {/* RIGHT */}
-      <div className="signup-right">
-        <h2>Create Patient Account</h2>
+        {/* RIGHT */}
+        <div className="signup-right-panel-enhanced">
+          <div className="signup-form-enhanced">
+            <div className="signup-form-header">
+              <h2>Create Patient Account</h2>
+              <p>Join thousands of patients managing their health digitally</p>
+            </div>
 
-        <form onSubmit={handleSubmit}>
-          <h4>Basic Information</h4>
+            <form onSubmit={handleSubmit}>
+              <h4 className="form-section-title">Basic Information</h4>
 
-          <input name="fullName" placeholder="Full Name" onChange={handleChange} required />
-          <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-          <input name="phone" placeholder="Phone" onChange={handleChange} required />
-          <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+              <div className="signup-input-group">
+                <div className="signup-input-icon"></div>
+                <input 
+                  className="signup-input"
+                  name="fullName" 
+                  placeholder="Full Name" 
+                  onChange={handleChange} 
+                  required 
+                />
+              </div>
 
-          {/* DROPDOWN CONTROLLER */}
-          <select onChange={(e) => setShowPersonal(e.target.value === "yes")} required>
-            <option value="">Add Personal Details?</option>
-            <option value="yes">Yes</option>
-            <option value="no">Later</option>
-          </select>
+              <div className="signup-input-group">
+                <div className="signup-input-icon"></div>
+                <input 
+                  className="signup-input"
+                  name="email" 
+                  type="email" 
+                  placeholder="Email" 
+                  onChange={handleChange} 
+                  required 
+                />
+              </div>
 
-          {/* CONDITIONAL SECTION */}
-          {showPersonal && (
-            <>
-              <h4>Personal Details</h4>
-              <input type="date" name="dob" onChange={handleChange} />
-              <select name="gender" onChange={handleChange}>
-                <option value="">Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-              <select name="bloodGroup" onChange={handleChange}>
-                <option value="">Blood Group</option>
-                <option>A+</option><option>B+</option><option>O+</option>
-              </select>
-              <input name="height" placeholder="Height (cm)" onChange={handleChange} />
-              <input name="weight" placeholder="Weight (kg)" onChange={handleChange} />
-            </>
-          )}
+              <div className="signup-input-group">
+                <div className="signup-input-icon"></div>
+                <input 
+                  className="signup-input"
+                  name="phone" 
+                  placeholder="Phone" 
+                  onChange={handleChange} 
+                  required 
+                />
+              </div>
 
-          <button className="signup-btn">Create Account</button>
-        </form>
+              <div className="signup-input-group">
+                <div className="signup-input-icon"></div>
+                <input 
+                  className="signup-input"
+                  name="password" 
+                  type="password" 
+                  placeholder="Password" 
+                  onChange={handleChange} 
+                  required 
+                />
+              </div>
+
+           
+              <div className="signup-input-group">
+                <select 
+                  className="signup-select"
+                  onChange={(e) => setShowPersonal(e.target.value === "yes")} 
+                  required
+                >
+                  <option value="">Add Personal Details?</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">Later</option>
+                </select>
+              </div>
+              {showPersonal && (
+                <div className="personal-details-section">
+                  <h4 className="form-section-title">Personal Details</h4>
+                  <div className="personal-details-grid">
+                    <div className="signup-input-group">
+                      <div className="signup-input-icon"></div>
+                      <input 
+                        className="signup-input"
+                        type="date" 
+                        name="dob" 
+                        onChange={handleChange} 
+                        placeholder="Date of Birth"
+                      />
+                    </div>
+
+                    <div className="signup-input-group">
+                      <select 
+                        className="signup-select"
+                        name="gender" 
+                        onChange={handleChange}
+                      >
+                        <option value="">Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+
+                    <div className="signup-input-group">
+                      <select 
+                        className="signup-select"
+                        name="bloodGroup" 
+                        onChange={handleChange}
+                      >
+                        <option value="">Blood Group</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                      </select>
+                    </div>
+
+                    <div className="signup-input-group">
+                      <div className="signup-input-icon"></div>
+                      <input 
+                        className="signup-input"
+                        name="height" 
+                        placeholder="Height (cm)" 
+                        onChange={handleChange} 
+                      />
+                    </div>
+
+                    <div className="signup-input-group">
+                      <div className="signup-input-icon"></div>
+                      <input 
+                        className="signup-input"
+                        name="weight" 
+                        placeholder="Weight (kg)" 
+                        onChange={handleChange} 
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <button 
+                className={`signup-submit-btn ${isLoading ? 'loading' : ''}`}
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Creating Account...' : 'Create Account'}
+              </button>
+            </form>
+
+            <div className="signup-login-link">
+              Already have an account? <a href="/login">Login here</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
