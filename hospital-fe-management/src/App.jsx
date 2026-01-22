@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
 import "./styles/main.css";
@@ -10,11 +11,12 @@ import {
 
 import Login from "./pages/Login";
 import Signup from "./pages/signup";
-import Doctor from "./pages/Doctor";
 import PatientDashboard from "./pages/PatientDashboard";
 import Admin from "./pages/Admin";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserProfilePage from "./pages/UserProfile";
+import DoctorDashboard from "./pages/DoctorDashboard";
+import Inventory from "./pages/Inventory.jsx";
 
 function Layout() {
   const location = useLocation();
@@ -24,8 +26,9 @@ function Layout() {
     location.pathname === "/signup" ||
     location.pathname === "/patient" ||
     location.pathname === "/doctor" ||
-     location.pathname === "admin"||
-    location.pathname === "/profile";
+    location.pathname === "/admin" ||
+    location.pathname === "/profile" ||
+    location.pathname === "/admin/inventory";
 
   return (
     <>
@@ -35,22 +38,41 @@ function Layout() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route   path="/patient"element={ <ProtectedRoute role="PATIENT"><PatientDashboard />  </ProtectedRoute> } />
-             <Route path="/profile" element={<UserProfilePage />} />
+
         <Route
-          path="/doctor"
+          path="/patient"
           element={
-            <ProtectedRoute role="DOCTOR">
-              <Doctor />
+            <ProtectedRoute role="PATIENT">
+              <PatientDashboard />
             </ProtectedRoute>
           }
         />
 
-        <Route                                  
+        <Route path="/profile" element={<UserProfilePage />} />
+
+        <Route
+          path="/doctor"
+          element={
+            <ProtectedRoute role="DOCTOR">
+              <DoctorDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/admin"
           element={
             <ProtectedRoute role="ADMIN">
               <Admin />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/inventory"
+          element={
+            <ProtectedRoute role="ADMIN">
+              <Inventory />
             </ProtectedRoute>
           }
         />
@@ -60,6 +82,11 @@ function Layout() {
 }
 
 function App() {
+  // 🌙 Enable Dark Mode globally
+  useEffect(() => {
+    document.body.setAttribute("data-theme", "dark");
+  }, []);
+
   return (
     <BrowserRouter>
       <Layout />
