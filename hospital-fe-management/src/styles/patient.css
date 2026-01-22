@@ -1,11 +1,34 @@
-/* ===== SIMPLIFIED USER PROFILE HEADER ===== */
+/* ===============================
+   ROBOTO FONT (NORMAL + ITALIC)
+================================ */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+/* ===============================
+   GLOBAL BASE
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", "Segoe UI", system-ui, sans-serif;
+  background-color: #f5f8fb;
+  color: #263238;
+  line-height: 1.6;
+}
+
+/* ===============================
+   USER PROFILE HEADER
+================================ */
 .user-profile-header {
   background: linear-gradient(135deg, #083c43, #4fb3b8);
   border-radius: 22px;
   padding: 30px 40px;
   color: white;
   margin-bottom: 30px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,7 +43,7 @@
 .user-avatar {
   width: 70px;
   height: 70px;
-  background: rgba(255,255,255,.15);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -30,54 +53,63 @@
 }
 
 .user-details h1 {
-  margin: 0 0 10px 0;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 8px;
 }
 
 .user-subtitle {
-  opacity: 0.9;
-  margin: 5px 0 0 0;
   font-size: 15px;
+  opacity: 0.9;
+  font-style: italic;
 }
 
+/* ===============================
+   USER TAGS
+================================ */
 .user-tags {
   display: flex;
   gap: 10px;
-  margin: 10px 0;
+  margin-top: 12px;
   flex-wrap: wrap;
 }
 
 .tag {
-  padding: 6px 12px;
-  background: rgba(255,255,255,.15);
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   font-size: 13px;
-  color: white;
-  border: 1px solid rgba(255,255,255,.2);
+  font-style: italic;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
+/* ===============================
+   HEADER ACTIONS
+================================ */
 .header-actions {
   display: flex;
   gap: 12px;
-  align-items: center;
 }
 
 .profile-link {
-  background: rgba(255,255,255,.15);
-  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
   padding: 10px 18px;
   border-radius: 12px;
   font-size: 14px;
-  cursor: pointer;
+  font-style: italic;
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
   text-decoration: none;
 }
 
-/* ===== SIMPLIFIED BANNER ACTIONS ===== */
+/* ===============================
+   BANNER ACTION BUTTONS
+================================ */
 .banner-actions-row {
   display: flex;
   gap: 15px;
@@ -85,44 +117,42 @@
   flex-wrap: wrap;
 }
 
-.banner-actions-row .btn-primary {
+.btn-primary {
   background: linear-gradient(135deg, #1ea6a9, #0b5c63);
   border: none;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 12px;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-style: italic;
+  cursor: pointer;
 }
 
-.banner-actions-row .btn-outline {
+.btn-outline {
   background: transparent;
   border: 2px solid #0b5c63;
   color: #0b5c63;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 12px;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
+  font-style: italic;
+  cursor: pointer;
 }
 
-.banner-actions-row .btn-secondary {
-  background: #2196F3;
+.btn-secondary {
+  background: #2196f3;
   border: none;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 12px;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-style: italic;
+  cursor: pointer;
 }
 
-/* ===== SIMPLIFIED HEALTH SUMMARY ===== */
+/* ===============================
+   HEALTH SUMMARY CARDS
+================================ */
 .health-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -132,40 +162,27 @@
 
 .health-card {
   background: white;
-  padding: 20px;
+  padding: 22px;
   border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border-left: 5px solid #0b5c63;
 }
 
-.health-card.critical {
-  border-left-color: #f44336;
-}
-
-.health-card.upcoming {
-  border-left-color: #2196F3;
-}
-
-.health-card.recent {
-  border-left-color: #4CAF50;
-}
-
 .health-card h4 {
-  margin: 0 0 15px 0;
-  color: #083c43;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
+  color: #083c43;
+  margin-bottom: 15px;
 }
 
 .health-card ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .health-card li {
   padding: 10px 0;
   border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
 }
 
 .health-card li:last-child {
@@ -174,14 +191,155 @@
 
 .health-card li strong {
   color: #083c43;
-  margin-right: 5px;
 }
 
 .health-card li small {
-  color: #666;
-  font-size: 13px;
+  display: block;
+  font-style: italic;
+  color: #607d8b;
+  margin-top: 4px;
 }
 
+/* ===============================
+   FIX: CARD CONTENT VISIBILITY
+================================ */
+
+/* Make card background fully opaque */
+.health-card {
+  background: #ffffff;
+  opacity: 1;
+}
+
+/* Headings stronger */
+.health-card h4 {
+  color: #083c43;
+  font-weight: 600;
+}
+
+/* List text darker */
+.health-card li {
+  color: #37474f;
+  font-weight: 400;
+}
+
+/* Labels like Allergies / Conditions */
+.health-card li strong {
+  color: #0b5c63;
+  font-weight: 500;
+}
+
+/* Secondary info (dates, notes) */
+.health-card li small {
+  color: #546e7a;
+  opacity: 1;
+}
+
+/* Recent activity text fix */
+.health-card.recent li {
+  color: #37474f;
+}
+
+/* Activity dot spacing + clarity */
+.activity-type {
+  opacity: 1;
+  flex-shrink: 0;
+}
+
+/* Improve divider visibility */
+.health-card li {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* ===============================
+   FIX: APPOINTMENTS & PRESCRIPTIONS
+================================ */
+
+/* Main container cards */
+.info-card,
+.appointment-card,
+.prescription-card {
+  background: #ffffff;
+  opacity: 1;
+}
+
+/* Card headers */
+.info-card-header,
+.card-header {
+  background: linear-gradient(135deg, #e6f5f5, #f0faf9);
+}
+
+/* Header titles */
+.info-card-header h3,
+.card-header h3 {
+  color: #083c43;
+  font-weight: 600;
+}
+
+/* Header subtitles */
+.info-card-header p,
+.card-header p {
+  color: #546e7a;
+  opacity: 1;
+}
+
+/* Inner list items */
+.appointment-item,
+.prescription-item {
+  background: #ffffff;
+  border: 1px solid #d6ecec;
+  color: #37474f;
+}
+
+/* Doctor / Medicine names */
+.appointment-item h4,
+.prescription-item h4 {
+  color: #0b5c63;
+  font-weight: 500;
+}
+
+/* Secondary text (date, dosage, type) */
+.appointment-item span,
+.prescription-item span,
+.appointment-item small,
+.prescription-item small {
+  color: #607d8b;
+  opacity: 1;
+}
+
+/* Right-side metadata (date/time) */
+.item-meta {
+  color: #455a64;
+  font-weight: 400;
+}
+
+/* Icons clarity */
+.card-icon {
+  opacity: 1;
+}
+
+/* Divider fix */
+.appointment-item,
+.prescription-item {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Card Variants */
+.health-card.critical {
+  border-left-color: #f44336;
+}
+
+.health-card.upcoming {
+  border-left-color: #2196f3;
+}
+
+.health-card.recent {
+  border-left-color: #4caf50;
+}
+
+/* ===============================
+   ACTIVITY INDICATORS
+================================ */
 .activity-type {
   display: inline-block;
   width: 8px;
@@ -191,58 +349,83 @@
 }
 
 .activity-type.results {
-  background: #2196F3;
+  background: #2196f3;
 }
 
 .activity-type.prescription {
-  background: #4CAF50;
+  background: #4caf50;
 }
 
 .activity-type.appointment {
-  background: #FF9800;
+  background: #ff9800;
 }
 
 .activity-type.checkup {
-  background: #9C27B0;
+  background: #9c27b0;
+}
+/* ===============================
+   HOSPITAL THEME BACKGROUND
+================================ */
+body {
+  font-family: "Roboto", "Segoe UI", system-ui, sans-serif;
+  /* Soft clinical blue-grey base */
+  background-color: #eef2f5; 
+  /* Medical Grid Pattern */
+  background-image: 
+    radial-gradient(circle at 2px 2px, rgba(8, 60, 67, 0.05) 1px, transparent 0);
+  background-size: 32px 32px;
+  color: #263238;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* Subtle "Pulse" Glow in the corner for a high-tech feel */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(79, 179, 184, 0.1), transparent 400px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================ */
 @media (max-width: 768px) {
   .user-profile-header {
     flex-direction: column;
-    gap: 20px;
     text-align: center;
+    gap: 20px;
   }
-  
+
   .user-info-main {
     flex-direction: column;
-    gap: 15px;
   }
-  
-  .user-tags {
-    justify-content: center;
-  }
-  
+
   .header-actions {
-    flex-direction: column;
     width: 100%;
+    flex-direction: column;
   }
-  
+
   .profile-link {
     width: 100%;
     justify-content: center;
   }
-  
+
   .banner-actions-row {
     flex-direction: column;
   }
-  
+
   .banner-actions-row button,
   .banner-actions-row a {
     width: 100%;
-    justify-content: center;
   }
-  
+
   .health-summary {
     grid-template-columns: 1fr;
   }

@@ -38,12 +38,16 @@ function Signup() {
         return;
       }
 
-      users.push({
-        email: formData.email,
-        password: formData.password,
-        role: "PATIENT",
-        profile: formData,
-      });
+   const role = formData.email === "admin@gmail.com"
+  ? "ADMIN"
+  : "PATIENT";
+
+users.push({
+  email: formData.email,
+  password: formData.password,
+  role,
+  profile: formData,
+});
 
       localStorage.setItem("users", JSON.stringify(users));
       

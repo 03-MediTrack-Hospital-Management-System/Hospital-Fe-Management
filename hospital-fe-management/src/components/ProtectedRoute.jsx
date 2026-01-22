@@ -1,12 +1,19 @@
 import { Navigate } from "react-router-dom";
 
-function ProtectedRoute({ children, role }) {
+export default function ProtectedRoute({ children, role }) {
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  if (!user) return <Navigate to="/login" />;
-  if (role && user.role !== role) return <Navigate to="/login" />;
+  // Not logged in
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+if (role && user.role !== role) {
+  if (user.role === "ADMIN") return <Navigate to="/admin" replace />;
+  if (user.role === "DOCTOR") return <Navigate to="/doctor" replace />;
+  if (user.role === "PATIENT") return <Navigate to="/patient" replace />;
+}
+
 
   return children;
 }
-
-export default ProtectedRoute;

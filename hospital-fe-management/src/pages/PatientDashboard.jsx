@@ -10,7 +10,6 @@ export default function PatientDashboard() {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  // User data
   const userData = {
     name: "John Smith",
     age: 34,
@@ -33,7 +32,7 @@ export default function PatientDashboard() {
 
   return (
     <div className="container patient-dashboard">
-      {/* User Profile Header */}
+      
       <div className="user-profile-header">
         <div className="user-info-main">
           <div 
