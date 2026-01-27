@@ -38,10 +38,14 @@ function Signup() {
         return;
       }
 
-   const role = formData.email === "admin@gmail.com"
-  ? "ADMIN"
-  : "PATIENT";
+   let role = "PATIENT";
 
+      if (formData.email === "admin@gmail.com") {
+        role = "ADMIN";
+      } else if (formData.email === "reception@gmail.com") {
+        role = "RECEPTION";
+      }
+      
 users.push({
   email: formData.email,
   password: formData.password,

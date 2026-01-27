@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import UserProfilePage from "./pages/UserProfile";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import Inventory from "./pages/Inventory.jsx";
+import ReceptionDashboard from "./pages/ReceptionDashboard.jsx";
 
 function Layout() {
   const location = useLocation();
@@ -28,7 +29,8 @@ function Layout() {
     location.pathname === "/doctor" ||
     location.pathname === "/admin" ||
     location.pathname === "/profile" ||
-    location.pathname === "/admin/inventory";
+    location.pathname === "/admin/inventory"||
+    location.pathname === "/reception";
 
   return (
     <>
@@ -76,13 +78,21 @@ function Layout() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/reception"
+          element={
+            <ProtectedRoute role="RECEPTION">
+              <ReceptionDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
 }
 
 function App() {
-  // 🌙 Enable Dark Mode globally
+  
   useEffect(() => {
     document.body.setAttribute("data-theme", "dark");
   }, []);

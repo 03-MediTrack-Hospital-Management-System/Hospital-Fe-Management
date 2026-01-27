@@ -105,7 +105,7 @@ export default function PatientDashboard() {
         </div>
       </div>
 
-      {/* Stats Row */}
+      
       <div className="stats-row">
         <StatCard
           icon={<span>📅</span>}
@@ -128,9 +128,9 @@ export default function PatientDashboard() {
         />
       </div>
 
-      {/* Main Content Grid */}
+    
       <div className="dashboard-grid">
-        {/* Appointments Section */}
+       
         <SectionCard
           icon={<span>📅</span>}
           title="Upcoming Appointments"
@@ -159,7 +159,7 @@ export default function PatientDashboard() {
           </div>
         </SectionCard>
 
-        {/* Prescriptions Section */}
+       
         <SectionCard
           icon={<span>💊</span>}
           title="Recent Prescriptions"
@@ -181,7 +181,6 @@ export default function PatientDashboard() {
         </SectionCard>
       </div>
 
-      {/* Book Appointment Modal */}
       {showModal && (
         <BookAppointmentModal onClose={() => setShowModal(false)} />
       )}

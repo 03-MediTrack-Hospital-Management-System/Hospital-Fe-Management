@@ -16,8 +16,6 @@ export default function Admin() {
 
   return (
     <div className="dashboard-container">
-
-      {/* ===== ADMIN HEADER ===== */}
       <div className="admin-header-enhanced">
         <div className="admin-left">
           <div className="admin-avatar-lg">AD</div>
@@ -39,8 +37,6 @@ export default function Admin() {
           </button>
         </div>
       </div>
-
-      {/* ===== STATS ===== */}
       <div className="stats">
         <div className="stat-card">
           <div className="stat-icon">👥</div>
@@ -74,11 +70,8 @@ export default function Admin() {
           </div>
         </div>
       </div>
-
-      {/* ===== MAIN GRID ===== */}
+      
       <div className="grid">
-
-        {/* Recent Bills */}
         <div className="card">
           <h3 className="section-title">Recent Bills</h3>
 

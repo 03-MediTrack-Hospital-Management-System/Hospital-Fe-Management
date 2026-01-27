@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { CiHeart } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import hospitalImg from "../assets/hospital1.jpg";
-// import "../styles/Login.css";
 import "../styles/Login.css";
 
 
@@ -26,6 +25,7 @@ function Login() {
           { email: "patient@gmail.com", password: "1234", role: "PATIENT" },
           { email: "doctor@gmail.com", password: "1234", role: "DOCTOR" },
           { email: "admin@gmail.com", password: "1234", role: "ADMIN" },
+          { email: "reception@gmail.com", password: "1234", role: "RECEPTION" }
         ])
       );
     }
@@ -39,8 +39,6 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    // Simulate API call
     setTimeout(() => {
       const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -66,6 +64,7 @@ function Login() {
         if (user.role === "PATIENT") navigate("/patient");
         if (user.role === "DOCTOR") navigate("/doctor");
         if (user.role === "ADMIN") navigate("/admin");
+        if (user.role === "RECEPTION") navigate("/reception");
       }, 1500);
     }, 800);
   };
@@ -80,7 +79,6 @@ function Login() {
       </div>
 
       <div className="login-container-enhanced">
-        {/* LEFT */}
         <div className="login-left-panel-enhanced">
           <div className="login-left-content">
             <div className="login-brand">
@@ -97,7 +95,6 @@ function Login() {
           </div>
         </div>
 
-        {/* RIGHT */}
         <div className="login-right-panel-enhanced">
           <form onSubmit={handleSubmit} className="login-form-enhanced">
             <div className="form-header">
