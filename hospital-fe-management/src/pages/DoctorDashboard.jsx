@@ -15,8 +15,8 @@ export default function DoctorDashboard() {
     { id: 2, name: "Thomas Brown", reason: "BP Check", priority: "Medium", age: 52, waitTime: "15 min" },
   ];
 
-  // Example data – in real app you would fetch this from API or state
-  const weeklyData = [3, 7, 4, 9, 5, 2]; // Mon → Sat
+  const weeklyData = [3, 7, 4, 9, 5, 2]; 
+
 
   return (
     <div className="dashboard-container">
