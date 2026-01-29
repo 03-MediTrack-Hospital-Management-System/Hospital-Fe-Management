@@ -1,9 +1,9 @@
 export default function PatientChart() {
   return (
     <div className="chart-card">
-      <h3>Patient Activity</h3>
+      <h3>Health Activity</h3>
       <div className="chart-placeholder">
-        📊 Chart goes here
+        📊 Health statistics chart
       </div>
     </div>
   );
