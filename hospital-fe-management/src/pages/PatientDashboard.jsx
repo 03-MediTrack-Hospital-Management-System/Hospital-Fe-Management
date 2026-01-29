@@ -11,7 +11,7 @@ import { IoExitOutline } from "react-icons/io5";
 export default function PatientDashboard() {
   return (
     <>
-      {/* HEADER */}
+      
       <section className="patient-dashboard-header">
         <div className="logo">
           <FaHeart /> <span>VVCARE</span>
@@ -22,7 +22,7 @@ export default function PatientDashboard() {
         </button>
       </section>
 
-      {/* CONTENT */}
+      
       <section className="patient-dashboard-content">
         <Sidebar />
 

@@ -92,7 +92,6 @@ export default function Admin() {
           ))}
         </div>
 
-        {/* Low Stock */}
         <div className="card warning">
           <h3 className="section-title">Low Stock Items</h3>
 

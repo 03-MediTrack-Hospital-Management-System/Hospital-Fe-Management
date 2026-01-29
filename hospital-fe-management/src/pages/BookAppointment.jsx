@@ -77,7 +77,7 @@ export default function BookAppointment() {
         </button>
       </div>
 
-      {/* Confirmation Modal */}
+  
       {showConfirm && (
         <div className="confirmation-modal">
           <div className="modal-content">
@@ -225,7 +225,7 @@ export default function BookAppointment() {
           </div>
         </form>
 
-        {/* Additional Information */}
+     
         <div className="appointment-info">
           <h4>Things to Remember:</h4>
           <ul>

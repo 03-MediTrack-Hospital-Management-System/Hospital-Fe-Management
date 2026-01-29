@@ -9,7 +9,7 @@ function Navbar() {
     navigate("/login");
   }
 
-  // Add scroll effect
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -26,7 +26,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="container nav-content">
-        {/* Logo with click to home */}
+        
         <div className="logo" onClick={() => navigate("/")}>
           <div className="logo-icon">♥</div>
           <div>

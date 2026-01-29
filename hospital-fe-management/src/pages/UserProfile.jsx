@@ -1,4 +1,3 @@
-// pages/UserProfilePage.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/main.css";
@@ -91,7 +90,7 @@ export default function UserProfilePage() {
 
   return (
     <div className="container user-profile-page">
-      {/* Header with Back Button */}
+    
       <div className="profile-page-header">
         <button 
           className="btn-back"
@@ -123,11 +122,11 @@ export default function UserProfilePage() {
         </div>
       </div>
 
-      {/* Main Profile Content */}
+      
       <div className="profile-content-grid">
-        {/* Left Column - Personal Info */}
+       
         <div className="profile-left-column">
-          {/* Profile Card */}
+        
           <div className="profile-card">
             <div className="profile-avatar-section">
               <div className="avatar-large">
@@ -160,7 +159,7 @@ export default function UserProfilePage() {
               </div>
             </div>
 
-            {/* Personal Information */}
+          
             <div className="info-section">
               <h3>Personal Information</h3>
               <div className="info-grid">
@@ -212,7 +211,7 @@ export default function UserProfilePage() {
             </div>
           </div>
 
-          {/* Health Metrics */}
+         
           <div className="profile-card">
             <h3>Health Metrics</h3>
             <div className="metrics-grid">
@@ -227,9 +226,9 @@ export default function UserProfilePage() {
           </div>
         </div>
 
-        {/* Right Column - Medical History */}
+        
         <div className="profile-right-column">
-          {/* Medical History Card */}
+         
           <div className="profile-card">
             <h3>Medical History</h3>
             
@@ -324,7 +323,7 @@ export default function UserProfilePage() {
             </div>
           </div>
 
-          {/* Emergency Contact */}
+         
           <div className="profile-card">
             <h3>Emergency Contact</h3>
             <div className="emergency-contact">
@@ -347,7 +346,7 @@ export default function UserProfilePage() {
             </div>
           </div>
 
-          {/* Action Buttons */}
+       
           <div className="profile-actions">
             <button className="btn-secondary">
               <FaDownload /> Download Records
@@ -365,7 +364,7 @@ export default function UserProfilePage() {
   );
 }
 
-// Helper component for editable fields
+
 function InfoField({ icon, label, value, editing, onChange, type = "text" }) {
   return (
     <div className="info-field">
