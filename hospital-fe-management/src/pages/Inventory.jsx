@@ -19,12 +19,12 @@ export default function Inventory() {
   const [showLowStock, setShowLowStock] = useState(false);
   const [sortBy, setSortBy] = useState("name");
 
-  // Calculate statistics
+
   const totalStock = medicines.reduce((sum, med) => sum + med.stock, 0);
   const lowStockCount = medicines.filter(med => med.stock < med.min).length;
   const categories = ["All", ...new Set(medicines.map(med => med.category))];
 
-  // Filter and sort medicines
+ 
   const filteredMedicines = medicines
     .filter(med => {
       const matchesSearch = med.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -70,7 +70,7 @@ export default function Inventory() {
 
   return (
     <div className="inventory-container">
-      {/* HEADER WITH STATS */}
+    
       <div className="inventory-header">
         <div>
           <h1>Inventory Management</h1>
@@ -102,7 +102,7 @@ export default function Inventory() {
         </div>
       </div>
 
-      {/* CONTROL PANEL */}
+   
       <div className="control-panel">
         <div className="search-container">
           <Search className="search-icon" size={20} />
@@ -168,7 +168,7 @@ export default function Inventory() {
         </div>
       </div>
 
-      {/* TABLE */}
+      
       <div className="table-container">
         <table className="inventory-table">
           <thead>
@@ -261,7 +261,7 @@ export default function Inventory() {
         </table>
       </div>
 
-      {/* SUMMARY & ALERTS */}
+     
       <div className="summary-section">
         {lowStockCount > 0 ? (
           <div className="alert-banner warning">

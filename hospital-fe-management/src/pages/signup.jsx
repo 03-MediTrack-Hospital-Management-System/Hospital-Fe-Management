@@ -55,7 +55,7 @@ users.push({
 
       localStorage.setItem("users", JSON.stringify(users));
       
-      // Show success state
+      
       setIsLoading(false);
       setShowSuccess(true);
       
@@ -77,7 +77,7 @@ users.push({
       )}
 
       <div className="signup-container-enhanced">
-        {/* LEFT */}
+       
         <div className="signup-left-panel-enhanced">
           <div className="signup-left-content">
             <div className="signup-brand">
@@ -95,7 +95,7 @@ users.push({
           </div>
         </div>
 
-        {/* RIGHT */}
+     
         <div className="signup-right-panel-enhanced">
           <div className="signup-form-enhanced">
             <div className="signup-form-header">

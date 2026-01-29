@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 export default function ProtectedRoute({ children, role }) {
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  // Not logged in
+  
   if (!user) {
     return <Navigate to="/login" replace />;
   }
