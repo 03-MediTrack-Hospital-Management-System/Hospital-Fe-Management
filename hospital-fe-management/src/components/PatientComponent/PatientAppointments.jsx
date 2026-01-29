@@ -1,16 +1,16 @@
-export default function DoctorAppointments() {
+export default function PatientAppointments() {
   return (
     <aside className="patient-dashboard-content-right">
-      <h3>Doctor's Appointment</h3>
+      <h3>My Doctors</h3>
 
       <div className="doctor-card">
-        ❤️ Heart Surgeon
-        <p>Dr. Caroline Hutomo</p>
+        ❤️ Cardiologist
+        <p>Dr. Caroline</p>
       </div>
 
       <div className="doctor-card active">
         👶 Pediatrician
-        <p>Dr. Malik Abimanyu</p>
+        <p>Dr. Malik</p>
       </div>
 
       <div className="doctor-card">

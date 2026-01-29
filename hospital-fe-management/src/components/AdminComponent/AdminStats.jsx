@@ -1,9 +1,9 @@
-export default function PatientChart() {
+export default function AdminStats() {
   return (
     <div className="chart-card">
-      <h3>Patient Activity</h3>
+      <h3>System Overview</h3>
       <div className="chart-placeholder">
-        📊 Chart goes here
+        📊 Hospital activity overview
       </div>
     </div>
   );

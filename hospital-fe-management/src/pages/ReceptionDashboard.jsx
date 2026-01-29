@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Receptioncomponent/Sidebar";
@@ -19,7 +20,7 @@ export default function ReceptionDashboard() {
 
   return (
     <>
-      {/* Header */}
+     
       <section className="patient-dashboard-header">
         <div className="logo">
           <FaHeart /> <span>VVCARE</span>
@@ -30,7 +31,7 @@ export default function ReceptionDashboard() {
         </button>
       </section>
 
-      {/* Content */}
+    
       <section className="patient-dashboard-content">
         <Sidebar
           onAddPatient={() => setShowPatientPopup(true)}
@@ -53,7 +54,7 @@ export default function ReceptionDashboard() {
         <DoctorAppointments />
       </section>
 
-      {/* Popups */}
+    
       {showPatientPopup && (
         <PatientRegisterPopup onClose={() => setShowPatientPopup(false)} />
       )}

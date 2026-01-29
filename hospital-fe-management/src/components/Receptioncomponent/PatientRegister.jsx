@@ -45,8 +45,7 @@ const PatientRegister = () => {
     });
   };
 
-  // 🔹 Inline styles
-// 🔹 Inline styles (UPDATED THEME)
+ 
 const containerStyle = {
   maxWidth: "500px",
   margin: "auto",
@@ -60,7 +59,7 @@ const containerStyle = {
 const headingStyle = {
   textAlign: "center",
   marginBottom: "20px",
-  color: "#0f766e", // teal
+  color: "#0f766e", 
   fontWeight: "600",
   fontSize: "22px"
 };
