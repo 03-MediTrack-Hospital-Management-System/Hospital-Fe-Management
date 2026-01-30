@@ -1,92 +1,176 @@
+import { useState } from "react";
 import DoctorSidebar from "../../components/DoctorComponent/DoctorSidebar";
 import GlobalHeader from "../../components/Common/GlobalHeader";
-import { FaHeart, FaUserMd, FaEnvelope, FaPhone, FaHospital, FaAward, FaCalendarAlt } from "react-icons/fa";
-import "../../styles/reception.css";
+import {
+  FaUserMd,
+  FaHospital,
+  FaAward,
+  FaCalendarAlt,
+  FaEdit,
+  FaSave,
+  FaTimes
+} from "react-icons/fa";
 
 export default function DoctorProfile() {
-    return (
-        <div id="patient-root">
-            <GlobalHeader />
+  const [isEditing, setIsEditing] = useState(false);
 
-            <div id="patient-layout" className="doctor-layout-override" style={{ height: 'calc(100vh - 80px)', minHeight: 'auto' }}>
-                <DoctorSidebar />
+  const [profile, setProfile] = useState({
+    name: "Dr. John Doe",
+    department: "Cardiology Department",
+    email: "dr.johndoe@vvcare.com",
+    phone: "+1 (555) 123-4567",
+    office: "Room 304, Block A",
+    license: "MD-12345-US",
+    specialization: "Cardiothoracic Surgery",
+    education: "Harvard Medical School",
+    experience: "12 Years"
+  });
 
-                <main id="patient-main" style={{ padding: '40px' }}>
-                    <div style={{ marginBottom: '35px' }}>
-                        <h1 style={{ fontSize: '36px', color: '#0b5c63', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.5px' }}>
-                            My Profile
-                        </h1>
-                        <p style={{ margin: 0, fontSize: '18px', color: '#64748b', fontWeight: '500' }}>
-                            Manage your personal and professional information.
-                        </p>
-                    </div>
+  const [backup, setBackup] = useState(profile);
 
+  const handleEdit = () => {
+    setBackup(profile); 
+    setIsEditing(true);
+  };
 
-                    <div className="profile-container" style={{ maxWidth: '1000px', margin: '0 0' }}>
-                        <div className="profile-header-card" style={{
-                            background: 'linear-gradient(135deg, #0b5c63 0%, #1ea6a9 100%)',
-                            color: 'white',
-                            position: 'relative',
-                            overflow: 'hidden',
-                            borderRadius: '24px',
-                            padding: '50px 40px',
-                            boxShadow: '0 15px 35px rgba(11, 92, 99, 0.15)',
-                            marginBottom: '40px'
-                        }}>
-                            <div style={{ position: 'absolute', top: 0, right: 0, width: '400px', height: '100%', background: 'rgba(255,255,255,0.03)', transform: 'skewX(-20deg)' }}></div>
+  const handleCancel = () => {
+    setProfile(backup);
+    setIsEditing(false);
+  };
 
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '40px', position: 'relative', zIndex: 1 }}>
-                                <div className="profile-avatar" style={{ width: '150px', height: '150px', border: '5px solid rgba(255,255,255,0.2)', background: 'white', color: '#0b5c63', borderRadius: '24px' }}>
-                                    <FaUserMd size={60} />
-                                </div>
-                                <div className="profile-info">
-                                    <h2 style={{ color: 'white', fontSize: '38px', marginBottom: '10px', fontWeight: '800' }}>Dr. John Doe</h2>
-                                    <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '18px', fontWeight: '500' }}><FaHospital style={{ marginRight: '8px' }} /> Cardiology Department</p>
-                                    <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
-                                        <span style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 18px', borderRadius: '12px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '600', backdropFilter: 'blur(10px)' }}><FaAward /> Senior Consultant</span>
-                                        <span style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 18px', borderRadius: '12px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '600', backdropFilter: 'blur(10px)' }}><FaCalendarAlt /> 12 Years Exp.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  const handleSave = () => {
+    console.log("Saved profile:", profile);
+    setIsEditing(false);
+  };
 
-                        <div className="profile-grid" style={{ marginTop: '0', padding: '0', gap: '25px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
-                            <div className="details-card" style={{ borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9', background: 'white', padding: '30px' }}>
-                                <h3 style={{ fontSize: '20px', color: '#0b5c63', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '10px' }}><FaEnvelope /> Contact Information</h3>
-                                <div className="info-row" style={{ padding: '16px 0', borderBottom: '1px solid #f8fafc' }}>
-                                    <span style={{ color: '#64748b' }}>Email Address</span>
-                                    <span style={{ fontWeight: '600' }}>dr.johndoe@vvcare.com</span>
-                                </div>
-                                <div className="info-row" style={{ padding: '16px 0', borderBottom: '1px solid #f8fafc' }}>
-                                    <span style={{ color: '#64748b' }}>Phone Number</span>
-                                    <span style={{ fontWeight: '600' }}>+1 (555) 123-4567</span>
-                                </div>
-                                <div className="info-row" style={{ padding: '16px 0', borderBottom: 'none' }}>
-                                    <span style={{ color: '#64748b' }}>Office Location</span>
-                                    <span style={{ fontWeight: '600' }}>Room 304, Block A, Main Wing</span>
-                                </div>
-                            </div>
+  return (
+    <div className="d-flex flex-column min-vh-100">
+      <GlobalHeader />
 
-                            <div className="details-card" style={{ borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', border: '1px solid #f1f5f9', background: 'white', padding: '30px' }}>
-                                <h3 style={{ fontSize: '20px', color: '#0b5c63', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '10px' }}><FaAward /> Professional Details</h3>
-                                <div className="info-row" style={{ padding: '16px 0', borderBottom: '1px solid #f8fafc' }}>
-                                    <span style={{ color: '#64748b' }}>Medical License</span>
-                                    <span style={{ fontWeight: '600' }}>MD-12345-US</span>
-                                </div>
-                                <div className="info-row" style={{ padding: '16px 0', borderBottom: '1px solid #f8fafc' }}>
-                                    <span style={{ color: '#64748b' }}>Specialization</span>
-                                    <span style={{ fontWeight: '600' }}>Cardiothoracic Surgery</span>
-                                </div>
-                                <div className="info-row" style={{ padding: '16px 0', borderBottom: 'none' }}>
-                                    <span style={{ color: '#64748b' }}>Education</span>
-                                    <span style={{ fontWeight: '600' }}>Harvard Medical School</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+      <div className="d-flex flex-grow-1">
+        <DoctorSidebar />
+
+        <main className="flex-grow-1 p-4 bg-light">
+          <h2 className="fw-bold text-teal">My Profile</h2>
+          <p className="text-muted mb-4">
+            Manage your personal and professional information
+          </p>
+
+          <div className="bg-white p-4 rounded-4 shadow-sm position-relative mb-4">
+
+            {!isEditing ? (
+              <button
+                className="btn btn-outline-primary position-absolute top-0 end-0 m-3"
+                onClick={handleEdit}
+              >
+                <FaEdit /> Edit
+              </button>
+            ) : (
+              <div className="position-absolute top-0 end-0 m-3 d-flex gap-2">
+                <button className="btn btn-success" onClick={handleSave}>
+                  <FaSave /> Save
+                </button>
+                <button className="btn btn-secondary" onClick={handleCancel}>
+                  <FaTimes /> Cancel
+                </button>
+              </div>
+            )}
+
+            <div className="d-flex gap-4 align-items-center">
+              <div
+                className="bg-light rounded-4 d-flex align-items-center justify-content-center"
+                style={{ width: 120, height: 120, fontSize: 50 }}
+              >
+                <FaUserMd />
+              </div>
+
+              <div>
+                {isEditing ? (
+                  <input
+                    className="form-control mb-2"
+                    value={profile.name}
+                    onChange={(e) =>
+                      setProfile({ ...profile, name: e.target.value })
+                    }
+                  />
+                ) : (
+                  <h3>{profile.name}</h3>
+                )}
+
+                <p className="mb-1">
+                  <FaHospital />{" "}
+                  {isEditing ? (
+                    <input
+                      className="form-control mt-1"
+                      value={profile.department}
+                      onChange={(e) =>
+                        setProfile({ ...profile, department: e.target.value })
+                      }
+                    />
+                  ) : (
+                    profile.department
+                  )}
+                </p>
+
+                <div className="d-flex gap-2 mt-2">
+                  <span className="badge bg-secondary">
+                    <FaAward /> {profile.experience}
+                  </span>
+                </div>
+              </div>
             </div>
-        </div>
-    );
+          </div>
+
+          <div className="row g-4">
+            <div className="col-md-6">
+              <div className="card p-4">
+                <h5>Contact Info</h5>
+
+                <Input label="Email" value={profile.email} edit={isEditing}
+                  onChange={(v) => setProfile({ ...profile, email: v })} />
+
+                <Input label="Phone" value={profile.phone} edit={isEditing}
+                  onChange={(v) => setProfile({ ...profile, phone: v })} />
+
+                <Input label="Office" value={profile.office} edit={isEditing}
+                  onChange={(v) => setProfile({ ...profile, office: v })} />
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="card p-4">
+                <h5>Professional Info</h5>
+
+                <Input label="License" value={profile.license} edit={isEditing}
+                  onChange={(v) => setProfile({ ...profile, license: v })} />
+
+                <Input label="Specialization" value={profile.specialization} edit={isEditing}
+                  onChange={(v) => setProfile({ ...profile, specialization: v })} />
+
+                <Input label="Education" value={profile.education} edit={isEditing}
+                  onChange={(v) => setProfile({ ...profile, education: v })} />
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 }
 
+function Input({ label, value, edit, onChange }) {
+  return (
+    <div className="mb-3">
+      <strong>{label}</strong>
+      {edit ? (
+        <input
+          className="form-control mt-1"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      ) : (
+        <p className="mb-1">{value}</p>
+      )}
+    </div>
+  );
+}
