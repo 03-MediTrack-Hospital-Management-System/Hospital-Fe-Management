@@ -149,9 +149,6 @@ function Login() {
             <div className="col-lg-6 p-5 bg-white d-flex align-items-center position-relative">
               <div className="w-100 px-lg-5">
                 <div className="text-center mb-5 stagger-1">
-                  <div className="d-inline-flex align-items-center justify-content-center p-3 rounded-circle bg-teal bg-opacity-10 text-teal mb-3 shadow-sm floating-card" style={{ width: '80px', height: '80px' }}>
-                    <div className="fs-2"><FaUserMd /></div>
-                  </div>
                   <h2 className="fw-bold text-dark mb-2">Welcome Back</h2>
                   <p className="text-secondary">Sign in to access your dashboard</p>
                 </div>
