@@ -3,12 +3,12 @@ import PatientLayout from "../components/PatientComponent/PatientLayout";
 import "../styles/reception.css";
 import { FaUser, FaBell, FaLock, FaGlobe, FaPalette, FaSave, FaCheckCircle, FaShieldAlt } from "react-icons/fa";
 import ChangePasswordModal from '../components/PatientComponent/ChangePasswordModal';
-import { color } from 'chart.js/helpers';
+
 
 export default function PatientSettings() {
   const [activeTab, setActiveTab] = useState('general');
   const [notifications, setNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+
   const [twoFactor, setTwoFactor] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
 

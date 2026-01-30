@@ -1,10 +1,10 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import MagicSidebar from "../Common/MagicSidebar";
 import {
     FaThLarge,
     FaCalendarCheck,
     FaUserInjured,
-    FaUser,
-    FaSignOutAlt
+    FaUser
 } from "react-icons/fa";
 
 export default function DoctorSidebar() {
@@ -14,38 +14,19 @@ export default function DoctorSidebar() {
         navigate("/login");
     };
 
+    const menuItems = [
+        { to: "/doctor", label: "Dashboard", icon: FaThLarge, end: true },
+        { to: "/doctor/appointments", label: "Appointments", icon: FaCalendarCheck },
+        { to: "/doctor/patients", label: "My Patients", icon: FaUserInjured },
+        { to: "/doctor/profile", label: "Profile", icon: FaUser },
+    ];
+
     return (
-        <aside className="patient-dashboard-content-left">
-            <div>
-                <h3>Doctor Menu</h3>
-
-                <NavLink to="/doctor" className={({ isActive }) => `menu-item ${isActive ? 'active' : ''}`} end>
-                    <FaThLarge />
-                    Dashboard
-                </NavLink>
-
-                <NavLink to="/doctor/appointments" className="menu-item">
-                    <FaCalendarCheck />
-                    Appointments
-                </NavLink>
-
-                <NavLink to="/doctor/patients" className="menu-item">
-                    <FaUserInjured />
-                    My Patients
-                </NavLink>
-
-                <NavLink to="/doctor/profile" className="menu-item">
-                    <FaUser />
-                    Profile
-                </NavLink>
-            </div>
-
-            <div className="sidebar-footer">
-                <div className="menu-item logout-link" onClick={handleLogout}>
-                    <FaSignOutAlt />
-                    Logout
-                </div>
-            </div>
-        </aside>
+        <MagicSidebar
+            title="Doctor Portal"
+            role="MEDICAL STAFF"
+            menuItems={menuItems}
+            onLogout={handleLogout}
+        />
     );
 }

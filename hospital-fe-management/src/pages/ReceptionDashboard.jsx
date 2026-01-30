@@ -26,13 +26,13 @@ export default function ReceptionDashboard() {
       </section>
 
 
-      <section className="patient-dashboard-content">
+      <section className="d-flex" style={{ height: 'calc(100vh - 80px)', overflow: 'hidden' }}>
         <Sidebar
           onAddPatient={() => setShowPatientPopup(true)}
           onGenerateBills={() => setShowBillsModal(true)}
         />
 
-        <main className="patient-dashboard-content-center">
+        <main className="patient-dashboard-content-center flex-grow-1" style={{ overflowY: 'auto' }}>
           <h1>Reception Dashboard</h1>
 
           <OverviewCards />
@@ -45,7 +45,9 @@ export default function ReceptionDashboard() {
           <LatestPatients />
         </main>
 
-        <DoctorAppointments />
+        <div style={{ width: '300px', flexShrink: 0, borderLeft: '1px solid #e2e8f0', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)' }}>
+          <DoctorAppointments />
+        </div>
       </section>
 
 

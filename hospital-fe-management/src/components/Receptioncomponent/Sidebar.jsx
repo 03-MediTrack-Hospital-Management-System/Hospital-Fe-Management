@@ -1,24 +1,24 @@
 import React from "react";
-import GenerateBills from "./GenerateBills";
-import { IoExitOutline } from "react-icons/io5";
+import MagicSidebar from "../Common/MagicSidebar";
+import { FaThLarge, FaUserPlus, FaFileInvoiceDollar } from "react-icons/fa";
 
 export default function Sidebar({ onAddPatient, onGenerateBills }) {
+  const handleLogout = () => {
+    window.location.href = "/login";
+  };
+
+  const menuItems = [
+    { label: "Dashboard", icon: FaThLarge, isActive: true, onClick: () => { } }, // Always active for now since it's a single page
+    { label: "Add Patient", icon: FaUserPlus, onClick: onAddPatient },
+    { label: "Generate Bills", icon: FaFileInvoiceDollar, onClick: onGenerateBills },
+  ];
+
   return (
-    <aside className="patient-dashboard-content-left">
-      <h3>General</h3>
-
-      <div className="menu-item active">Dashboard</div>
-
-      <div className="menu-item" onClick={onAddPatient}>
-        Add Patient
-      </div>
-
-      <div className="menu-item" onClick={onGenerateBills}>
-        Generate Bills
-      </div>
-      <div className="menu-item logout" onClick={() => (window.location.href = "/login")} style={{ marginTop: 'auto', color: '#ef4444', borderTop: '1px solid #e2e8f0' }}>
-        Log Out
-      </div>
-    </aside>
+    <MagicSidebar
+      title="Reception"
+      role="FRONT DESK"
+      menuItems={menuItems}
+      onLogout={handleLogout}
+    />
   );
 }

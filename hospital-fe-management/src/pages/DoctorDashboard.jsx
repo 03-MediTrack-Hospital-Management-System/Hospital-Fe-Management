@@ -8,13 +8,13 @@ import "../styles/reception.css";
 
 export default function DoctorDashboard() {
   return (
-    <div id="patient-root">
+    <div className="doctor-dashboard-container">
       <GlobalHeader />
 
-      <div id="patient-layout" className="doctor-layout-override" style={{ height: 'calc(100vh - 80px)', minHeight: 'auto' }}>
+      <div className="d-flex" style={{ minHeight: '100vh' }}>
         <DoctorSidebar />
 
-        <main id="patient-main" style={{ padding: '40px' }}>
+        <main className="flex-grow-1 p-4" style={{ background: '#f8fafc' }}>
           <div style={{ marginBottom: '40px' }}>
             <h1 style={{ fontSize: '36px', color: '#0b5c63', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.5px' }}>
               Doctor Dashboard

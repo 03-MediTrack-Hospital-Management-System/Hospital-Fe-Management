@@ -18,9 +18,9 @@ export default function Admin() {
   ];
 
   return (
-    <div className="admin-container">
+    <div className="admin-container d-flex" style={{ minHeight: '100vh' }}>
       <AdminSidebar />
-      <main className="admin-main">
+      <main className="admin-main flex-grow-1 p-4" style={{ background: '#f8fafc' }}>
         <div className="admin-header-enhanced">
           <div className="admin-left">
             <div className="admin-avatar-lg">AD</div>
