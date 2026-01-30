@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import Login from "./pages/Login";
-import Signup from "./pages/SignUp";
+import Signup from  "./pages/signup";
 import PatientDashboard from "./pages/PatientDashboard";
 import PatientAppointments from "./pages/PatientAppointments";
 import PatientReports from "./pages/PatientReports";
@@ -43,6 +43,7 @@ function Layout() {
     location.pathname.startsWith("/admin") ||
     location.pathname === "/profile" ||
     location.pathname === "/reception";
+    
 
   return (
     <>
@@ -54,152 +55,40 @@ function Layout() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        <Route
-          path="/patient"
-          element={
-            <ProtectedRoute role="PATIENT">
-              <PatientDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/patient"element={ <ProtectedRoute role="PATIENT"> <PatientDashboard />  </ProtectedRoute> }  />
 
-        <Route
-          path="/patient/appointments"
-          element={
-            <ProtectedRoute role="PATIENT">
-              <PatientAppointments />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/patient/appointments" element={ <ProtectedRoute role="PATIENT"> <PatientAppointments /></ProtectedRoute>}/>
 
-        <Route
-          path="/patient/reports"
-          element={
-            <ProtectedRoute role="PATIENT">
-              <PatientReports />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/patient/reports" element={  <ProtectedRoute role="PATIENT"> <PatientReports /> </ProtectedRoute>}/>
 
-        <Route
-          path="/patient/profile"
-          element={
-            <ProtectedRoute role="PATIENT">
-              <PatientProfile />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/patient/profile" element={ <ProtectedRoute role="PATIENT">  <PatientProfile />  </ProtectedRoute>  }   />
 
-        <Route
-          path="/patient/settings"
-          element={
-            <ProtectedRoute role="PATIENT">
-              <PatientSettings />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/patient/settings"  element={  <ProtectedRoute role="PATIENT">  <PatientSettings /> </ProtectedRoute> } />
 
-        <Route
-          path="/patient/feedback"
-          element={
-            <ProtectedRoute role="PATIENT">
-              <PatientFeedback />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/patient/feedback" element={  <ProtectedRoute role="PATIENT">  <PatientFeedback />    </ProtectedRoute> } />
 
         <Route path="/profile" element={<UserProfilePage />} />
 
-        <Route
-          path="/doctor"
-          element={
-            <ProtectedRoute role="DOCTOR">
-              <DoctorDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route   path="/doctor"  element={ <ProtectedRoute role="DOCTOR">  <DoctorDashboard />   </ProtectedRoute> } />
 
-        <Route
-          path="/doctor/appointments"
-          element={
-            <ProtectedRoute role="DOCTOR">
-              <DoctorAppointmentsPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route   path="/doctor/appointments" element={<ProtectedRoute role="DOCTOR"><DoctorAppointmentsPage /></ProtectedRoute> } />
 
-        <Route
-          path="/doctor/patients"
-          element={
-            <ProtectedRoute role="DOCTOR">
-              <DoctorPatientsPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/doctor/patients" element={ <ProtectedRoute role="DOCTOR"> <DoctorPatientsPage />  </ProtectedRoute>  }/>
 
-        <Route
-          path="/doctor/profile"
-          element={
-            <ProtectedRoute role="DOCTOR">
-              <DoctorProfile />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/doctor/profile" element={ <ProtectedRoute role="DOCTOR"> <DoctorProfile /> </ProtectedRoute>  }/>
 
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <Admin />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/admin"element={  <ProtectedRoute role="ADMIN"> <Admin /> </ProtectedRoute> } />
 
-        <Route
-          path="/admin/doctors"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminDoctors />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/admin/doctors" element={ <ProtectedRoute role="ADMIN"> <AdminDoctors />  </ProtectedRoute>  } />
 
-        <Route
-          path="/admin/patients"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminPatients />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/admin/patients"element={ <ProtectedRoute role="ADMIN">  <AdminPatients />  </ProtectedRoute>  }/>
 
-        <Route
-          path="/admin/settings"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminSettings />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/admin/settings"  element={ <ProtectedRoute role="ADMIN">  <AdminSettings />  </ProtectedRoute>  }  />
 
         <Route path="/admin/doctors/add" element={<AdminAddDoctor />} />
 
-        <Route
-          path="/admin/inventory"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <Inventory />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/reception"
-          element={
-            <ProtectedRoute role="RECEPTION">
-              <ReceptionDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route  path="/admin/inventory"  element={ <ProtectedRoute role="ADMIN"> <Inventory /> </ProtectedRoute> }  />
+        <Route  path="/reception" element={   <ProtectedRoute role="RECEPTION">  <ReceptionDashboard />  </ProtectedRoute>  } />
       </Routes>
     </>
   );
