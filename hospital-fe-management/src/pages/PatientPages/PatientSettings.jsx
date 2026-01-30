@@ -43,7 +43,7 @@ export default function PatientSettings() {
           <div className="details-card animation-fade-in">
             <h3 style={{ borderBottom: '1px solid #e2e8f0', paddingBottom: '15px', marginBottom: '20px' }}>Security Settings</h3>
 
-            <div className="setting-item">
+            {/* <div className="setting-item">
               <div className="setting-info">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{ background: '#fff7ed', padding: '8px', borderRadius: '8px', color: '#ea580c' }}><FaShieldAlt /></div>
@@ -57,7 +57,7 @@ export default function PatientSettings() {
                 className={`toggle-switch ${twoFactor ? 'on' : ''}`}
                 onClick={() => setTwoFactor(!twoFactor)}
               ></div>
-            </div>
+            </div> */}
 
             <div className="setting-item">
               <div className="setting-info">
