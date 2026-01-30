@@ -1,5 +1,5 @@
-import "../styles/admin.css";
-import AdminSidebar from "../components/AdminComponent/AdminSidebar";
+import "../../styles/admin.css"
+import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import { FaUserInjured, FaSearch, FaEye, FaSortAmountDown } from "react-icons/fa";
 import { useState } from "react";
 

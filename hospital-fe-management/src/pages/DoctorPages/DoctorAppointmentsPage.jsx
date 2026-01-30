@@ -1,8 +1,8 @@
-import DoctorSidebar from "../components/DoctorComponent/DoctorSidebar";
-import DoctorAppointments from "../components/DoctorComponent/DoctorAppointments";
-import GlobalHeader from "../components/Common/GlobalHeader";
+import DoctorSidebar from "../../components/DoctorComponent/DoctorSidebar";
+import DoctorAppointments from "../../components/DoctorComponent/DoctorAppointments";
+import GlobalHeader from "../../components/Common/GlobalHeader";
 import { FaHeart, FaCalendarCheck, FaClock, FaHistory, FaBan } from "react-icons/fa";
-import "../styles/reception.css";
+import "../../styles/reception.css";
 import { useState } from "react";
 
 export default function DoctorAppointmentsPage() {

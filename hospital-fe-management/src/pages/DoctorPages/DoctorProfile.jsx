@@ -1,7 +1,7 @@
-import DoctorSidebar from "../components/DoctorComponent/DoctorSidebar";
-import GlobalHeader from "../components/Common/GlobalHeader";
+import DoctorSidebar from "../../components/DoctorComponent/DoctorSidebar";
+import GlobalHeader from "../../components/Common/GlobalHeader";
 import { FaHeart, FaUserMd, FaEnvelope, FaPhone, FaHospital, FaAward, FaCalendarAlt } from "react-icons/fa";
-import "../styles/reception.css";
+import "../../styles/reception.css";
 
 export default function DoctorProfile() {
     return (

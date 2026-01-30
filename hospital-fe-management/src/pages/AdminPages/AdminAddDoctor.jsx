@@ -1,5 +1,5 @@
-import "../styles/admin.css";
-import AdminSidebar from "../components/AdminComponent/AdminSidebar";
+import "../../styles/admin.css"
+import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import { useState } from "react";
 import { FaUserMd, FaArrowLeft, FaSave, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

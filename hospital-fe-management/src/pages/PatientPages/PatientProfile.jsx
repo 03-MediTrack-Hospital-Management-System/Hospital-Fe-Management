@@ -1,5 +1,5 @@
-import PatientLayout from "../components/PatientComponent/PatientLayout";
-import "../styles/reception.css";
+import PatientLayout from "../../components/PatientComponent/PatientLayout";
+import "../../styles/reception.css";
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaTint, FaBirthdayCake, FaPen } from "react-icons/fa";
 
 export default function PatientProfile() {

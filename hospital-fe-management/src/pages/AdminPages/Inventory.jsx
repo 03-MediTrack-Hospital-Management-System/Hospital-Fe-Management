@@ -1,7 +1,7 @@
-import "../styles/admin.css";
+import "../../styles/admin.css"
 import { useState } from "react";
 import { FaBoxOpen, FaExclamationTriangle, FaSearch, FaFilter, FaPlus, FaCamera, FaFlask, FaDownload, FaTrash, FaEdit } from "react-icons/fa";
-import AdminSidebar from "../components/AdminComponent/AdminSidebar";
+import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 
 export default function Inventory() {
   const [search, setSearch] = useState("");

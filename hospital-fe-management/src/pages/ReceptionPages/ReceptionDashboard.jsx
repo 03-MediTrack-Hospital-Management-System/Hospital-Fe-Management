@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Sidebar from "../components/ReceptionComponent/Sidebar";
-import PatientRegisterPopup from "../components/ReceptionComponent/PatientRegisterPopup";
-import GenerateBillsModal from "../components/ReceptionComponent/GenerateBillsModal";
-import OverviewCards from "../components/ReceptionComponent/OverviewCards";
-import PatientChart from "../components/ReceptionComponent/PatientChart";
-import Reports from "../components/ReceptionComponent/Reports";
-import LatestPatients from "../components/ReceptionComponent/LatestPatients";
-import Calendar from "../components/Common/Calendar";
-import GlobalHeader from "../components/Common/GlobalHeader";
-import "../styles/reception.css";
+import Sidebar from "../../components/ReceptionComponent/Sidebar";
+import PatientRegisterPopup from "../../components/ReceptionComponent/PatientRegisterPopup";
+import GenerateBillsModal from "../../components/ReceptionComponent/GenerateBillsModal";
+import OverviewCards from "../../components/ReceptionComponent/OverviewCards";
+import PatientChart from "../../components/ReceptionComponent/PatientChart";
+import Reports from "../../components/ReceptionComponent/Reports";
+import LatestPatients from "../../components/ReceptionComponent/LatestPatients";
+import Calendar from "../../components/Common/Calendar";
+import GlobalHeader from "../../components/Common/GlobalHeader";
+import "../../styles/reception.css";
 import { useNavigate } from "react-router-dom";
 
 export default function ReceptionDashboard() {

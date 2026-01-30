@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PatientLayout from "../components/PatientComponent/PatientLayout";
-import "../styles/reception.css";
+import PatientLayout from "../../components/PatientComponent/PatientLayout";
+import "../../styles/reception.css";
 import { FaUser, FaBell, FaLock, FaGlobe, FaPalette, FaSave, FaCheckCircle, FaShieldAlt } from "react-icons/fa";
-import ChangePasswordModal from '../components/PatientComponent/ChangePasswordModal';
+import ChangePasswordModal from '../../components/PatientComponent/ChangePasswordModal';
 
 
 export default function PatientSettings() {

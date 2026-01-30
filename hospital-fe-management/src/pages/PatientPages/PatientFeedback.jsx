@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PatientLayout from "../components/PatientComponent/PatientLayout";
+import PatientLayout from "../../components/PatientComponent/PatientLayout";
 import { FaStar, FaRegStar, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
-import "../styles/components/PatientFeedback.css";
+import "../../styles/components/PatientFeedback.css"
 
 export default function PatientFeedback() {
     const [rating, setRating] = useState(0);
