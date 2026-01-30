@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import {
   FaHeart,
@@ -32,7 +33,6 @@ function Landing() {
 
             <div className="hero-buttons">
               <button className="primary-btn">Get Started →</button>
-              <button className="secondary-btn ">Access Portal</button>
             </div>
 
             <div className="rating">
@@ -111,7 +111,7 @@ function Landing() {
             <h3>Cardiology</h3>
             <p>Expert heart care with advanced diagnostics and treatments.</p>
 
-            <a href="#" aria-label="Go to Cardiology page"></a>
+            <Link to="/specialty/cardiology" aria-label="Go to Cardiology page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -122,7 +122,7 @@ function Landing() {
             <h3>Neurology</h3>
             <p>Advanced treatment for brain and nervous system disorders.</p>
 
-            <a href="#" aria-label="Go to Neurology page"></a>
+            <Link to="/specialty/neurology" aria-label="Go to Neurology page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -133,7 +133,7 @@ function Landing() {
             <h3>Orthopedics</h3>
             <p>Comprehensive bone, joint, and spine care solutions.</p>
 
-            <a href="#" aria-label="Go to Orthopedics page"></a>
+            <Link to="/specialty/orthopedics" aria-label="Go to Orthopedics page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -144,7 +144,7 @@ function Landing() {
             <h3>Pediatrics</h3>
             <p>Compassionate healthcare for infants, children, and teens.</p>
 
-            <a href="#" aria-label="Go to Pediatrics page"></a>
+            <Link to="/specialty/pediatrics" aria-label="Go to Pediatrics page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -155,7 +155,7 @@ function Landing() {
             <h3>Oncology</h3>
             <p>Comprehensive cancer diagnosis and treatment services.</p>
 
-            <a href="#" aria-label="Go to Oncology page"></a>
+            <Link to="/specialty/oncology" aria-label="Go to Oncology page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -166,7 +166,7 @@ function Landing() {
             <h3>Gastroenterology</h3>
             <p>Digestive system care with expert specialists.</p>
 
-            <a href="#" aria-label="Go to Gastroenterology page"></a>
+            <Link to="/specialty/gastroenterology" aria-label="Go to Gastroenterology page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -177,7 +177,7 @@ function Landing() {
             <h3>Nephrology</h3>
             <p>Advanced kidney care and dialysis services.</p>
 
-            <a href="#" aria-label="Go to Nephrology page"></a>
+            <Link to="/specialty/nephrology" aria-label="Go to Nephrology page"></Link>
           </div>
 
           <div className="specialty-card">
@@ -188,7 +188,7 @@ function Landing() {
             <h3>Pulmonology</h3>
             <p>Expert treatment for lung and respiratory conditions.</p>
 
-            <a href="#" aria-label="Go to Pulmonology page"></a>
+            <Link to="/specialty/pulmonology" aria-label="Go to Pulmonology page"></Link>
           </div>
         </section>
         <section className="Footer-hero-Landing">
@@ -202,7 +202,7 @@ function Landing() {
                 healthcare needs. Start your journey to better health today.
               </p>
               <button className="footer-cta">
-             <a href="/login">   Get Started Now <span>→</span></a>
+                <a href="/login">   Get Started Now <span>→</span></a>
               </button>
             </div>
 

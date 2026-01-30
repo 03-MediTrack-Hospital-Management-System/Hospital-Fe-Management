@@ -1,44 +1,23 @@
-import Sidebar from "../components/Receptioncomponent/Sidebar";
+import PatientLayout from "../components/PatientComponent/PatientLayout";
 import PatientOverview from "../components/PatientComponent/PatientOverview";
-import PatientChart from "../components/PatientComponent/PatientChart";
-import PatientReports from "../components/PatientComponent/PatientReports";
-import PatientAppointments from "../components/PatientComponent/PatientAppointments";
-import React from "react";
-import "../styles/patient.css";
-import { FaHeart } from "react-icons/fa";
-import { IoExitOutline } from "react-icons/io5";
+import PatientDoctors from "../components/PatientComponent/PatientDoctors";
+import "../styles/pages/PatientDashboard.css";
 
 export default function PatientDashboard() {
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
   return (
-    <>
-      
-      <section className="patient-dashboard-header">
-        <div className="logo">
-          <FaHeart /> <span>VVCARE</span>
-        </div>
+    <PatientLayout>
+      <div className="dashboard-header">
+        <h1>My Dashboard</h1>
+        <p>Welcome back, John! Here is your health overview for {today}.</p>
+      </div>
 
-        <button className="logout-btn">
-          <IoExitOutline /> Logout
-        </button>
-      </section>
+      <PatientOverview />
 
-      
-      <section className="patient-dashboard-content">
-        <Sidebar />
-
-        <main className="patient-dashboard-content-center">
-          <h1>My Dashboard</h1>
-
-          <PatientOverview />
-
-          <div className="dashboard-middle">
-            <PatientChart />
-            <PatientReports />
-          </div>
-        </main>
-
-        <PatientAppointments />
-      </section>
-    </>
+      <div className="dashboard-middle">
+        <PatientDoctors />
+      </div>
+    </PatientLayout>
   );
 }

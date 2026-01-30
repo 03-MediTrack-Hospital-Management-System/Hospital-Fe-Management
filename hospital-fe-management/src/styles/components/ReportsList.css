@@ -1,0 +1,249 @@
+.filter-btn {
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #64748b;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.filter-btn.active {
+    background: #fff;
+    color: #0b5c63;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 16px;
+    width: 320px;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.search-box:focus-within {
+    border-color: #0b5c63;
+    box-shadow: 0 0 0 3px rgba(11, 92, 99, 0.1);
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    color: #333;
+    font-size: 14px;
+}
+
+.search-box svg {
+    color: #94a3b8;
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 25px;
+}
+
+.report-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 18px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.report-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    border-color: rgba(11, 92, 99, 0.1);
+}
+
+.report-header-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.report-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    line-height: 0;
+}
+
+.report-card:hover .report-icon-box {
+    transform: scale(1.05);
+}
+
+.report-icon-box.lab {
+    background: #f0fdfa;
+    color: #0d9488;
+    border: 1px solid #ccfbf1;
+}
+
+.report-icon-box.radiology {
+    background: #f0f9ff;
+    color: #0284c7;
+    border: 1px solid #e0f2fe;
+}
+
+.report-icon-box.prescription {
+    background: #fdf2f8;
+    color: #db2777;
+    border: 1px solid #fce7f3;
+}
+
+.report-title-section {
+    flex: 1;
+}
+
+.report-title-section h3 {
+    margin: 0 0 8px 0;
+    font-size: 17px;
+    color: #1e293b;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.status-badge {
+    display: inline-flex;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.report-desc {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    min-height: 44px;
+    /* Align heights */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.report-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.doctor-meta {
+    color: #0b5c63;
+}
+
+.dr-avatar-mini {
+    font-size: 16px;
+    color: #0b5c63;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.meta-item svg:not(.dr-avatar-mini) {
+    color: #94a3b8;
+}
+
+.report-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.action-btn.view {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+}
+
+.action-btn.view:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.action-btn.download {
+    background: #0b5c63;
+    color: #fff;
+    border: none;
+}
+
+.action-btn.download:hover {
+    background: #084a50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 92, 99, 0.2);
+}
+
+.no-reports {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #94a3b8;
+    padding: 60px;
+    background: #f8fafc;
+    border-radius: 20px;
+    border: 2px dashed #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .reports-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+}

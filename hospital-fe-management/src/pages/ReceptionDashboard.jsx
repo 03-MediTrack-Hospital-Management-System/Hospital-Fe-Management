@@ -1,14 +1,13 @@
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Receptioncomponent/Sidebar";
-import PatientRegisterPopup from "../components/Receptioncomponent/PatientRegisterPopup";
-import GenerateBillsModal from "../components/Receptioncomponent/GenerateBillsModal";
-import OverviewCards from "../components/Receptioncomponent/OverviewCards";
-import PatientChart from "../components/Receptioncomponent/PatientChart";
-import Reports from "../components/Receptioncomponent/Reports";
-import LatestPatients from "../components/Receptioncomponent/LatestPatients";
-import DoctorAppointments from "../components/Receptioncomponent/DoctorAppointments";
+import Sidebar from "../components/ReceptionComponent/Sidebar";
+import PatientRegisterPopup from "../components/ReceptionComponent/PatientRegisterPopup";
+import GenerateBillsModal from "../components/ReceptionComponent/GenerateBillsModal";
+import OverviewCards from "../components/ReceptionComponent/OverviewCards";
+import PatientChart from "../components/ReceptionComponent/PatientChart";
+import Reports from "../components/ReceptionComponent/Reports";
+import LatestPatients from "../components/ReceptionComponent/LatestPatients";
+import DoctorAppointments from "../components/ReceptionComponent/DoctorAppointments";
 import "../styles/reception.css";
 import { FaHeart } from "react-icons/fa";
 import { IoExitOutline } from "react-icons/io5";
@@ -16,22 +15,17 @@ import { IoExitOutline } from "react-icons/io5";
 export default function ReceptionDashboard() {
   const [showPatientPopup, setShowPatientPopup] = useState(false);
   const [showBillsModal, setShowBillsModal] = useState(false);
-  const navigate = useNavigate();
 
   return (
     <>
-     
+
       <section className="patient-dashboard-header">
         <div className="logo">
           <FaHeart /> <span>VVCARE</span>
         </div>
-
-        <button className="logout-btn" onClick={() => navigate("/login")}>
-          <IoExitOutline /> Logout
-        </button>
       </section>
 
-    
+
       <section className="patient-dashboard-content">
         <Sidebar
           onAddPatient={() => setShowPatientPopup(true)}
@@ -54,7 +48,7 @@ export default function ReceptionDashboard() {
         <DoctorAppointments />
       </section>
 
-    
+
       {showPatientPopup && (
         <PatientRegisterPopup onClose={() => setShowPatientPopup(false)} />
       )}

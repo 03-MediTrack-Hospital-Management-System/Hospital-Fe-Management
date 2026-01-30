@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/modal.css";
+import "../../styles/modal.css";
 
 export default function BookAppointmentModal({ onClose }) {
   const [formData, setFormData] = useState({
