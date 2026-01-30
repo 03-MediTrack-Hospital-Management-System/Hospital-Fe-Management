@@ -5,7 +5,7 @@ import { FaCalendarAlt, FaClock, FaUserMd, FaMapMarkerAlt, FaNotesMedical, FaChe
 export default function AppointmentList() {
   const [activeTab, setActiveTab] = useState('upcoming');
 
-  // Mock data - replace with actual API call later
+  
   const appointments = [
     {
       id: 1,

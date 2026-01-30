@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Sidebar from "../components/ReceptionComponent/Sidebar";
 import PatientRegisterPopup from "../components/ReceptionComponent/PatientRegisterPopup";
@@ -7,32 +6,34 @@ import OverviewCards from "../components/ReceptionComponent/OverviewCards";
 import PatientChart from "../components/ReceptionComponent/PatientChart";
 import Reports from "../components/ReceptionComponent/Reports";
 import LatestPatients from "../components/ReceptionComponent/LatestPatients";
-import DoctorAppointments from "../components/ReceptionComponent/DoctorAppointments";
+import Calendar from "../components/Common/Calendar";
+import GlobalHeader from "../components/Common/GlobalHeader";
 import "../styles/reception.css";
-import { FaHeart } from "react-icons/fa";
-import { IoExitOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export default function ReceptionDashboard() {
   const [showPatientPopup, setShowPatientPopup] = useState(false);
   const [showBillsModal, setShowBillsModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/login');
+  };
 
   return (
-    <>
+    <div className="d-flex flex-column min-vh-100 overflow-hidden global-dashboard-bg">
+      <GlobalHeader
+        user={{ name: "Receptionist", role: "Front Desk" }}
+        onLogout={handleLogout}
+      />
 
-      <section className="patient-dashboard-header">
-        <div className="logo">
-          <FaHeart /> <span>VVCARE</span>
-        </div>
-      </section>
-
-
-      <section className="d-flex" style={{ height: 'calc(100vh - 80px)', overflow: 'hidden' }}>
+      <section className="d-flex flex-grow-1 overflow-hidden">
         <Sidebar
           onAddPatient={() => setShowPatientPopup(true)}
           onGenerateBills={() => setShowBillsModal(true)}
         />
 
-        <main className="patient-dashboard-content-center flex-grow-1" style={{ overflowY: 'auto' }}>
+        <main className="patient-dashboard-content-center flex-grow-1 overflow-y-auto p-4">
           <h1>Reception Dashboard</h1>
 
           <OverviewCards />
@@ -45,8 +46,8 @@ export default function ReceptionDashboard() {
           <LatestPatients />
         </main>
 
-        <div style={{ width: '300px', flexShrink: 0, borderLeft: '1px solid #e2e8f0', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)' }}>
-          <DoctorAppointments />
+        <div style={{ width: '320px', flexShrink: 0, borderLeft: '1px solid #e2e8f0', background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(10px)', padding: '20px' }}>
+          <Calendar />
         </div>
       </section>
 
@@ -58,6 +59,6 @@ export default function ReceptionDashboard() {
       {showBillsModal && (
         <GenerateBillsModal onClose={() => setShowBillsModal(false)} />
       )}
-    </>
+    </div>
   );
 }

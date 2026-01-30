@@ -22,11 +22,9 @@ function Landing() {
   return (
     <div className="landing-page overflow-hidden bg-hero-gradient">
       <Navbar />
-      {/* Hero Section */}
       <section className="hero-section py-5 position-relative">
         <div className="container py-5 position-relative" style={{ zIndex: 1 }}>
           <div className="row align-items-center g-5">
-            {/* Left Content */}
             <div className="col-lg-6 text-center text-lg-start">
               <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill bg-white shadow-sm mb-4 border border-1 border-light stagger-1">
                 <FaShieldAlt className="text-teal" />
@@ -85,10 +83,8 @@ function Landing() {
               </div>
             </div>
 
-            {/* Right Stats Grid */}
             <div className="col-lg-6">
               <div className="row g-4 perspective-container">
-                {/* Card 1: Active Patients - Teal Icon Box */}
                 <div className="col-md-6 pt-md-5">
                   <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-1" style={{ animationDelay: '0s' }}>
                     <div className="mb-4">
@@ -101,7 +97,6 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Card 2: Medical Experts - Dark Icon Box */}
                 <div className="col-md-6">
                   <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-3" style={{ animationDelay: '1.5s' }}>
                     <div className="mb-4">
@@ -114,7 +109,6 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Card 3: Experience - Dark Icon Box */}
                 <div className="col-md-6 pt-md-5 mt-md-n5">
                   <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-2" style={{ animationDelay: '0.5s' }}>
                     <div className="mb-4">
@@ -127,7 +121,6 @@ function Landing() {
                   </div>
                 </div>
 
-                {/* Card 4: Available - Teal Icon Box */}
                 <div className="col-md-6 mt-md-n5">
                   <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-4" style={{ animationDelay: '2s' }}>
                     <div className="mb-4">
@@ -145,7 +138,6 @@ function Landing() {
         </div>
       </section>
 
-      {/* Specialties Section */}
       <section className="py-5 bg-white">
         <div className="container py-5">
           <div className="text-center mb-5">
@@ -187,7 +179,6 @@ function Landing() {
         </div>
       </section>
 
-      {/* Footer Section */}
       <footer className="bg-dark text-light py-5 mt-5">
         <div className="container">
           <div className="row g-5 mb-5 pb-5 border-bottom border-secondary border-opacity-25">

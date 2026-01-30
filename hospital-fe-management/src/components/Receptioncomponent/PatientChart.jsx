@@ -29,9 +29,9 @@ export default function PatientChart() {
       {
         label: "Active Patients",
         data: [120, 190, 300, 500, 200, 300, 450],
-        borderColor: "#008080", // Teal color matching the theme seen in screenshots
+        borderColor: "#008080", 
         backgroundColor: "rgba(0, 128, 128, 0.1)",
-        tension: 0.4, // Smooths the curve
+        tension: 0.4, 
         fill: true,
         pointBackgroundColor: "#fff",
         pointBorderColor: "#008080",
@@ -49,7 +49,7 @@ export default function PatientChart() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // Hide legend for cleaner look as there's only one dataset
+        display: false, 
       },
       tooltip: {
         backgroundColor: "#1f2937",
@@ -63,7 +63,7 @@ export default function PatientChart() {
     scales: {
       x: {
         grid: {
-          display: false, // Cleaner look without vertical grid lines
+          display: false, 
         },
         ticks: {
           color: "#6b7280",
@@ -71,7 +71,7 @@ export default function PatientChart() {
       },
       y: {
         grid: {
-          borderDash: [5, 5], // Dashed horizontal lines
+          borderDash: [5, 5], 
           color: "#e5e7eb",
         },
         ticks: {

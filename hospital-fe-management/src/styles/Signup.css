@@ -1,4 +1,3 @@
-/* SIGNUP PAGE ENHANCEMENTS - MATCHING LOGIN STYLE */
 
 .signup-page-wrapper {
   min-height: 100vh;
@@ -11,7 +10,7 @@
   overflow: hidden;
 }
 
-/* Success Animation */
+
 .signup-success {
   position: fixed;
   top: 0;
@@ -78,7 +77,7 @@
   position: relative;
 }
 
-/* Left Panel */
+
 .signup-left-panel-enhanced {
   flex: 1;
   background: linear-gradient(135deg, #083c43, #1ea6a9);
@@ -140,7 +139,7 @@
   animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
-/* Background Image */
+
 .signup-bg-image-enhanced {
   flex: 1;
   background-size: cover;
@@ -166,7 +165,7 @@
   border-radius: 20px;
 }
 
-/* Right Panel */
+
 .signup-right-panel-enhanced {
   flex: 1.2;
   display: flex;
@@ -216,7 +215,7 @@
   margin-top: 15px;
 }
 
-/* Form Sections */
+
 .form-section-title {
   font-size: 1.3rem;
   color: #083c43;
@@ -237,7 +236,7 @@
   background: linear-gradient(90deg, #0b5c63, #1ea6a9);
 }
 
-/* Form Groups */
+
 .signup-form-group {
   margin-bottom: 20px;
 }
@@ -278,7 +277,7 @@
   color: #9ca3af;
 }
 
-/* Select Styling */
+
 .signup-select {
   width: 100%;
   padding: 16px 50px 16px 20px;
@@ -306,7 +305,7 @@
   border-color: #9ca3af;
 }
 
-/* Personal Details Animation */
+
 .personal-details-section {
   animation: slideDown 0.5s ease-out;
 }
@@ -322,7 +321,7 @@
   }
 }
 
-/* Submit Button */
+
 .signup-submit-btn {
   width: 100%;
   padding: 18px;
@@ -402,7 +401,7 @@
   opacity: 1;
 }
 
-/* Alert Styling */
+
 .signup-alert {
   position: fixed;
   top: 30px;
@@ -427,7 +426,7 @@
   }
 }
 
-/* Login Link */
+
 .signup-login-link {
   text-align: center;
   color: #6b7280;
@@ -447,7 +446,7 @@
   text-decoration: underline;
 }
 
-/* Form Validation */
+
 .signup-input:valid {
   border-color: #10b981;
   background-color: #f0fdf4;
@@ -465,7 +464,7 @@
   animation: fadeIn 0.3s ease;
 }
 
-/* Responsive Design */
+
 @media (max-width: 1024px) {
   .signup-container-enhanced {
     flex-direction: column;
@@ -557,7 +556,7 @@
   }
 }
 
-/* Background Pattern */
+
 .signup-page-wrapper::before {
   content: '';
   position: absolute;
@@ -571,7 +570,7 @@
   pointer-events: none;
 }
 
-/* Input Icons */
+
 .signup-input-group:nth-child(1) .signup-input-icon::before { content: "👤"; }
 .signup-input-group:nth-child(2) .signup-input-icon::before { content: "✉️"; }
 .signup-input-group:nth-child(3) .signup-input-icon::before { content: "📱"; }
@@ -580,13 +579,13 @@
 .signup-input-group:nth-child(8) .signup-input-icon::before { content: "📏"; }
 .signup-input-group:nth-child(9) .signup-input-icon::before { content: "⚖️"; }
 
-/* Floating Animation */
+
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0); }
   50% { transform: translateY(-10px) rotate(5deg); }
 }
 
-/* Grid Layout for Personal Details */
+
 .personal-details-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

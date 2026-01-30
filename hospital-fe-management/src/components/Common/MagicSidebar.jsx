@@ -62,16 +62,6 @@ export default function MagicSidebar({ title, role, menuItems, onLogout }) {
                 })}
             </nav>
 
-            <div className="sidebar-footer">
-                <button
-                    className="logout-btn"
-                    onClick={onLogout}
-                    title={isCollapsed ? "Logout" : ""}
-                >
-                    <FaSignOutAlt />
-                    <span>Logout</span>
-                </button>
-            </div>
         </aside>
     );
 }

@@ -62,14 +62,14 @@ export default function UserProfilePage() {
   };
 
   const handleSave = () => {
-    // In a real app, you would save to backend here
+    
     setIsEditing(false);
     alert("Profile updated successfully!");
   };
 
   const handleCancel = () => {
     setIsEditing(false);
-    // Reset to original data
+    
     setUserData({...userData});
     setMedicalData({...medicalData});
   };

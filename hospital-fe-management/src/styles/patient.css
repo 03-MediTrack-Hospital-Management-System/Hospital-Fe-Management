@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* ================================
-   GLOBAL RESET
-================================ */
 * {
   margin: 0;
   padding: 0;
@@ -10,14 +6,10 @@
 }
 
 body {
-  font-family: 'Outfit', 'Roboto', sans-serif;
   background-color: rgba(11, 92, 99, 0.05);
   color: #111827;
 }
 
-/* ================================
-   HEADER
-================================ */
 .patient-dashboard-header {
   height: 70px;
   background: #ffffff;
@@ -46,19 +38,13 @@ body {
   font-weight: 500;
 }
 
-/* ================================
-   LAYOUT
-================================ */
 .patient-dashboard-content {
   display: grid;
   grid-template-columns: 230px 1fr 280px;
   height: calc(100vh - 70px);
-  background: #f4f9ff;
+  background: transparent;
 }
 
-/* ================================
-   SIDEBAR
-================================ */
 .patient-dashboard-content-left {
   background: #ffffff;
   padding: 25px;
@@ -89,9 +75,6 @@ body {
   color: white;
 }
 
-/* ================================
-   CENTER CONTENT
-================================ */
 .patient-dashboard-content-center {
   padding: 25px;
   overflow-y: auto;
@@ -103,9 +86,6 @@ body {
   margin-bottom: 25px;
 }
 
-/* ================================
-   CARDS
-================================ */
 .cards-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -138,7 +118,6 @@ body {
   font-size: 30px;
 }
 
-/* Card Colors */
 .blue {
   color: #2563eb;
 }
@@ -151,9 +130,7 @@ body {
   color: #ec4899;
 }
 
-/* ================================
-   MIDDLE SECTION
-================================ */
+
 .dashboard-middle {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -161,9 +138,7 @@ body {
   margin-bottom: 30px;
 }
 
-/* ================================
-   CHART
-================================ */
+
 .chart-card {
   background: #ffffff;
   padding: 20px;
@@ -182,9 +157,7 @@ body {
   color: #64748b;
 }
 
-/* ================================
-   REPORTS
-================================ */
+
 .reports-card {
   background: #ffffff;
   padding: 20px;
@@ -201,9 +174,7 @@ body {
   color: #111827;
 }
 
-/* ================================
-   RIGHT PANEL
-================================ */
+
 .patient-dashboard-content-right {
   background: #ffffff;
   padding: 25px;
@@ -229,17 +200,13 @@ body {
   color: white;
 }
 
-/* ================================
-   FORCE VISIBILITY FIX
-================================ */
+
 .patient-dashboard-content,
 .patient-dashboard-content * {
   opacity: 1 !important;
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
+
 @media (max-width: 1100px) {
   .patient-dashboard-content {
     grid-template-columns: 200px 1fr;
