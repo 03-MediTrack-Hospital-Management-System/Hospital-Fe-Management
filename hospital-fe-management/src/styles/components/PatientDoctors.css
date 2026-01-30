@@ -1,0 +1,62 @@
+.patient-doctors-section {
+    margin-top: 30px;
+}
+
+.patient-doctors-section h3 {
+    margin-bottom: 20px;
+    color: #0b5c63;
+}
+
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.doctor-item-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #f1f5f9;
+    transition: all 0.3s ease;
+}
+
+.doctor-item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.doctor-item-card.active {
+    background: linear-gradient(135deg, #0b5c63 0%, #1ea6a9 100%);
+    border: none;
+}
+
+.doctor-icon-wrapper {
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+.doctor-info-text span {
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    display: block;
+}
+
+.doctor-info-text p {
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.doctor-item-card.active .doctor-info-text span {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.doctor-item-card.active .doctor-info-text p {
+    color: #fff;
+}

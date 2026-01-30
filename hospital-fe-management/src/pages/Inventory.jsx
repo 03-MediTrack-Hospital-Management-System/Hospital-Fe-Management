@@ -1,10 +1,14 @@
-import "../styles/inventory.css";
-import { useState, useEffect } from "react";
-import { Search, AlertTriangle, Package, Filter, Plus, Camera, TestTube, Download, Edit, Trash2 } from "lucide-react";
+import "../styles/admin.css";
+import { useState } from "react";
+import { FaBoxOpen, FaExclamationTriangle, FaSearch, FaFilter, FaPlus, FaCamera, FaFlask, FaDownload, FaTrash, FaEdit } from "react-icons/fa";
+import AdminSidebar from "../components/AdminComponent/AdminSidebar";
 
 export default function Inventory() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const showLowStock = false;
+  const sortBy = "name";
+
   const [medicines, setMedicines] = useState([
     { id: 1, name: "Aspirin 75mg", category: "Cardiology", stock: 40, min: 100, price: 12.5, expiry: "2024-12-31", supplier: "MediCorp" },
     { id: 2, name: "Paracetamol 500mg", category: "General", stock: 250, min: 100, price: 5.2, expiry: "2025-06-30", supplier: "PharmaPlus" },
@@ -16,19 +20,14 @@ export default function Inventory() {
     { id: 8, name: "Levothyroxine 50mcg", category: "Endocrine", stock: 70, min: 40, price: 11.2, expiry: "2025-09-25", supplier: "BioHealth" },
   ]);
 
-  const [showLowStock, setShowLowStock] = useState(false);
-  const [sortBy, setSortBy] = useState("name");
-
-
   const totalStock = medicines.reduce((sum, med) => sum + med.stock, 0);
   const lowStockCount = medicines.filter(med => med.stock < med.min).length;
   const categories = ["All", ...new Set(medicines.map(med => med.category))];
 
- 
   const filteredMedicines = medicines
     .filter(med => {
       const matchesSearch = med.name.toLowerCase().includes(search.toLowerCase()) ||
-                          med.supplier.toLowerCase().includes(search.toLowerCase());
+        med.supplier.toLowerCase().includes(search.toLowerCase());
       const matchesCategory = selectedCategory === "All" || med.category === selectedCategory;
       const matchesLowStock = !showLowStock || med.stock < med.min;
       return matchesSearch && matchesCategory && matchesLowStock;
@@ -55,246 +54,149 @@ export default function Inventory() {
   };
 
   const handleAddMedicine = () => {
-    const newMedicine = {
-      id: medicines.length + 1,
-      name: "New Medicine",
-      category: "General",
-      stock: 0,
-      min: 50,
-      price: 0,
-      expiry: "2024-12-31",
-      supplier: "New Supplier"
-    };
-    setMedicines([...medicines, newMedicine]);
+    alert("Add Medicine Modal would open here");
   };
 
   return (
-    <div className="inventory-container">
-    
-      <div className="inventory-header">
-        <div>
-          <h1>Inventory Management</h1>
-          <p className="subtitle">Monitor medicine stock, testing & scan controls</p>
+    <div className="admin-container">
+      <AdminSidebar />
+      <main className="admin-main">
+        <div className="admin-header-enhanced">
+          <div className="admin-info">
+            <h1>Inventory Management</h1>
+            <p>Monitor medicine stock and alerts</p>
+          </div>
+
+          <div className="admin-actions">
+            <button className="btn-primary" onClick={handleAddMedicine}>
+              <FaPlus style={{ marginRight: '8px' }} /> Add Medicine
+            </button>
+          </div>
         </div>
 
-        <div className="header-stats">
+        <div className="stats-grid" style={{ padding: 0, marginBottom: '20px' }}>
           <div className="stat-card">
-            <Package className="stat-icon" size={20} />
+            <div className="stat-icon" style={{ background: 'rgba(11, 92, 99, 0.1)', color: '#0b5c63' }}>
+              <FaBoxOpen size={20} />
+            </div>
             <div>
-              <h3>{medicines.length}</h3>
-              <p>Total Medicines</p>
+              <h4>{medicines.length}</h4>
+              <span>Total Medicines</span>
             </div>
           </div>
           <div className="stat-card">
-            <div className="stat-icon stock-icon">📦</div>
+            <div className="stat-icon" style={{ background: '#dcfce7', color: '#16a34a' }}>
+              <strong>Stock</strong>
+            </div>
             <div>
-              <h3>{totalStock}</h3>
-              <p>Total Stock</p>
+              <h4>{totalStock}</h4>
+              <span>Total Units</span>
             </div>
           </div>
-          <div className="stat-card low-stat">
-            <AlertTriangle className="stat-icon" size={20} />
+          <div className="stat-card" style={lowStockCount > 0 ? { borderLeft: '4px solid #ef4444' } : {}}>
+            <div className="stat-icon" style={{ background: '#fee2e2', color: '#ef4444' }}>
+              <FaExclamationTriangle size={20} />
+            </div>
             <div>
-              <h3 className="low-count">{lowStockCount}</h3>
-              <p>Low Stock</p>
+              <h4 style={{ color: '#ef4444' }}>{lowStockCount}</h4>
+              <span>Low Stock Alerts</span>
             </div>
           </div>
         </div>
-      </div>
 
-   
-      <div className="control-panel">
-        <div className="search-container">
-          <Search className="search-icon" size={20} />
-          <input
-            type="text"
-            placeholder="Search medicine or supplier..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="search-input"
-          />
-        </div>
+        <div className="admin-toolbar">
+          <div className="search-bar-container">
+            <FaSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search medicine or supplier..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
+            />
+          </div>
 
-        <div className="controls-right">
           <div className="filter-group">
-            <Filter size={16} />
-            <select 
-              className="filter-select"
+            <FaFilter color="#64748b" />
+            <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
+              className="filter-select"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
-          </div>
 
-          <div className="filter-group">
-            <select 
-              className="filter-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="name">Sort by Name</option>
-              <option value="stock">Sort by Stock</option>
-              <option value="category">Sort by Category</option>
-            </select>
-          </div>
-
-          <label className="toggle-switch">
-            <input
-              type="checkbox"
-              checked={showLowStock}
-              onChange={(e) => setShowLowStock(e.target.checked)}
-            />
-            <span className="toggle-slider"></span>
-            <span>Low Stock Only</span>
-          </label>
-
-          <div className="button-group">
-            <button className="btn-outline" title="Download Report">
-              <Download size={16} /> Export
-            </button>
-            <button className="btn-outline" title="Testing">
-              <TestTube size={16} /> Testing
-            </button>
-            <button className="btn-primary" title="Scan Medicine">
-              <Camera size={16} /> Scan
-            </button>
-            <button className="btn-success" onClick={handleAddMedicine}>
-              <Plus size={16} /> Add Medicine
+            <button className="btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <FaDownload /> Export
             </button>
           </div>
         </div>
-      </div>
 
-      
-      <div className="table-container">
-        <table className="inventory-table">
-          <thead>
-            <tr>
-              <th>Medicine Name</th>
-              <th>Category</th>
-              <th>Supplier</th>
-              <th>Stock Level</th>
-              <th>Min. Required</th>
-              <th>Price ($)</th>
-              <th>Expiry Date</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+        <div className="card dashboard-card">
 
-          <tbody>
-            {filteredMedicines.map((med) => {
-              const isLow = med.stock < med.min;
-              const stockPercentage = Math.min((med.stock / med.min) * 100, 100);
-              
-              return (
-                <tr key={med.id} className={isLow ? "low-stock-row" : ""}>
-                  <td className="medicine-name">
-                    <div className="name-wrapper">
-                      <strong>{med.name}</strong>
-                      {isLow && <AlertTriangle className="low-indicator" size={14} />}
-                    </div>
-                  </td>
-                  <td>
-                    <span className="category-tag">{med.category}</span>
-                  </td>
-                  <td>{med.supplier}</td>
-                  <td>
-                    <div className="stock-display">
-                      <span className="stock-number">{med.stock}</span>
-                      <div className="stock-bar">
-                        <div 
-                          className={`stock-fill ${isLow ? 'low' : 'normal'}`}
-                          style={{ width: `${stockPercentage}%` }}
-                        ></div>
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Medicine Name</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Min Level</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredMedicines.map((med) => {
+                const isLow = med.stock < med.min;
+                return (
+                  <tr key={med.id}>
+                    <td>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div className="admin-avatar-sm" style={{ width: '35px', height: '35px', borderRadius: '8px', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b' }}>
+                          <FaFlask size={14} />
+                        </div>
+                        <div>
+                          <span style={{ fontWeight: '600', color: '#334155', display: 'block' }}>{med.name}</span>
+                          <span style={{ fontSize: '12px', color: '#94a3b8' }}>{med.supplier}</span>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td>{med.min}</td>
-                  <td className="price">${med.price.toFixed(2)}</td>
-                  <td>
-                    <span className={`expiry-date ${new Date(med.expiry) < new Date(Date.now() + 90*24*60*60*1000) ? 'warning' : ''}`}>
-                      {new Date(med.expiry).toLocaleDateString()}
-                    </span>
-                  </td>
-                  <td>
-                    {isLow ? (
-                      <span className="status low">
-                        <AlertTriangle size={12} /> Low Stock
+                    </td>
+                    <td><span style={{ background: '#f8fafc', padding: '4px 10px', borderRadius: '6px', fontSize: '13px', color: '#475569', border: '1px solid #e2e8f0' }}>{med.category}</span></td>
+                    <td>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span style={{ fontWeight: '600' }}>{med.stock}</span>
+                        {isLow && <FaExclamationTriangle color="#ef4444" size={12} title="Low Stock" />}
+                      </div>
+                    </td>
+                    <td>{med.min}</td>
+                    <td>${med.price.toFixed(2)}</td>
+                    <td>
+                      <span className={`status ${isLow ? 'pending' : 'paid'}`} style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>
+                        {isLow ? 'Low Stock' : 'In Stock'}
                       </span>
-                    ) : (
-                      <span className="status ok">✅ Available</span>
-                    )}
-                  </td>
-                  <td>
-                    <div className="action-buttons">
-                      <button 
-                        className="btn-action edit"
-                        onClick={() => handleAddStock(med.id, 10)}
-                        title="Add 10 units"
-                      >
-                        +10
-                      </button>
-                      <button 
-                        className="btn-action edit"
-                        onClick={() => handleAddStock(med.id, 50)}
-                        title="Add 50 units"
-                      >
-                        +50
-                      </button>
-                      <button 
-                        className="btn-action delete"
-                        onClick={() => handleDeleteMedicine(med.id)}
-                        title="Delete"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button className="icon-btn" onClick={() => handleAddStock(med.id, 10)} title="Add Stock"><FaPlus size={12} /></button>
+                        <button className="icon-btn" onClick={() => handleDeleteMedicine(med.id)} title="Delete"><FaTrash color="#ef4444" size={12} /></button>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
 
-     
-      <div className="summary-section">
-        {lowStockCount > 0 ? (
-          <div className="alert-banner warning">
-            <AlertTriangle size={20} />
-            <div>
-              <strong>Action Required:</strong> {lowStockCount} medicine{lowStockCount !== 1 ? 's' : ''} 
-              {lowStockCount === 1 ? ' is' : ' are'} below minimum stock level.
+          {filteredMedicines.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>
+              <p>No medicines found.</p>
             </div>
-            <button className="btn-alert">Order Now</button>
-          </div>
-        ) : (
-          <div className="alert-banner success">
-            ✅ All medicines are adequately stocked.
-          </div>
-        )}
-
-        <div className="summary-cards">
-          <div className="summary-card">
-            <h4>Stock Value</h4>
-            <h2>${medicines.reduce((sum, med) => sum + (med.stock * med.price), 0).toFixed(2)}</h2>
-          </div>
-          <div className="summary-card">
-            <h4>Avg. Stock Level</h4>
-            <h2>{Math.round(medicines.reduce((sum, med) => sum + (med.stock / med.min * 100), 0) / medicines.length)}%</h2>
-          </div>
-          <div className="summary-card">
-            <h4>Expiring Soon (90 days)</h4>
-            <h2 className="expiring-count">
-              {medicines.filter(med => new Date(med.expiry) < new Date(Date.now() + 90*24*60*60*1000)).length}
-            </h2>
-          </div>
+          )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

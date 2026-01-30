@@ -1,0 +1,22 @@
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    font-size: 36px;
+    color: #0b5c63;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.dashboard-header p {
+    margin: 0;
+    font-size: 18px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.dashboard-middle {
+    margin-top: 30px;
+}

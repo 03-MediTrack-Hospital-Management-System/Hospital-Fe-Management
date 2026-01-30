@@ -1,0 +1,21 @@
+.patient-sidebar {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.menu-label {
+    padding-left: 12px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.5px;
+}

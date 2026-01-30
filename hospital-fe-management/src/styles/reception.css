@@ -1,7 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
 /* ================================
-   GLOBAL
+   GLOBAL variables
 ================================ */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+:root {
+  --primary: #0b5c63;
+  --primary-dark: #07464b;
+  --secondary: #1ea6a9;
+  --accent: #d44f8c;
+
+  --bg-gradient: linear-gradient(135deg, rgba(11, 92, 99, 0.05) 0%, rgba(30, 166, 169, 0.05) 100%);
+  --card-bg: rgba(255, 255, 255, 0.95);
+
+  --text-primary: #0b5c63;
+  --text-secondary: rgba(11, 92, 99, 0.7);
+
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  /* Matched variable name */
+  --shadow-sm: 0 4px 12px rgba(11, 92, 99, 0.05);
+  /* Kept specific variable */
+  --shadow-lg: 0 15px 35px rgba(11, 92, 99, 0.12);
+  /* Kept specific variable */
+
+  --radius: 14px;
+  --radius-lg: 18px;
+  --transition: all 0.3s ease;
+}
+
+/* ================================
+   RESET & BASE
+================================ */
 
 * {
   margin: 0;
@@ -10,10 +38,594 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, rgba(11, 92, 99, 0.05) 0%, rgba(30, 166, 169, 0.05) 100%);
-  color: #0b5c63;
+  font-family: 'Outfit', 'Roboto', sans-serif;
+  /* Upgraded font */
+  background: var(--bg-gradient);
+  color: var(--text-primary);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ================================
+   HEADER
+================================ */
+.patient-dashboard-header {
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(30, 166, 169, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.logo svg {
+  color: var(--secondary);
+  font-size: 30px;
+}
+
+/* ================================
+   MAIN LAYOUT (Fixed for Patient Dashboard)
+================================ */
+#patient-root {
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f9ff;
+  display: flex;
+  flex-direction: column;
+}
+
+#patient-layout {
+  display: grid !important;
+  grid-template-columns: 260px 1fr 320px;
+  /* Enhanced widths */
+  min-height: calc(100vh - 80px);
+  /* Adjust for header if separate, otherwise full height */
+  height: 100vh;
+  background: linear-gradient(to right, #ffffff, #f4f9ff 20%, #eff6ff);
+  overflow: hidden;
+  /* Prevent body scroll */
+}
+
+/* Override for Doctor Portal to utilize full width */
+#patient-layout.doctor-layout-override {
+  grid-template-columns: 260px 1fr !important;
+}
+
+
+/* ================================
+   SIDEBAR
+================================ */
+.patient-dashboard-content-left {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px 25px;
+  border-right: 1px solid rgba(30, 166, 169, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.patient-dashboard-content-left h3 {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding-left: 10px;
+}
+
+.menu-item {
+  padding: 16px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 600;
+  transition: var(--transition);
+  color: var(--text-primary);
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 15px;
+  text-decoration: none;
+  /* Remove underline from NavLink */
+}
+
+.menu-item svg {
+  font-size: 20px;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.menu-item:hover {
+  background: rgba(30, 166, 169, 0.08);
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.menu-item.active {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(30, 166, 169, 0.3);
+}
+
+.menu-item.active svg {
+  opacity: 1;
+}
+
+/* Sidebar Logout Button */
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(30, 166, 169, 0.15);
+  padding-top: 20px;
+}
+
+.logout-link {
+  color: #dc3545;
+}
+
+.logout-link:hover {
+  background: rgba(220, 53, 69, 0.08);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.1);
+}
+
+/* ================================
+   CENTER CONTENT
+================================ */
+#patient-main {
+  padding: 40px;
+  overflow-y: auto;
+  height: 100%;
+  scrollbar-width: thin;
+}
+
+/* Custom Scrollbar */
+#patient-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+#patient-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#patient-main::-webkit-scrollbar-thumb {
+  background: rgba(30, 166, 169, 0.2);
+  border-radius: 20px;
+}
+
+#patient-main::-webkit-scrollbar-thumb:hover {
+  background: rgba(30, 166, 169, 0.4);
+}
+
+#patient-main h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+}
+
+.welcome-sub {
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+/* ================================
+   DASHBOARD CARDS
+================================ */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.overview-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.overview-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  opacity: 0.8;
+}
+
+.overview-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.overview-card svg {
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+.overview-card h2 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.overview-card p {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Card Colors */
+.pink {
+  color: #d44f8c;
+}
+
+.pink svg {
+  color: #d44f8c;
+  background: rgba(212, 79, 140, 0.1);
+  padding: 8px;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+}
+
+.blue {
+  color: var(--primary);
+}
+
+.blue svg {
+  color: var(--primary);
+  background: rgba(11, 92, 99, 0.1);
+  padding: 8px;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+}
+
+.green {
+  color: #0da389;
+}
+
+.green svg {
+  color: #0da389;
+  background: rgba(13, 163, 137, 0.1);
+  padding: 8px;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+}
+
+/* ================================
+   RIGHT PANEL
+================================ */
+.patient-dashboard-content-right {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 40px 30px;
+  border-left: 1px solid rgba(30, 166, 169, 0.1);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+
+.patient-dashboard-content-right h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: var(--primary);
+}
+
+.doctor-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  border: 1px solid rgba(30, 166, 169, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.doctor-card.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  box-shadow: 0 10px 20px rgba(11, 92, 99, 0.25);
+}
+
+.doctor-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.doctor-card p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ================================
+   PROFILE & SETTINGS STYLES
+================================ */
+.profile-container,
+.settings-container {
+  max-width: 900px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.profile-header-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-header-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(30, 166, 169, 0.05));
+  transform: skewX(-20deg);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eee, #ddd);
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #bbb;
+}
+
+.profile-info h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.profile-info p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.details-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+
+.details-card h3 {
+  font-size: 20px;
+  margin-bottom: 25px;
+  color: var(--primary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 15px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  font-size: 15px;
+}
+
+.info-row span:first-child {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.info-row span:last-child {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Settings Specific */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.setting-info h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: var(--text-primary);
+}
+
+.setting-info p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 26px;
+  background: #e0e0e0;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.toggle-switch.on {
+  background: var(--primary);
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.on::after {
+  left: 27px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(11, 92, 99, 0.2);
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 92, 99, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid rgba(11, 92, 99, 0.15);
+  color: var(--primary);
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  background: rgba(11, 92, 99, 0.03);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 1200px) {
+  #patient-layout {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .patient-dashboard-content-right {
+    display: none;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  #patient-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-dashboard-content-left {
+    display: none;
+    /* In real app, toggle with hamburger menu */
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   ANIMATIONS
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.overview-card,
+.doctor-card,
+.reports-container,
+.appointments-container {
+  animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ================================
@@ -211,15 +823,17 @@ body {
 }
 
 /* Card colors */
-.pink { 
-  color: #d44f8c; 
+.pink {
+  color: #d44f8c;
   background: linear-gradient(135deg, rgba(212, 79, 140, 0.1), rgba(255, 255, 255, 0.95));
 }
-.blue { 
+
+.blue {
   color: rgba(11, 92, 99, 0.95);
   background: linear-gradient(135deg, rgba(11, 92, 99, 0.1), rgba(255, 255, 255, 0.95));
 }
-.green { 
+
+.green {
   color: #0da389;
   background: linear-gradient(135deg, rgba(13, 163, 137, 0.1), rgba(255, 255, 255, 0.95));
 }
@@ -451,7 +1065,7 @@ body {
   .patient-dashboard-content-right {
     display: none;
   }
-  
+
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -471,15 +1085,15 @@ body {
   .patient-dashboard-content-left {
     display: none;
   }
-  
+
   .cards-container {
     grid-template-columns: 1fr;
   }
-  
+
   .patient-dashboard-header {
     padding: 0 20px;
   }
-  
+
   .patient-dashboard-content-center {
     padding: 20px;
   }
@@ -489,17 +1103,28 @@ body {
    ANIMATIONS
 ================================ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.overview-card, .chart-card, .reports-card, .latest-patient-data {
+.overview-card,
+.chart-card,
+.reports-card,
+.latest-patient-data {
   animation: fadeIn 0.5s ease-out;
 }
 
 .menu-item {
   animation: fadeIn 0.4s ease-out;
 }
+
 /* ================================
    MODAL (POPUP)
 ================================ */
@@ -546,8 +1171,101 @@ body {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* ===============================
+   PATIENT DASHBOARD FIX
+================================ */
+
+.patient-root {
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f9ff;
+  display: block;
+}
+
+/* Prevent landing page layout interference */
+.patient-root section {
+  display: block !important;
+  align-items: unset !important;
+  justify-content: unset !important;
+}
+
+/* Main dashboard layout */
+.patient-dashboard-content {
+  display: grid !important;
+  grid-template-columns: 230px 1fr 280px;
+  min-height: 100vh;
+  background: #f4f9ff;
+}
+
+/* Center panel */
+.patient-dashboard-content-center {
+  padding: 25px;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+/* Remove faded look */
+.patient-dashboard-content,
+.patient-dashboard-content * {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .patient-dashboard-content {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .patient-dashboard-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================
+   FORCE PATIENT DASHBOARD FIX
+   (Do not edit above this)
+================================ */
+
+#patient-root {
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f9ff;
+  display: block;
+}
+
+#patient-layout {
+  display: grid !important;
+  grid-template-columns: 230px 1fr 280px;
+  min-height: 100vh;
+  background: #f4f9ff;
+}
+
+#patient-main {
+  padding: 25px;
+  overflow-y: auto;
+  background: #f4f9ff;
+}
+
+/* Kill landing-page styles */
+#patient-root section,
+#patient-root div {
+  align-items: unset !important;
+  justify-content: unset !important;
+}
+
+/* Force visibility */
+#patient-root *,
+#patient-layout * {
+  opacity: 1 !important;
+  filter: none !important;
 }

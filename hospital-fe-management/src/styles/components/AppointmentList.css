@@ -1,0 +1,243 @@
+.appointments-container {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+
+.appointments-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    background: #f8fafc;
+    padding: 5px;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: #fff;
+    color: #0b5c63;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Card Styling */
+.appointment-item-card {
+    background: #fff;
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.appointment-item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    border-color: rgba(11, 92, 99, 0.1);
+}
+
+.appointment-item-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background 0.3s;
+}
+
+.appointment-item-card:hover::before {
+    background: #0b5c63;
+}
+
+.apt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.apt-doctor-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-placeholder {
+    width: 52px;
+    height: 52px;
+    background: rgba(11, 92, 99, 0.05);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0b5c63;
+    border: 1px solid rgba(11, 92, 99, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.appointment-item-card:hover .avatar-placeholder {
+    background: #0b5c63;
+    color: white;
+    border-color: #0b5c63;
+}
+
+.apt-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+}
+
+.apt-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.detail-item svg {
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+.apt-reason {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    color: #475569;
+    background: #fff;
+    padding: 0 10px;
+    font-size: 14px;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+
+.apt-reason svg {
+    color: #0b5c63;
+    margin-top: 3px;
+}
+
+.apt-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.reschedule-btn {
+    background: #0b5c63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 10px rgba(11, 92, 99, 0.2);
+}
+
+.reschedule-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(11, 92, 99, 0.3);
+    background: #084a50;
+}
+
+.cancel-btn-outline {
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-btn-outline:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+}
+
+.no-appointments {
+    text-align: center;
+    padding: 60px 20px;
+    color: #94a3b8;
+    background: #f8fafc;
+    border-radius: 20px;
+    border: 2px dashed #e2e8f0;
+}
+
+.empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #cbd5e1;
+}
+
+@media (max-width: 600px) {
+    .apt-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .apt-status {
+        align-self: flex-start;
+        margin-left: 72px;
+        /* Align with text not avatar */
+    }
+
+    .apt-details {
+        grid-template-columns: 1fr;
+    }
+
+    .apt-actions {
+        flex-direction: column;
+    }
+
+    .reschedule-btn,
+    .cancel-btn-outline {
+        width: 100%;
+    }
+}

@@ -1,15 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import "../styles/Navbar.css";
+import "../../styles/Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
 
-  function gotoLogin() {
-    navigate("/login");
-  }
 
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -18,7 +15,7 @@ function Navbar() {
         document.querySelector('.navbar').classList.remove('scrolled');
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -26,7 +23,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="container nav-content">
-        
+
         <div className="logo" onClick={() => navigate("/")}>
           <div className="logo-icon">♥</div>
           <div>
@@ -38,7 +35,7 @@ function Navbar() {
         <div className="nav-actions">
           <button className="login-btn" onClick={() => navigate("/login")}>
             Login
-          </button> 
+          </button>
           <button className="login-btn" onClick={() => navigate("/signup")}>
             Signup
           </button>

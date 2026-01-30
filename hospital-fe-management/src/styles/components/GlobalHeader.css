@@ -1,0 +1,64 @@
+.global-header-styled {
+    width: 100%;
+    border-bottom: 1px solid rgba(11, 92, 99, 0.1);
+    z-index: 1100;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+}
+
+.header-profile-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 14px;
+    background: rgba(11, 92, 99, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(11, 92, 99, 0.05);
+    transition: all 0.3s ease;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.user-name {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: #0b5c63;
+}
+
+.user-role {
+    display: block;
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.user-avatar-wrapper {
+    color: #0b5c63;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logo svg {
+    display: block;
+}
