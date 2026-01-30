@@ -1,17 +1,13 @@
-/* doctor.css */
 
-/* Dashboard Container */
 .dashboard-container {
   min-height: 100vh;
   padding: 2rem;
-  background: linear-gradient(135deg, #c0f0f9, #a0e0f5);
-  font-family: 'Arial', sans-serif;
+  background: transparent;
   color: #333;
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle Animated Background */
 .dashboard-container::after {
   content: "";
   position: absolute;
@@ -19,17 +15,21 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 20%, transparent 20%) repeat;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 20%, transparent 20%) repeat;
   animation: moveBg 25s linear infinite;
   z-index: 0;
 }
 
 @keyframes moveBg {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 50px);
+  }
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -38,19 +38,20 @@
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   position: relative;
   z-index: 1;
 }
+
 .header-actions {
   display: flex;
-  gap: 0.75rem; /* space between buttons */
+  gap: 0.75rem;
   align-items: center;
 }
 
 .header-actions button {
-  min-width: 140px; /* optional: make buttons uniform */
+  min-width: 140px;
   white-space: nowrap;
   text-align: center;
 }
@@ -82,7 +83,6 @@
   color: #555;
 }
 
-/* Buttons */
 .btn-primary {
   background: linear-gradient(90deg, #00acc1, #26c6da);
   color: #fff;
@@ -116,7 +116,6 @@
   color: #fff;
 }
 
-/* Stats Layout */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -157,7 +156,6 @@
   color: #4b5563;
 }
 
-/* Grid Layout */
 .grid {
   display: grid;
   gap: 2rem;
@@ -166,7 +164,6 @@
   z-index: 1;
 }
 
-/* Card */
 .card {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
@@ -180,7 +177,6 @@
   transform: translateY(-4px);
 }
 
-/* ✅ FIXED CHART CARD */
 .chart-card-small {
   padding: 14px 16px;
   height: 240px;
@@ -188,21 +184,18 @@
   flex-direction: column;
 }
 
-/* ✅ FIXED CHART WRAPPER */
 .chart-wrapper {
   position: relative;
   width: 100%;
   flex: 1;
 }
 
-/* Smaller Title */
 .section-title.small {
   font-size: 16px;
   margin-bottom: 6px;
   text-align: center;
 }
 
-/* Section Titles */
 .section-title {
   position: relative;
   padding-left: 2rem;
@@ -223,7 +216,6 @@
   background: #26c6da33;
 }
 
-/* Schedule Items */
 .schedule-item,
 .queue-item {
   display: flex;
@@ -233,7 +225,7 @@
   padding: 0.8rem;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .status.confirmed {
@@ -261,7 +253,6 @@
   font-weight: bold;
 }
 
-/* Footer Button */
 .footer-btn {
   width: 100%;
   margin-top: 1rem;

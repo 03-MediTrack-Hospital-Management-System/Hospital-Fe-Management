@@ -1,19 +1,19 @@
-/* Magic Sidebar Container */
+
 .magic-sidebar {
     width: 260px;
-    height: 100vh;
+    height: calc(100vh - 72.8px);
     display: flex;
     flex-direction: column;
     background: white;
     border-right: 1px solid #e2e8f0;
     padding: 1.5rem 1rem;
     position: sticky;
-    top: 0;
+    top: 72.8px;
     flex-shrink: 0;
+    z-index: 400;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Header Config */
 .sidebar-header {
     display: flex;
     align-items: center;
@@ -30,16 +30,34 @@
     letter-spacing: -0.5px;
 }
 
-/* Navigation List */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     flex-grow: 1;
     position: relative;
+    overflow-y: auto;
+    padding-right: 4px;
+    padding-bottom: 2rem;
 }
 
-/* Menu Item */
+.sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
 .magic-nav-item {
     display: flex;
     align-items: center;
@@ -65,7 +83,6 @@
     background: #f8fafc;
 }
 
-/* Icons */
 .magic-nav-item svg {
     font-size: 1.1rem;
     transition: transform 0.3s ease;
@@ -75,7 +92,6 @@
     transform: scale(1.1);
 }
 
-/* Active State */
 .magic-nav-item.active {
     color: #0b5c63;
     font-weight: 600;
@@ -86,36 +102,7 @@
     color: #0b5c63;
 }
 
-/* Logout Button */
-.sidebar-footer {
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid #f1f5f9;
-}
 
-.logout-btn {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    width: 100%;
-    border: none;
-    background: #fee2e2;
-    color: #ef4444;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: #fecaca;
-    transform: translateY(-2px);
-}
-
-
-/* Collapsed State */
 .magic-sidebar.collapsed {
     width: 90px;
     padding: 1.5rem 0.5rem;
@@ -150,7 +137,6 @@
     font-size: 1.4rem;
 }
 
-/* Toggle Button */
 .sidebar-toggle-btn {
     position: absolute;
     top: 50%;

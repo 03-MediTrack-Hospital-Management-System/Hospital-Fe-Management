@@ -15,10 +15,10 @@ export default function DoctorPatients({ searchTerm = "" }) {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Critical': return { text: '#ef4444', bg: '#fee2e2' };
-      case 'Stable': return { text: '#059669', bg: '#dcfce7' };
-      case 'Recovering': return { text: '#2563eb', bg: '#eff6ff' };
-      default: return { text: '#64748b', bg: '#f1f5f9' };
+      case 'Critical': return { text: '#ffffffff', bg: '#6c6c6cff' };
+      case 'Stable': return { text: '#ffffffff', bg: '#6c6c6cff' };
+      case 'Recovering': return { text: '#ffffffff', bg: '#6c6c6cff' };
+      default: return { text: '#ffffffff', bg: '#6c6c6cff' };
     }
   };
 
@@ -36,7 +36,7 @@ export default function DoctorPatients({ searchTerm = "" }) {
           padding: 24px;
           border-bottom: 1px solid #f1f5f9;
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
         }
 
@@ -84,15 +84,19 @@ export default function DoctorPatients({ searchTerm = "" }) {
         }
 
         .patient-avatar-sm {
-          width: 32px;
-          height: 32px;
-          background: #f1f5f9;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #94a3b8;
-        }
+  width: 32px;
+  height: 32px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+}
+
+.patient-avatar-sm svg {
+  display: block;
+}
 
         .status-pill {
           padding: 4px 10px;

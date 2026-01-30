@@ -2,7 +2,7 @@ import React from 'react';
 import { FaClock, FaUserCircle, FaCalendarCheck, FaEllipsisV, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 
 export default function DoctorAppointments() {
-  // Mock data for appointments
+  
   const appointments = [
     {
       id: 1,

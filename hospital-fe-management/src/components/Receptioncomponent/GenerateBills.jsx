@@ -53,7 +53,7 @@ export default function GenerateBills() {
     console.log("Generated Bill:", bill);
     alert("Bill Generated Successfully ✅");
 
-    // later → send to backend
+    
   };
 
   const containerStyle = {
@@ -116,7 +116,7 @@ const buttonStyle = {
     <div style={containerStyle}>
       <h2 style={headingStyle}>Generate Patient Bill</h2>
 
-      {/* Patient */}
+
       <select
         style={inputStyle}
         value={selectedPatient}
@@ -130,7 +130,7 @@ const buttonStyle = {
         ))}
       </select>
 
-      {/* Doctor */}
+
       <select
         style={inputStyle}
         onChange={(e) =>
@@ -147,14 +147,14 @@ const buttonStyle = {
         ))}
       </select>
 
-      {/* Fee Info */}
+
       {selectedDoctor && (
         <div style={infoBox}>
           <p><strong>Consultation Fee:</strong> ₹{selectedDoctor.consultationFee}</p>
         </div>
       )}
 
-      {/* Extra Charges */}
+
       <input
         style={inputStyle}
         type="number"
@@ -163,7 +163,7 @@ const buttonStyle = {
         onChange={(e) => setExtraCharges(e.target.value)}
       />
 
-      {/* Total */}
+
       <div style={totalBox}>
         <span>Total Amount</span>
         <strong>₹ {totalAmount}</strong>

@@ -1,44 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
-/* ===============================
-   CSS VARIABLES
-================================ */
-
-:root {
-  --primary: #0b5c63;
-  --primary-dark: #07464b;
-  --primary-light: rgba(11, 92, 99, 0.05);
-  --secondary: #1ea6a9;
-
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --info: #06b6d4;
-  --purple: #8b5cf6;
-
-  --bg-admin: #f1f5f9;
-  --bg-sidebar: #ffffff;
-  --bg-card: #ffffff;
-
-  --text-primary: #0b5c63;
-  --text-secondary: rgba(11, 92, 99, 0.7);
-  --text-muted: #94a3b8;
-  --text-light: #ffffff;
-
-  --border: #e2e8f0;
-  --sidebar-border: #e2e8f0;
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-
-  --radius: 12px;
-  --radius-sm: 8px;
-}
-
-/* ===============================
-   BASE STYLES
-================================ */
 * {
   margin: 0;
   padding: 0;
@@ -46,19 +6,16 @@
 }
 
 body {
-  font-family: 'Outfit', 'Roboto', sans-serif;
   background: var(--bg-admin);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ===============================
-   ADMIN LAYOUT GRID
-================================ */
+
 .admin-container {
   display: flex;
   min-height: 100vh;
-  background-color: var(--bg-admin);
+  background-color: transparent;
 }
 
 .admin-sidebar {
@@ -82,9 +39,6 @@ body {
   margin-right: auto;
 }
 
-/* ===============================
-   SIDEBAR COMPONENTS
-================================ */
 .sidebar-header {
   padding: 1.5rem;
   border-bottom: 1px solid var(--sidebar-border);
@@ -158,9 +112,6 @@ body {
   border-color: #ef4444;
 }
 
-/* ===============================
-   HEADER & CRUMBS
-================================ */
 .admin-header-enhanced {
   display: flex;
   justify-content: space-between;
@@ -183,9 +134,7 @@ body {
   color: var(--text-secondary);
 }
 
-/* ===============================
-   STATS GRID
-================================ */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -235,9 +184,6 @@ body {
   border-left: 4px solid var(--danger);
 }
 
-/* ===============================
-   DASHBOARD CARDS
-================================ */
 .dashboard-card {
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -324,9 +270,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* ===============================
-   DATA TABLES
-================================ */
+
 .data-table {
   width: 100%;
   border-collapse: separate;
@@ -360,9 +304,6 @@ body {
   background: #f8fafc;
 }
 
-/* ===============================
-   ELEMENTS & UTILS
-================================ */
 .btn-primary,
 .btn-outline,
 .btn-ghost {

@@ -28,7 +28,6 @@ function Signup() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
     setTimeout(() => {
       const users = JSON.parse(localStorage.getItem("users")) || [];
       const exists = users.find((u) => u.email === formData.email);
@@ -81,7 +80,6 @@ function Signup() {
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center auth-bg py-5">
 
-      {/* Success Message Overlay */}
       {showSuccess && (
         <div
           className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center bg-teal text-white"
@@ -96,11 +94,12 @@ function Signup() {
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         <div className="card glass-effect border-0 overflow-hidden rounded-5 shadow-lg" style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="row g-0">
-            {/* Left Panel - Dark Teal Sidebar */}
+            
+
             <div className="col-lg-5 text-white p-5 d-none d-lg-flex flex-column justify-content-center position-relative overflow-hidden"
               style={{ background: 'linear-gradient(135deg, rgba(8, 60, 56, 0.95), rgba(11, 92, 99, 0.9))' }}>
 
-              {/* Abstract Shapes */}
+
               <div style={{ position: 'absolute', top: '-15%', left: '-15%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)', borderRadius: '50%' }}></div>
 
               <div className="position-relative z-2 stagger-1">
@@ -116,7 +115,7 @@ function Signup() {
               </div>
             </div>
 
-            {/* Right Panel - Form */}
+
             <div className="col-lg-7 p-5 bg-white position-relative">
               <div className="mx-auto" style={{ maxWidth: '550px' }}>
                 <div className="text-center mb-5 stagger-1">

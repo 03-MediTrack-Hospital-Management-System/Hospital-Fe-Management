@@ -35,38 +35,7 @@ export default function PatientSettings() {
               ></div>
             </div>
 
-            {/* <div className="setting-item">
-              <div className="setting-info">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ background: '#f0fdf4', padding: '8px', borderRadius: '8px', color: '#16a34a' }}><FaGlobe /></div>
-                  <div>
-                    <h4>Language</h4>
-                    <p>Select your interface language</p>
-                  </div>
-                </div>
-              </div>
-              <select style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #cbd5e1', outline: 'none' }}>
-                <option>English (US)</option>
-                <option>Spanish</option>
-                <option>French</option>
-              </select>
-            </div> */}
-
-            {/* <div className="setting-item">
-              <div className="setting-info">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ background: '#f3e8ff', padding: '8px', borderRadius: '8px', color: '#9333ea' }}><FaPalette /></div>
-                  <div>
-                    <h4>Dark Mode</h4>
-                    <p>Reduce eye strain at night</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                className={`toggle-switch ${darkMode ? 'on' : ''}`}
-                onClick={() => setDarkMode(!darkMode)}
-              ></div>
-            </div> */}
+            
           </div>
         );
       case 'security':

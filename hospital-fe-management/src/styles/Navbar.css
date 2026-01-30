@@ -1,4 +1,4 @@
-/* NAVBAR ENHANCED STYLES */
+
 
 .navbar {
   background: rgba(255, 255, 255, 0.95);
@@ -36,7 +36,6 @@
   height: 80px;
 }
 
-/* Logo */
 .logo {
   display: flex;
   gap: 16px;
@@ -146,14 +145,12 @@
   color: #0b5c63;
 }
 
-/* Navigation Actions */
 .nav-actions {
   display: flex;
   gap: 15px;
   align-items: center;
 }
 
-/* Buttons */
 .login-btn {
   background: transparent;
   border: 2px solid #0b5c63;
@@ -224,7 +221,7 @@
   background: rgba(11, 92, 99, 0.05);
 }
 
-/* Button Container Animation */
+
 .nav-actions {
   animation: fadeIn 0.8s ease-out 0.3s both;
 }
@@ -240,7 +237,7 @@
   }
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .nav-content {
     padding: 12px 0;
@@ -309,25 +306,9 @@
   }
 }
 
-/* Navbar Scrolled State */
+
 .navbar.scrolled {
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 8px 30px rgba(11, 92, 99, 0.1);
   backdrop-filter: blur(20px);
 }
-
-/* Add this JavaScript to your Navbar component for scroll effect */
-/*
-useEffect(() => {
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      document.querySelector('.navbar').classList.add('scrolled');
-    } else {
-      document.querySelector('.navbar').classList.remove('scrolled');
-    }
-  };
-  
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
-*/

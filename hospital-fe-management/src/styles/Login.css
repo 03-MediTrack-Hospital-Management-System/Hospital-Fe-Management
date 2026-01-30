@@ -1,4 +1,3 @@
-/* LOGIN PAGE ENHANCEMENTS */
 
 .login-page-wrapper {
   min-height: 100vh;
@@ -11,7 +10,6 @@
   overflow: hidden;
 }
 
-/* Success Animation */
 .login-success {
   position: fixed;
   top: 0;
@@ -84,7 +82,6 @@
   }
 }
 
-/* Main Container */
 .login-container-enhanced {
   display: flex;
   max-width: 1200px;
@@ -111,7 +108,6 @@
   }
 }
 
-/* Left Panel */
 .login-left-panel-enhanced {
   flex: 1;
   background: linear-gradient(135deg, #083c43, #1ea6a9);
@@ -198,7 +194,6 @@
   border-radius: 20px;
 }
 
-/* Right Panel */
 .login-right-panel-enhanced {
   flex: 1;
   display: flex;
@@ -233,7 +228,6 @@
   font-size: 1rem;
 }
 
-/* Error Message */
 .error-message {
   background: #fee2e2;
   color: #dc2626;
@@ -251,7 +245,6 @@
   75% { transform: translateX(5px); }
 }
 
-/* Input Groups */
 .input-group {
   position: relative;
   margin-bottom: 25px;
@@ -295,7 +288,6 @@
   75% { transform: translateX(2px); }
 }
 
-/* Form Options */
 .form-options {
   display: flex;
   justify-content: space-between;
@@ -342,7 +334,6 @@
   text-decoration: underline;
 }
 
-/* Login Button */
 .login-button {
   width: 100%;
   padding: 16px;
@@ -407,7 +398,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* Demo Credentials */
 .demo-credentials {
   margin: 25px 0;
   padding: 20px;
@@ -471,7 +461,6 @@
   color: white;
 }
 
-/* Signup Link */
 .signup-link {
   text-align: center;
   color: #6b7280;
@@ -491,7 +480,6 @@
   text-decoration: underline;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .login-container-enhanced {
     flex-direction: column;
@@ -572,7 +560,6 @@
   }
 }
 
-/* Background Pattern */
 .login-page-wrapper::before {
   content: '';
   position: absolute;

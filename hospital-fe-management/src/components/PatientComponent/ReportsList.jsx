@@ -18,7 +18,7 @@ export default function ReportsList() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Mock data
+  
   const reports = [
     {
       id: 1,
@@ -96,7 +96,7 @@ export default function ReportsList() {
 
   return (
     <div className="reports-container">
-      {/* Controls Header */}
+      
       <div className="reports-controls">
         <div className="filter-tabs">
           {categories.map(cat => (
@@ -121,7 +121,7 @@ export default function ReportsList() {
         </div>
       </div>
 
-      {/* Reports Grid */}
+
       <div className="reports-grid">
         {filteredReports.map(report => (
           <div key={report.id} className="report-card">

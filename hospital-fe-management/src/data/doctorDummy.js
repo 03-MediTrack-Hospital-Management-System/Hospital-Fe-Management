@@ -1,4 +1,3 @@
-// doctorDummy.js
 
 export const upcomingConsultations = [
   {
