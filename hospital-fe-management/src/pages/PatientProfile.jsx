@@ -6,7 +6,8 @@ export default function PatientProfile() {
   return (
     <PatientLayout>
       <div className="profile-container">
-        {/* Header Card */}
+       
+       
         <div className="profile-header-card">
           <div className="profile-avatar">
             <FaUser />
@@ -21,7 +22,7 @@ export default function PatientProfile() {
           </div>
         </div>
 
-        {/* Details Grid */}
+        
         <div className="profile-grid">
           <div className="details-card">
             <h3>Personal Information</h3>

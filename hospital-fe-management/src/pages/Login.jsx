@@ -70,7 +70,6 @@ function Login() {
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center auth-bg py-5">
 
-      {/* Success Overlay - Unchanged Logic, enhanced z-index/visuals */}
       <div
         className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center bg-teal text-white"
         style={{
@@ -92,11 +91,9 @@ function Login() {
         <div className="card glass-effect border-0 overflow-hidden rounded-5 shadow-lg" style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="row g-0">
 
-            {/* Left Panel - Premium Dark Teal + Glass */}
             <div className="col-lg-6 text-white p-5 d-none d-lg-flex flex-column justify-content-between position-relative overflow-hidden"
               style={{ background: 'linear-gradient(135deg, rgba(8, 60, 56, 0.95), rgba(11, 92, 99, 0.9))' }}>
 
-              {/* Decorative Circles */}
               <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(80, 200, 198, 0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
               <div style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(80, 200, 198, 0.1) 0%, transparent 70%)', borderRadius: '50%' }}></div>
 
@@ -149,7 +146,6 @@ function Login() {
               </div>
             </div>
 
-            {/* Right Panel - Login Form */}
             <div className="col-lg-6 p-5 bg-white d-flex align-items-center position-relative">
               <div className="w-100 px-lg-5">
                 <div className="text-center mb-5 stagger-1">
@@ -213,14 +209,7 @@ function Login() {
                 </form>
 
                 <div className="mt-5 text-center stagger-5">
-                  {/* <p className="text-secondary small mb-3">Or continue with</p>
-                  <div className="d-flex justify-content-center gap-3 mb-4">
-                    {['Google', 'Apple', 'Facebook'].map((social) => (
-                      <button key={social} className="btn btn-light border rounded-3 px-3 py-2 text-secondary hover-shadow small fw-bold" style={{ minWidth: '100px' }}>
-                        {social}
-                      </button>
-                    ))}
-                  </div> */}
+              
 
                   <p className="small text-secondary m-0">
                     Don’t have an account?{" "}

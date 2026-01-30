@@ -8,7 +8,7 @@ export default function Sidebar({ onAddPatient, onGenerateBills }) {
   };
 
   const menuItems = [
-    { label: "Dashboard", icon: FaThLarge, isActive: true, onClick: () => { } }, // Always active for now since it's a single page
+    { label: "Dashboard", icon: FaThLarge, isActive: true, onClick: () => { } }, 
     { label: "Add Patient", icon: FaUserPlus, onClick: onAddPatient },
     { label: "Generate Bills", icon: FaFileInvoiceDollar, onClick: onGenerateBills },
   ];

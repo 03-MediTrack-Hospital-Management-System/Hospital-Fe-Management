@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 :root {
   --primary-teal: #50C8C6;
-  /* Brighter, more turquoise teal from screenshot */
   --dark-teal: #083c38;
   --light-teal: #e0fafa;
   --text-dark: #2c3e50;
@@ -16,10 +17,22 @@ body,
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Specific Gradient Background for Hero */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.02em;
+}
+
 .bg-hero-gradient {
   background: var(--hero-bg);
 }
@@ -29,9 +42,12 @@ body,
 }
 
 
-/* Custom Text and Background Utilities */
 .text-teal {
   color: var(--primary-teal) !important;
+}
+
+.bg-teal {
+  background-color: var(--primary-teal) !important;
 }
 
 .bg-teal {
@@ -42,7 +58,6 @@ body,
   background-color: var(--light-teal) !important;
 }
 
-/* Custom Buttons */
 .btn-teal {
   background-color: var(--primary-teal);
   color: white;
@@ -69,7 +84,6 @@ body,
 }
 
 
-/* Card Hover Effects */
 .hover-up {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -79,7 +93,6 @@ body,
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Floating Cards Animation */
 .floating-card {
   animation: float 6s ease-in-out infinite;
 }
@@ -98,12 +111,10 @@ body,
   }
 }
 
-/* Hover Text White */
 .hover-text-white:hover {
   color: white !important;
 }
 
-/* Hover Text Teal */
 .hover-text-teal:hover {
   color: var(--primary-teal) !important;
 }
@@ -179,7 +190,6 @@ body,
   }
 }
 
-/* Glassmorphism Utilities */
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
@@ -190,12 +200,16 @@ body,
 
 .glass-dark {
   background: rgba(11, 92, 99, 0.85);
-  /* Dark Teal */
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Auth Page Specifics */
+.global-dashboard-bg {
+  background: linear-gradient(rgba(240, 253, 254, 0.8), rgba(240, 253, 254, 0.8)),
+    url('https://images.unsplash.com/photo-1638202993928-7267aad84c31?q=80&w=2574&auto=format&fit=crop') center/cover no-repeat;
+  background-attachment: fixed;
+}
+
 .auth-bg {
   background: url('https://images.unsplash.com/photo-1638202993928-7267aad84c31?q=80&w=2574&auto=format&fit=crop') center/cover no-repeat;
   position: relative;
@@ -257,7 +271,6 @@ body,
   animation: slideDown 0.6s cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 
-/* Button Shine Effect */
 .btn-shine {
   position: relative;
   overflow: hidden;
@@ -280,7 +293,6 @@ body,
   transition: all 0.75s;
 }
 
-/* Animated Underline for Links */
 .hover-underline-animation {
   position: relative;
 }

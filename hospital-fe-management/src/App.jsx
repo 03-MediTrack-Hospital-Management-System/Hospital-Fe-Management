@@ -41,13 +41,13 @@ function App() {
 
 
       <Routes>
-        {/* Public */}
+
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/specialty/:id" element={<SpecialtyPage />} />
 
-        {/* Patient */}
+
         <Route
           path="/patient"
           element={
@@ -97,7 +97,7 @@ function App() {
           }
         />
 
-        {/* Doctor */}
+
         <Route
           path="/doctor"
           element={
@@ -131,7 +131,7 @@ function App() {
           }
         />
 
-        {/* Admin */}
+
         <Route
           path="/admin"
           element={
@@ -181,7 +181,7 @@ function App() {
           }
         />
 
-        {/* Reception */}
+
         <Route
           path="/reception"
           element={
@@ -191,7 +191,7 @@ function App() {
           }
         />
 
-        {/* Profile */}
+
         <Route path="/profile" element={<UserProfilePage />} />
       </Routes>
     </BrowserRouter>

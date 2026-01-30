@@ -35,7 +35,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Card Styling */
 .appointment-item-card {
     background: #fff;
     border: 1px solid #f1f5f9;
@@ -225,7 +224,6 @@
     .apt-status {
         align-self: flex-start;
         margin-left: 72px;
-        /* Align with text not avatar */
     }
 
     .apt-details {

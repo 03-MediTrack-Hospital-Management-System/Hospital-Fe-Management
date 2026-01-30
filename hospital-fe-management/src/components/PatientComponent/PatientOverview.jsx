@@ -6,10 +6,11 @@ export default function PatientOverview() {
       <div className="col-12 col-sm-6 col-lg-4">
         <div className="card glass-effect border-0 p-4 h-100 position-relative overflow-hidden hover-up">
           <div className="position-absolute top-0 end-0 p-3 opacity-10">
-            <FaCalendarCheck size={80} className="text-teal" />
+            <FaCalendarCheck size={50} className="text-teal" />
           </div>
           <div className="d-flex align-items-center gap-3 position-relative z-1">
-            <div className="p-3 bg-teal bg-opacity-10 rounded-4 text-teal shadow-sm floating-card">
+            <div className="p-3 bg-teal bg-opacity-10 rounded-4 text-white shadow-sm floating-card">
+
               <FaCalendarCheck size={28} />
             </div>
             <div>
@@ -23,7 +24,7 @@ export default function PatientOverview() {
       <div className="col-12 col-sm-6 col-lg-4">
         <div className="card glass-effect border-0 p-4 h-100 position-relative overflow-hidden hover-up">
           <div className="position-absolute top-0 end-0 p-3 opacity-10">
-            <FaFileMedical size={80} className="text-success" />
+            <FaFileMedical size={50} className="text-success" />
           </div>
           <div className="d-flex align-items-center gap-3 position-relative z-1">
             <div className="p-3 bg-success bg-opacity-10 rounded-4 text-success shadow-sm floating-card" style={{ animationDelay: '0.5s' }}>
@@ -40,7 +41,7 @@ export default function PatientOverview() {
       <div className="col-12 col-sm-6 col-lg-4">
         <div className="card glass-effect border-0 p-4 h-100 position-relative overflow-hidden hover-up">
           <div className="position-absolute top-0 end-0 p-3 opacity-10">
-            <FaUserMd size={80} className="text-danger" />
+            <FaUserMd size={50} className="text-danger" />
           </div>
           <div className="d-flex align-items-center gap-3 position-relative z-1">
             <div className="p-3 bg-danger bg-opacity-10 rounded-4 text-danger shadow-sm floating-card" style={{ animationDelay: '1s' }}>

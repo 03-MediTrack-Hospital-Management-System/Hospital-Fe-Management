@@ -27,7 +27,6 @@ export default function PatientFeedback() {
             alert("Please provide a rating");
             return;
         }
-        // Simulation of submission
         setSubmitted(true);
         setTimeout(() => {
             setSubmitted(false);
