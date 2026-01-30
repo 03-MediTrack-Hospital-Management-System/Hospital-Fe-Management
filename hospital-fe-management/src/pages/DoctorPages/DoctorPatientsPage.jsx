@@ -1,8 +1,8 @@
-import DoctorSidebar from "../components/DoctorComponent/DoctorSidebar";
-import DoctorPatients from "../components/DoctorComponent/DoctorPatients";
-import GlobalHeader from "../components/Common/GlobalHeader";
+import DoctorSidebar from "../../components/DoctorComponent/DoctorSidebar";
+import DoctorPatients from "../../components/DoctorComponent/DoctorPatients";
+import GlobalHeader from "../../components/Common/GlobalHeader";
 import { FaSearch } from "react-icons/fa";
-import "../styles/reception.css";
+import "../../styles/reception.css";
 import { useState } from "react";
 
 export default function DoctorPatientsPage() {

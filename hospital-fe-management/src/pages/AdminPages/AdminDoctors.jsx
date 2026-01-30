@@ -1,5 +1,5 @@
-import "../styles/admin.css";
-import AdminSidebar from "../components/AdminComponent/AdminSidebar";
+import "../../styles/admin.css"
+import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import { FaUserMd, FaPlus, FaEdit, FaTrash, FaSearch, FaFilter } from "react-icons/fa";
 import { useState } from "react";
 

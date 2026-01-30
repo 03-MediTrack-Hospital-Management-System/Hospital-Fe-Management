@@ -1,7 +1,7 @@
-import "../styles/admin.css";
+import "../../styles/admin.css"
 import { useNavigate } from "react-router-dom";
-import AdminSidebar from "../components/AdminComponent/AdminSidebar";
-import GlobalHeader from "../components/Common/GlobalHeader";
+import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
+import GlobalHeader from "../../components/Common/GlobalHeader";
 import { FaUserMd, FaUserInjured, FaUsers, FaChartLine, FaBoxOpen, FaExclamationTriangle } from "react-icons/fa";
 
 export default function Admin() {

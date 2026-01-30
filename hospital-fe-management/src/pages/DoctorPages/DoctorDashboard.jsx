@@ -1,10 +1,10 @@
-import DoctorSidebar from "../components/DoctorComponent/DoctorSidebar";
-import DoctorOverview from "../components/DoctorComponent/DoctorOverview";
-import DoctorStats from "../components/DoctorComponent/DoctorStats";
-import DoctorPatients from "../components/DoctorComponent/DoctorPatients";
-import DoctorAppointments from "../components/DoctorComponent/DoctorAppointments";
-import GlobalHeader from "../components/Common/GlobalHeader";
-import "../styles/reception.css";
+import DoctorSidebar from "../../components/DoctorComponent/DoctorSidebar";
+import DoctorOverview from "../../components/DoctorComponent/DoctorOverview";
+import DoctorStats from "../../components/DoctorComponent/DoctorStats";
+import DoctorPatients from "../../components/DoctorComponent/DoctorPatients";
+import DoctorAppointments from "../../components/DoctorComponent/DoctorAppointments";
+import GlobalHeader from "../../components/Common/GlobalHeader";
+import "../../styles/reception.css";
 import { useNavigate } from "react-router-dom";
 
 export default function DoctorDashboard() {

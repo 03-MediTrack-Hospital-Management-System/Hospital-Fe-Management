@@ -1,19 +1,19 @@
-import PatientLayout from "../components/PatientComponent/PatientLayout";
-import AppointmentList from "../components/PatientComponent/AppointmentList";
-import "../styles/reception.css";
+import PatientLayout from "../../components/PatientComponent/PatientLayout";
+import ReportsList from "../../components/PatientComponent/ReportsList";
+import "../../styles/reception.css";
 
-export default function PatientAppointments() {
+export default function PatientReports() {
   return (
     <PatientLayout>
       <div style={{ marginBottom: '40px' }}>
         <h1 style={{ fontSize: '36px', color: '#0b5c63', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.5px' }}>
-          My Appointments
+          Medical Reports
         </h1>
         <p style={{ margin: 0, fontSize: '18px', color: '#64748b', fontWeight: '500' }}>
-          Manage your upcoming and past medical appointments.
+          Access and download your medical history documents.
         </p>
       </div>
-      <AppointmentList />
+      <ReportsList />
     </PatientLayout>
   );
 }

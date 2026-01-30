@@ -1,5 +1,5 @@
-import "../styles/admin.css";
-import AdminSidebar from "../components/AdminComponent/AdminSidebar";
+import "../../styles/admin.css"
+import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import { useState } from "react";
 import { FaHospital, FaUsers, FaShieldAlt, FaBell, FaSave, FaLock, FaUserShield, FaCheckCircle } from "react-icons/fa"; // Removed unused icons for cleanliness
 

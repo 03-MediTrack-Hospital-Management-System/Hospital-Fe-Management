@@ -8,27 +8,27 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-import PatientDashboard from "./pages/PatientDashboard";
-import PatientAppointments from "./pages/PatientAppointments";
-import PatientReports from "./pages/PatientReports";
-import PatientProfile from "./pages/PatientProfile";
-import PatientSettings from "./pages/PatientSettings";
-import PatientFeedback from "./pages/PatientFeedback";
+import PatientDashboard from "./pages/PatientPages/PatientDashboard";
+import PatientAppointments from "./pages/PatientPages/PatientAppointments";
+import PatientReports from "./pages/PatientPages/PatientReports";
+import PatientProfile from "./pages/PatientPages/PatientProfile";
+import PatientSettings from "./pages/PatientPages/PatientSettings";
+import PatientFeedback from "./pages/PatientPages/PatientFeedback";
 
-import DoctorDashboard from "./pages/DoctorDashboard";
-import DoctorAppointmentsPage from "./pages/DoctorAppointmentsPage";
-import DoctorPatientsPage from "./pages/DoctorPatientsPage";
-import DoctorProfile from "./pages/DoctorProfile";
+import DoctorDashboard from "./pages/DoctorPages/DoctorDashboard";
+import DoctorAppointmentsPage from "./pages/DoctorPages/DoctorAppointmentsPage";
+import DoctorPatientsPage from "./pages/DoctorPages/DoctorPatientsPage";
+import DoctorProfile from "./pages/DoctorPages/DoctorProfile";
 
-import Admin from "./pages/Admin";
-import AdminDoctors from "./pages/AdminDoctors";
-import AdminPatients from "./pages/AdminPatients";
-import AdminSettings from "./pages/AdminSettings";
-import AdminAddDoctor from "./pages/AdminAddDoctor";
+import Admin from "./pages/AdminPages/Admin";
+import AdminDoctors from "./pages/AdminPages/AdminDoctors";
+import AdminPatients from "./pages/AdminPages/AdminPatients";
+import AdminSettings from "./pages/AdminPages/AdminSettings";
+import AdminAddDoctor from "./pages/AdminPages/AdminAddDoctor";
 
-import ReceptionDashboard from "./pages/ReceptionDashboard";
-import Inventory from "./pages/Inventory";
-import UserProfilePage from "./pages/UserProfile";
+import ReceptionDashboard from "./pages/ReceptionPages/ReceptionDashboard";
+import Inventory from "./pages/AdminPages/Inventory";
+import UserProfilePage from "./pages/PatientPages/UserProfile";
 import SpecialtyPage from "./pages/SpecialtyPage";
 
 function App() {

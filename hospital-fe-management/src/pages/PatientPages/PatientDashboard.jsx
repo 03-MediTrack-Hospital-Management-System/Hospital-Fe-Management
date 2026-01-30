@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PatientLayout from "../components/PatientComponent/PatientLayout";
-import PatientOverview from "../components/PatientComponent/PatientOverview";
-import PatientDoctors from "../components/PatientComponent/PatientDoctors";
+import PatientLayout from "../../components/PatientComponent/PatientLayout";
+import PatientOverview from "../../components/PatientComponent/PatientOverview";
+import PatientDoctors from "../../components/PatientComponent/PatientDoctors";
 import { FaSun, FaMoon, FaCloudSun } from 'react-icons/fa';
 
 export default function PatientDashboard() {
