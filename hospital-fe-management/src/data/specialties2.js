@@ -13,15 +13,17 @@ function SpecialtyPage() {
 
   const image = specialtyImages[id];
   const themeColor = "rgba(8, 60, 56, 0.95)";
-  const themeColorMain = "rgba(11, 92, 99, 0.9)";
+  const themeColorLight = "rgba(11, 92, 99, 0.9)";
   const themeColorLightBg = "rgba(11, 92, 99, 0.1)";
-  const themeTextColor = "rgba(11, 92, 99, 0.9)";
 
   return (
     <>
+      {/* White Navbar */}
       <div className="bg-white shadow-sm">
         <Navbar />
       </div>
+
+      {/* ================= HERO SECTION WITH BACKGROUND IMAGE ================= */}
       <div 
         className="position-relative pt-5 mt-4"
         style={{
@@ -31,27 +33,18 @@ function SpecialtyPage() {
           minHeight: '70vh'
         }}
       >
+        {/* Blur Overlay */}
         <div 
           className="position-absolute top-0 start-0 w-100 h-100"
           style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(15px) brightness(0.9)',
-            transform: 'scale(1.02)'
-          }}
-        ></div>
-        
-          <div 
-          className="position-absolute top-0 start-0 w-100 h-100"
-          style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.3)'
+            background: `linear-gradient(135deg, ${themeColor}, ${themeColorLight})`,
+            backdropFilter: 'blur(8px)'
           }}
         ></div>
         
         <div className="container position-relative z-1 pt-5">
           <div className="row align-items-center min-vh-70 pt-4">
-      
+            {/* Content Column */}
             <div className="col-lg-6 mb-4 mb-lg-0 offset-lg-1">
               <h1 className="fw-bold display-4 text-white mb-3 lh-base">{specialty.title}</h1>
               <p className="text-light fs-4 fw-light mb-4">
@@ -73,39 +66,30 @@ function SpecialtyPage() {
               </div>
             </div>
             
+            {/* Image Column */}
             <div className="col-lg-4 mt-5 mt-lg-0 ms-lg-5">
-              <div className="position-relative">
-                <img
-                  src={image}
-                  alt={specialty.title}
-                  className="img-fluid rounded-4 shadow-lg border border-white border-4 position-relative z-1"
-                  style={{ 
-                    maxHeight: "400px", 
-                    objectFit: "cover", 
-                    width: "100%",
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.3) !important',
-                    transform: 'translateX(-20px)'
-                  }}
-                />
-           
-                <div 
-                  className="position-absolute top-0 start-0 w-100 h-100 rounded-4"
-                  style={{
-                    backgroundColor: 'rgba(11, 92, 99, 0.2)',
-                    filter: 'blur(15px)',
-                    transform: 'translateX(-20px) scale(1.05)',
-                    zIndex: 0
-                  }}
-                ></div>
-              </div>
+              <img
+                src={image}
+                alt={specialty.title}
+                className="img-fluid rounded-4 shadow-lg border border-white border-4"
+                style={{ 
+                  maxHeight: "400px", 
+                  objectFit: "cover", 
+                  width: "100%",
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.3) !important',
+                  transform: 'translateX(-20px)'
+                }}
+              />
             </div>
           </div>
         </div>
       </div>
+
+      {/* ================= OVERVIEW SECTION ================= */}
       <div className="container py-5">
         <div className="row mb-5">
           <div className="col-lg-10 mx-auto">
-            <h2 className="fw-bold display-6 text-center mb-4" style={{color: themeTextColor}}>
+            <h2 className="fw-bold display-6 text-center mb-4" style={{color: themeColor}}>
               Overview
             </h2>
             <p className="text-muted fs-5 lh-lg text-center px-lg-5">
@@ -116,9 +100,11 @@ function SpecialtyPage() {
             </p>
           </div>
         </div>
+
+        {/* ================= GENERAL MEDICAL INFORMATION ================= */}
         <div className="row mb-5">
           <div className="col-lg-8 mx-auto">
-            <h3 className="fw-bold display-6 text-center mb-4" style={{color: themeTextColor}}>
+            <h3 className="fw-bold display-6 text-center mb-4" style={{color: themeColor}}>
               General Medical Information
             </h3>
             <p className="text-muted fs-5 lh-lg text-center mb-5">
@@ -130,28 +116,28 @@ function SpecialtyPage() {
             
             <div className="row g-4">
               <div className="col-md-6">
-                <div className="card border-0 shadow-sm h-100 rounded-4" style={{borderTop: `4px solid ${themeTextColor}`}}>
+                <div className="card border-0 shadow-sm h-100 rounded-4" style={{borderTop: `4px solid ${themeColor}`}}>
                   <div className="card-body p-4">
                     <div className="d-flex align-items-start mb-3">
-                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeTextColor}}></i>
+                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeColor}}></i>
                       <div>
-                        <h5 className="fw-bold mb-2" style={{color: themeTextColor}}>Experienced and certified specialists</h5>
+                        <h5 className="fw-bold mb-2" style={{color: themeColor}}>Experienced and certified specialists</h5>
                         <p className="text-muted mb-0">Our team consists of board-certified specialists with years of experience.</p>
                       </div>
                     </div>
                     
                     <div className="d-flex align-items-start mb-3">
-                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeTextColor}}></i>
+                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeColor}}></i>
                       <div>
-                        <h5 className="fw-bold mb-2" style={{color: themeTextColor}}>Advanced diagnostic facilities</h5>
+                        <h5 className="fw-bold mb-2" style={{color: themeColor}}>Advanced diagnostic facilities</h5>
                         <p className="text-muted mb-0">State-of-the-art equipment for accurate diagnosis and monitoring.</p>
                       </div>
                     </div>
                     
                     <div className="d-flex align-items-start">
-                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeTextColor}}></i>
+                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeColor}}></i>
                       <div>
-                        <h5 className="fw-bold mb-2" style={{color: themeTextColor}}>Personalized treatment plans</h5>
+                        <h5 className="fw-bold mb-2" style={{color: themeColor}}>Personalized treatment plans</h5>
                         <p className="text-muted mb-0">Customized care plans designed for individual patient needs.</p>
                       </div>
                     </div>
@@ -160,28 +146,28 @@ function SpecialtyPage() {
               </div>
               
               <div className="col-md-6">
-                <div className="card border-0 shadow-sm h-100 rounded-4" style={{borderTop: `4px solid ${themeTextColor}`}}>
+                <div className="card border-0 shadow-sm h-100 rounded-4" style={{borderTop: `4px solid ${themeColor}`}}>
                   <div className="card-body p-4">
                     <div className="d-flex align-items-start mb-3">
-                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeTextColor}}></i>
+                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeColor}}></i>
                       <div>
-                        <h5 className="fw-bold mb-2" style={{color: themeTextColor}}>24/7 patient support services</h5>
+                        <h5 className="fw-bold mb-2" style={{color: themeColor}}>24/7 patient support services</h5>
                         <p className="text-muted mb-0">Round-the-clock assistance and emergency care availability.</p>
                       </div>
                     </div>
                     
                     <div className="d-flex align-items-start mb-3">
-                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeTextColor}}></i>
+                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeColor}}></i>
                       <div>
-                        <h5 className="fw-bold mb-2" style={{color: themeTextColor}}>Modern medical equipment</h5>
+                        <h5 className="fw-bold mb-2" style={{color: themeColor}}>Modern medical equipment</h5>
                         <p className="text-muted mb-0">Latest technology for effective treatment and recovery.</p>
                       </div>
                     </div>
                     
                     <div className="d-flex align-items-start">
-                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeTextColor}}></i>
+                      <i className="bi bi-check-circle-fill me-3 mt-1 fs-4" style={{color: themeColor}}></i>
                       <div>
-                        <h5 className="fw-bold mb-2" style={{color: themeTextColor}}>Emergency care available</h5>
+                        <h5 className="fw-bold mb-2" style={{color: themeColor}}>Emergency care available</h5>
                         <p className="text-muted mb-0">Immediate medical attention for critical situations.</p>
                       </div>
                     </div>
@@ -191,12 +177,14 @@ function SpecialtyPage() {
             </div>
           </div>
         </div>
+
+        {/* ================= CONSULTATION CTA ================= */}
         <div className="row mb-5">
           <div className="col-lg-6 mx-auto">
             <div 
-              className="rounded-4 p-5 shadow-lg text-center border-0"
+              className="rounded-4 p-5 shadow-lg text-center"
               style={{
-                background: `linear-gradient(135deg, ${themeColorMain}, ${themeColor})`
+                background: `linear-gradient(135deg, ${themeColor}, ${themeColorLight})`
               }}
             >
               <h3 className="fw-bold display-6 text-white mb-3">Need a Consultation?</h3>
@@ -207,21 +195,10 @@ function SpecialtyPage() {
               <div className="d-grid">
                 <Link 
                   to="/login" 
-                  className="btn btn-lg rounded-pill px-5 py-3 fw-bold text-white border-0"
+                  className="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold"
                   style={{ 
                     fontSize: '1.2rem',
-                    backgroundColor: themeTextColor,
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = themeColor;
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = themeTextColor;
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
+                    color: themeColor
                   }}
                 >
                   <i className="bi bi-calendar-check me-2"></i>
@@ -231,9 +208,11 @@ function SpecialtyPage() {
             </div>
           </div>
         </div>
+
+        {/* ================= PATIENT REVIEWS ================= */}
         <div className="row mb-5">
           <div className="col-12">
-            <h3 className="fw-bold display-6 text-center mb-4" style={{color: themeTextColor}}>
+            <h3 className="fw-bold display-6 text-center mb-4" style={{color: themeColor}}>
               Patient Reviews
             </h3>
             <div className="row g-4">
@@ -255,17 +234,17 @@ function SpecialtyPage() {
                 }
               ].map((r, index) => (
                 <div key={index} className="col-md-4">
-                  <div className="card h-100 border-0 shadow-sm rounded-4" style={{borderTop: `4px solid ${themeTextColor}`}}>
+                  <div className="card h-100 border-0 shadow-sm rounded-4" style={{borderTop: `4px solid ${themeColor}`}}>
                     <div className="card-body p-4">
                       <div className="d-flex align-items-center mb-3">
                         <div 
                           className="rounded-circle p-2 me-3"
                           style={{backgroundColor: themeColorLightBg}}
                         >
-                          <i className="bi bi-person-circle fs-3" style={{color: themeTextColor}}></i>
+                          <i className="bi bi-person-circle fs-3" style={{color: themeColor}}></i>
                         </div>
                         <div>
-                          <h5 className="fw-bold mb-0" style={{color: themeTextColor}}>{r.name}</h5>
+                          <h5 className="fw-bold mb-0" style={{color: themeColor}}>{r.name}</h5>
                           <div className="text-warning fs-5">
                             {"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}
                           </div>
@@ -280,28 +259,23 @@ function SpecialtyPage() {
           </div>
         </div>
 
-       
+        {/* ================= BACK TO SPECIALTIES ================= */}
         <div className="text-center mb-4 pt-3">
           <Link 
-            to="/" 
-            className="btn btn-lg rounded-pill px-5 py-3 fw-bold"
+            to="/specialties" 
+            className="btn btn-lg rounded-pill px-5 py-2"
             style={{
-              border: `2px solid ${themeTextColor}`,
-              color: themeTextColor,
-              backgroundColor: 'transparent',
-              transition: 'all 0.3s ease'
+              border: `2px solid ${themeColor}`,
+              color: themeColor,
+              backgroundColor: 'transparent'
             }}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = themeTextColor;
+              e.target.style.backgroundColor = themeColor;
               e.target.style.color = 'white';
-              e.target.style.transform = 'translateY(-2px)';
-              e.target.style.boxShadow = '0 8px 16px rgba(11, 92, 99, 0.2)';
             }}
             onMouseLeave={(e) => {
               e.target.style.backgroundColor = 'transparent';
-              e.target.style.color = themeTextColor;
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = 'none';
+              e.target.style.color = themeColor;
             }}
           >
             <i className="bi bi-arrow-left me-2"></i>
@@ -310,6 +284,7 @@ function SpecialtyPage() {
         </div>
       </div>
 
+      {/* ================= FOOTER ================= */}
       <footer 
         className="py-5 mt-5"
         style={{backgroundColor: themeColor}}
@@ -327,41 +302,17 @@ function SpecialtyPage() {
               <h5 className="fw-bold fs-4 mb-3 text-white">Quick Links</h5>
               <ul className="list-unstyled">
                 <li className="mb-3">
-                  <Link 
-                    to="/" 
-                    className="text-white text-decoration-none fs-5 d-flex align-items-center opacity-75"
-                    style={{
-                      transition: 'opacity 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => e.target.style.opacity = '1'}
-                    onMouseLeave={(e) => e.target.style.opacity = '0.75'}
-                  >
+                  <Link to="/" className="text-white text-decoration-none fs-5 d-flex align-items-center opacity-75 hover-opacity-100">
                     <i className="bi bi-house-door me-2 fs-5"></i>Home
                   </Link>
                 </li>
                 <li className="mb-3">
-                  <Link 
-                    to="/specialties" 
-                    className="text-white text-decoration-none fs-5 d-flex align-items-center opacity-75"
-                    style={{
-                      transition: 'opacity 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => e.target.style.opacity = '1'}
-                    onMouseLeave={(e) => e.target.style.opacity = '0.75'}
-                  >
+                  <Link to="/specialties" className="text-white text-decoration-none fs-5 d-flex align-items-center opacity-75 hover-opacity-100">
                     <i className="bi bi-heart-pulse me-2 fs-5"></i>Specialties
                   </Link>
                 </li>
                 <li className="mb-3">
-                  <Link 
-                    to="/doctors" 
-                    className="text-white text-decoration-none fs-5 d-flex align-items-center opacity-75"
-                    style={{
-                      transition: 'opacity 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => e.target.style.opacity = '1'}
-                    onMouseLeave={(e) => e.target.style.opacity = '0.75'}
-                  >
+                  <Link to="/doctors" className="text-white text-decoration-none fs-5 d-flex align-items-center opacity-75 hover-opacity-100">
                     <i className="bi bi-person-badge me-2 fs-5"></i>Doctors
                   </Link>
                 </li>

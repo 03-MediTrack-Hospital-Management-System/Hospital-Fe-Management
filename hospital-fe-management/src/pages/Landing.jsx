@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import Navbar from "../components/Common/Navbar";
+import { specialties } from "../data/specialties";
 import {
   FaHeart,
   FaBrain,
@@ -16,6 +17,20 @@ import {
   FaClock
 } from "react-icons/fa";
 
+
+
+const iconsMap = {
+  FaHeart: FaHeart,
+  FaBrain: FaBrain,
+  FaBone: FaBone,
+  FaChild: FaChild,
+  FaShieldAlt: FaShieldAlt,
+  FaUtensils: FaUtensils,
+  FaHeartbeat: FaHeartbeat,
+  FaLungs: FaLungs,
+};
+
+
 function Landing() {
   const navigate = useNavigate();
 
@@ -28,7 +43,9 @@ function Landing() {
             <div className="col-lg-6 text-center text-lg-start">
               <div className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill bg-white shadow-sm mb-4 border border-1 border-light stagger-1">
                 <FaShieldAlt className="text-teal" />
-                <span className="text-dark small fw-bold text-uppercase tracking-wider">Trusted Healthcare Provider</span>
+                <span className="text-dark small fw-bold text-uppercase tracking-wider">
+                  Trusted Healthcare Provider
+                </span>
               </div>
 
               <h1 className="display-3 fw-bold mb-4 text-dark lh-sm stagger-2">
@@ -85,99 +102,81 @@ function Landing() {
 
             <div className="col-lg-6">
               <div className="row g-4 perspective-container">
-                <div className="col-md-6 pt-md-5">
-                  <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-1" style={{ animationDelay: '0s' }}>
-                    <div className="mb-4">
-                      <div className="d-inline-flex align-items-center justify-content-center p-3 rounded-4 bg-teal text-white shadow-sm" style={{ width: '64px', height: '64px' }}>
-                        <FaUserMd size={28} />
+                {[
+                  { icon: <FaUserMd size={28} />, color: 'bg-teal', title: '15K+', subtitle: 'Active Patients', delay: '0s' },
+                  { icon: <FaHeartbeat size={28} />, color: 'bg-dark', title: '200+', subtitle: 'Medical Experts', delay: '1.5s' },
+                  { icon: <FaLeaf size={28} />, color: 'bg-dark', title: '30+', subtitle: 'Years Experience', delay: '0.5s' },
+                  { icon: <FaClock size={28} />, color: 'bg-teal', title: '24/7', subtitle: 'Available', delay: '2s' },
+                ].map((item, idx) => (
+                  <div key={idx} className="col-md-6 pt-md-5 mt-md-n5">
+                    <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-1"
+                      style={{ animationDelay: item.delay }}>
+                      <div className="mb-4">
+                        <div className={`d-inline-flex align-items-center justify-content-center p-3 rounded-4 ${item.color} text-white shadow-sm`} style={{ width: '64px', height: '64px' }}>
+                          {item.icon}
+                        </div>
                       </div>
+                      <h2 className="display-6 fw-bold text-dark mb-1">{item.title}</h2>
+                      <p className="text-secondary m-0 fw-medium">{item.subtitle}</p>
                     </div>
-                    <h2 className="display-6 fw-bold text-dark mb-1">15K+</h2>
-                    <p className="text-secondary m-0 fw-medium">Active Patients</p>
                   </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-3" style={{ animationDelay: '1.5s' }}>
-                    <div className="mb-4">
-                      <div className="d-inline-flex align-items-center justify-content-center p-3 rounded-4 bg-dark text-white shadow-sm" style={{ width: '64px', height: '64px' }}>
-                        <FaHeartbeat size={28} />
-                      </div>
-                    </div>
-                    <h2 className="display-6 fw-bold text-dark mb-1">200+</h2>
-                    <p className="text-secondary m-0 fw-medium">Medical Experts</p>
-                  </div>
-                </div>
-
-                <div className="col-md-6 pt-md-5 mt-md-n5">
-                  <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-2" style={{ animationDelay: '0.5s' }}>
-                    <div className="mb-4">
-                      <div className="d-inline-flex align-items-center justify-content-center p-3 rounded-4 bg-dark text-white shadow-sm" style={{ width: '64px', height: '64px' }}>
-                        <FaLeaf size={28} />
-                      </div>
-                    </div>
-                    <h2 className="display-6 fw-bold text-dark mb-1">30+</h2>
-                    <p className="text-secondary m-0 fw-medium">Years Experience</p>
-                  </div>
-                </div>
-
-                <div className="col-md-6 mt-md-n5">
-                  <div className="card border-0 glass-effect h-100 p-4 hover-up rounded-4 floating-card stagger-4" style={{ animationDelay: '2s' }}>
-                    <div className="mb-4">
-                      <div className="d-inline-flex align-items-center justify-content-center p-3 rounded-4 bg-teal text-white shadow-sm" style={{ width: '64px', height: '64px' }}>
-                        <FaClock size={28} />
-                      </div>
-                    </div>
-                    <h2 className="display-6 fw-bold text-dark mb-1">24/7</h2>
-                    <p className="text-secondary m-0 fw-medium">Available</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-5 bg-white">
-        <div className="container py-5">
-          <div className="text-center mb-5">
-            <span className="badge bg-light-teal text-teal border border-teal rounded-pill px-3 py-2 mb-3">CENTRES OF EXCELLENCE</span>
-            <h2 className="display-5 fw-bold text-dark">Our Medical <span className="text-teal">Specialties</span></h2>
-            <p className="text-secondary mt-3 mx-auto" style={{ maxWidth: '600px' }}>
-              World-class medical care across multiple specialties with experienced doctors and advanced facilities
-            </p>
-          </div>
  
-          <div className="row g-4">
-            {[
-              { icon: <FaHeart />, title: "Cardiology", count: "5000+", color: "bg-danger", link: "/specialty/cardiology" },
-              { icon: <FaBrain />, title: "Neurology", count: "3500+", color: "bg-primary", link: "/specialty/neurology" },
-              { icon: <FaBone />, title: "Orthopedics", count: "4200+", color: "bg-warning", link: "/specialty/orthopedics" },
-              { icon: <FaChild />, title: "Pediatrics", count: "6000+", color: "bg-danger", link: "/specialty/pediatrics" },
-              { icon: <FaShieldAlt />, title: "Oncology", count: "2500+", color: "bg-primary", link: "/specialty/oncology" },
-              { icon: <FaUtensils />, title: "Gastroenterology", count: "3800+", color: "bg-success", link: "/specialty/gastroenterology" },
-              { icon: <FaHeartbeat />, title: "Nephrology", count: "1400+", color: "bg-info", link: "/specialty/nephrology" },
-              { icon: <FaLungs />, title: "Pulmonology", count: "2100+", color: "bg-teal", link: "/specialty/pulmonology" }
-            ].map((item, index) => (
-              <div key={index} className="col-md-6 col-lg-3">
-                <Link to={item.link} className="text-decoration-none d-block h-100">
-                  <div className="card h-100 border border-light-subtle shadow-sm hover-up transition-all p-4 rounded-4">
-                    <div className={`d-inline-flex align-items-center justify-content-center p-3 rounded-3 ${item.color} text-white mb-4`} style={{ width: '60px', height: '60px' }}>
-                      <div className="fs-4">{item.icon}</div>
-                    </div>
-                    <h3 className="h5 fw-bold text-dark mb-2">{item.title}</h3>
-                    <p className="text-secondary small mb-4">Expert care & treatment</p>
-                    <div className="d-flex justify-content-between align-items-center pt-3 border-top border-light-subtle">
-                      <span className="text-secondary x-small">Patients Treated</span>
-                      <span className={`fw-bold ${item.color === 'bg-teal' ? 'text-teal' : item.color.replace('bg-', 'text-')}`}>{item.count}</span>
-                    </div>
-                  </div>
-                </Link>
+<section className="py-5 bg-white">
+  <div className="container py-5">
+    <div className="text-center mb-5">
+      <h2 className="display-5 fw-bold">
+        Our Medical <span className="text-teal">Specialties</span>
+      </h2>
+      <p className="text-secondary">
+        World-class care across multiple specialties
+      </p>
+    </div>
+
+    <div className="row g-4">
+      {specialties.map((item) => {
+        const Icon = iconsMap[item.icon];
+
+        return (
+          <div key={item.id} className="col-md-6 col-lg-3">
+            <Link
+              to={`/specialty/${item.id}`}
+              className="text-decoration-none h-100 d-block"
+            >
+              <div className="card h-100 p-4 shadow-sm rounded-4 hover-up">
+                <div
+                  className={`d-flex align-items-center justify-content-center rounded-3 ${item.color} text-white mb-4`}
+                  style={{ width: 60, height: 60 }}
+                >
+                  {Icon && <Icon size={26} />}
+                </div>
+
+                <h3 className="h5 fw-bold text-dark">{item.title}</h3>
+                <p className="text-secondary small">
+                  Expert care & treatment
+                </p>
+
+                <div className="d-flex justify-content-between pt-3 border-top">
+                  <span className="text-secondary small">
+                    Patients Treated
+                  </span>
+                  <span className="fw-bold">{item.count}</span>
+                </div>
               </div>
-            ))}
+            </Link>
           </div>
-        </div>
-      </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
 
       <footer className="bg-dark text-light py-5 mt-5">
         <div className="container">
