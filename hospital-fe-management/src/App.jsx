@@ -6,7 +6,7 @@ import ProtectedRoute from "./components/Common/ProtectedRoute";
 
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Signup from "./pages/signup";
 
 import PatientDashboard from "./pages/PatientPages/PatientDashboard";
 import PatientAppointments from "./pages/PatientPages/PatientAppointments";
