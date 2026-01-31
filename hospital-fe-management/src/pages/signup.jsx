@@ -31,39 +31,40 @@ function Signup() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  e.preventDefault();
+  setIsLoading(true);
+
+  setTimeout(() => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const exists = users.find((u) => u.email === formData.email);
+
+    if (exists) {
+      setIsLoading(false);
+      alert("User already exists");
+      return;
+    }
+
+    let role = "PATIENT";
+    if (formData.email === "admin@gmail.com") role = "ADMIN";
+    if (formData.email === "reception@gmail.com") role = "RECEPTION";
+
+    users.push({
+      email: formData.email,
+      password: formData.password,
+      role,
+      profile: formData
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    setIsLoading(false);
+    setShowSuccess(true);
 
     setTimeout(() => {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const exists = users.find((u) => u.email === formData.email);
+      navigate("/login");
+    }, 2000);
+  }, 1000);
+};
 
-      if (exists) {
-        setIsLoading(false);
-        alert("User already exists");
-        return;
-      }
-
-      let role = "PATIENT";
-      if (formData.email === "admin@gmail.com") role = "ADMIN";
-      if (formData.email === "reception@gmail.com") role = "RECEPTION";
-
-      users.push({
-        email: formData.email,
-        password: formData.password,
-        role,
-        profile: formData
-      });
-
-      localStorage.setItem("users", JSON.stringify(users));
-      setIsLoading(false);
-      setShowSuccess(true);
-
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 2000);
-    }, 1000);
-  };
 
   const InputField = ({ icon: Icon, name, ...props }) => (
     <div className="input-group mb-3">
@@ -233,3 +234,4 @@ function Signup() {
 }
 
 export default Signup;
+
