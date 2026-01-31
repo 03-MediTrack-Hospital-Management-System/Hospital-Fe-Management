@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaUser, FaEnvelope, FaPhone, FaLock, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaLock,
+  FaCalendarAlt
+} from "react-icons/fa";
 import hospitalImg from "../assets/hospital1.jpg";
 
 function Signup() {
@@ -17,7 +23,7 @@ function Signup() {
     gender: "",
     bloodGroup: "",
     height: "",
-    weight: "",
+    weight: ""
   });
 
   const handleChange = (e) => {
@@ -39,22 +45,17 @@ function Signup() {
       }
 
       let role = "PATIENT";
-
-      if (formData.email === "admin@gmail.com") {
-        role = "ADMIN";
-      } else if (formData.email === "reception@gmail.com") {
-        role = "RECEPTION";
-      }
+      if (formData.email === "admin@gmail.com") role = "ADMIN";
+      if (formData.email === "reception@gmail.com") role = "RECEPTION";
 
       users.push({
         email: formData.email,
         password: formData.password,
         role,
-        profile: formData,
+        profile: formData
       });
 
       localStorage.setItem("users", JSON.stringify(users));
-
       setIsLoading(false);
       setShowSuccess(true);
 
@@ -64,156 +65,167 @@ function Signup() {
     }, 1000);
   };
 
-  const InputField = ({ icon: Icon, ...props }) => (
+  const InputField = ({ icon: Icon, name, ...props }) => (
     <div className="input-group mb-3">
-      <span className="input-group-text bg-light border-0 ps-3">
-        {Icon ? <Icon className="text-secondary opacity-50" /> : <FaUser className="text-secondary opacity-50" />}
+      <span className="input-group-text bg-light border-0">
+        {Icon && <Icon className="text-secondary opacity-75" />}
       </span>
       <input
-        className="form-control bg-light border-0 py-3 ps-2"
-        style={{ fontSize: '0.9rem' }}
+        className="form-control bg-light border-0 py-3"
+        name={name}
+        value={formData[name]}
+        onChange={handleChange}
         {...props}
       />
     </div>
   );
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center auth-bg py-5">
+    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5">
 
       {showSuccess && (
-        <div
-          className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center bg-teal text-white"
-          style={{ zIndex: 2000, backdropFilter: 'blur(10px)', opacity: 0.95 }}
-        >
-          <div className="bg-white rounded-circle d-flex align-items-center justify-content-center mb-4 text-teal display-4 shadow-lg scale-up" style={{ width: '120px', height: '120px' }}>✓</div>
-          <h3 className="display-4 fw-bold animate-fade-in">Account Created!</h3>
-          <p className="lead animate-fade-in delay-100">Redirecting to login page...</p>
+        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
+          style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}>
+          <div className="bg-white text-success rounded-circle d-flex align-items-center justify-content-center mb-4 fs-1 fw-bold">
+            ✓
+          </div>
+          <h3 className="fw-bold">Account Created!</h3>
+          <p>Redirecting to login page...</p>
         </div>
       )}
 
-      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-        <div className="card glass-effect border-0 overflow-hidden rounded-5 shadow-lg" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="container">
+        <div className="card border-0 shadow-lg rounded-5 overflow-hidden">
           <div className="row g-0">
-            
 
-            <div className="col-lg-5 text-white p-5 d-none d-lg-flex flex-column justify-content-center position-relative overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, rgba(8, 60, 56, 0.95), rgba(11, 92, 99, 0.9))' }}>
-
-
-              <div style={{ position: 'absolute', top: '-15%', left: '-15%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)', borderRadius: '50%' }}></div>
-
-              <div className="position-relative z-2 stagger-1">
-                <h4 className="fw-bold mb-4 opacity-75 text-uppercase tracking-widest">VV Care Hospitals</h4>
-                <h2 className="display-4 fw-bold mb-4">Your Health,<br /><span className="text-teal-gradient">Our Priority</span></h2>
-                <p className="opacity-90 lead fw-light mb-5">
-                  Join thousands of patients managing their health digitally. Secure, fast, and reliable.
-                </p>
-
-                <div className="rounded-4 overflow-hidden shadow-lg transform-hover" style={{ height: '240px', border: '1px solid rgba(255,255,255,0.2)' }}>
-                  <img src={hospitalImg} alt="Hospital" className="w-100 h-100 object-fit-cover opacity-90 hover-scale" style={{ transition: 'transform 0.5s ease' }} />
-                </div>
-              </div>
+            <div
+              className="col-lg-5 d-none d-lg-flex flex-column justify-content-center p-5 text-white"
+              style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}
+            >
+              <h6 className="text-uppercase opacity-75 fw-bold">
+                VV Care Hospitals
+              </h6>
+              <h2 className="fw-bold display-5">
+                Your Health,<br />
+                <span className="opacity-75">Our Priority</span>
+              </h2>
+              <p className="lead opacity-75">
+                Join thousands of patients managing their health digitally.
+              </p>
+              <img
+                src={hospitalImg}
+                alt="Hospital"
+                className="img-fluid rounded-4 mt-4"
+              />
             </div>
 
-
-            <div className="col-lg-7 p-5 bg-white position-relative">
-              <div className="mx-auto" style={{ maxWidth: '550px' }}>
-                <div className="text-center mb-5 stagger-1">
-                  <h3 className="fw-bold text-dark-teal mb-2 display-6">Create Account</h3>
-                  <p className="text-secondary small">Begin your journey to better health management</p>
+            <div className="col-lg-7 p-5 bg-white">
+              <div className="mx-auto" style={{ maxWidth: "520px" }}>
+                <div className="text-center mb-4">
+                  <h3 className="fw-bold text-dark">
+                    Create <span style={{ color: "#0b5c63" }}>Account</span>
+                  </h3>
+                  <p className="text-muted small">
+                    Begin your journey to better health management
+                  </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+                <form onSubmit={handleSubmit}>
+                  <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                    <h6 className="fw-bold text-uppercase small mb-0"
+                      style={{ color: "#0b5c63" }}>
+                      {showPersonal ? "Step 2: Personal Details" : "Step 1: Basic Information"}
+                    </h6>
+                    <span className="badge rounded-pill text-white"
+                      style={{ backgroundColor: "#2aa7a1" }}>
+                      {showPersonal ? "2 / 2" : "1 / 2"}
+                    </span>
+                  </div>
 
-                  <div className="stagger-2">
-                    <div className="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom border-light">
-                      <h6 className="text-teal fw-bold small text-uppercase tracking-wide mb-0">
-                        {showPersonal ? "Step 2: Personal Details" : "Step 1: Basic Information"}
-                      </h6>
-                      <span className="badge bg-teal bg-opacity-10 text-teal rounded-pill px-3">{showPersonal ? "2 / 2" : "1 / 2"}</span>
-                    </div>
+                  {!showPersonal && (
+                    <>
+                      <InputField icon={FaUser} name="fullName" placeholder="Full Name" required autoFocus />
+                      <InputField icon={FaEnvelope} name="email" type="email" placeholder="Email Address" required />
+                      <InputField icon={FaPhone} name="phone" placeholder="Phone Number" required />
+                      <InputField icon={FaLock} name="password" type="password" placeholder="Create Password" required />
 
-                    {!showPersonal ? (
-                      <div className="animate-fade-in">
-                        <InputField icon={FaUser} name="fullName" placeholder="Full Name" onChange={handleChange} required />
-                        <InputField icon={FaEnvelope} name="email" type="email" placeholder="Email Address" onChange={handleChange} required />
-                        <InputField icon={FaPhone} name="phone" placeholder="Phone Number" onChange={handleChange} required />
-                        <InputField icon={FaLock} name="password" type="password" placeholder="Create Password" onChange={handleChange} required />
+                      <button
+                        type="button"
+                        className="btn w-100 fw-bold"
+                        style={{ borderColor: "#2aa7a1", color: "#0b5c63" }}
+                        onClick={() => setShowPersonal(true)}
+                      >
+                        Add Personal Details
+                      </button>
+                    </>
+                  )}
 
-                        <div className="mb-3 animate-fade-in delay-100">
-                          <label className="form-label small text-secondary fw-bold ms-1">Would you like to add personal details?</label>
-                          <div className="d-flex gap-3 mt-1">
-                            <button
-                              type="button"
-                              className={`btn flex-grow-1 py-2 fw-bold text-start ps-3 rounded-3 border ${showPersonal === false ? 'border-light bg-light text-secondary' : ''}`}
-                              onClick={() => setShowPersonal("yes")}
-                              style={{ background: 'white' }}
-                            >
-                              <span className="text-teal me-2">●</span> Yes, add details now
-                            </button>
-                          </div>
+                  {showPersonal && (
+                    <>
+                      <div className="row g-3">
+                        <div className="col-md-6">
+                          <InputField icon={FaCalendarAlt} type="date" name="dob" />
+                        </div>
+                        <div className="col-md-6">
                           <select
-                            className="form-select bg-light border-0 py-3 mt-2 text-secondary d-none"
-                            onChange={(e) => setShowPersonal(e.target.value === "yes")}
+                            className="form-select bg-light border-0 py-3"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
                           >
-                            <option value="">Select Option</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">Skip for now</option>
+                            <option value="">Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
                           </select>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="animate-slide-up">
-                        <div className="row g-3">
-                          <div className="col-md-6"><InputField icon={FaCalendarAlt} type="date" name="dob" onChange={handleChange} /></div>
-                          <div className="col-md-6">
-                            <div className="input-group mb-3">
-                              <span className="input-group-text bg-light border-0 ps-3"><FaUser className="text-secondary opacity-50" /></span>
-                              <select className="form-select bg-light border-0 py-3 text-secondary ps-2" name="gender" onChange={handleChange} style={{ fontSize: '0.9rem' }}>
-                                <option value="">Gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-md-4"><InputField icon={FaUser} name="bloodGroup" placeholder="Blood Group" onChange={handleChange} /></div>
-                          <div className="col-md-4"><InputField icon={FaUser} name="height" placeholder="Height (cm)" onChange={handleChange} /></div>
-                          <div className="col-md-4"><InputField icon={FaUser} name="weight" placeholder="Weight (kg)" onChange={handleChange} /></div>
+                        <div className="col-md-4">
+                          <InputField name="bloodGroup" placeholder="Blood Group" />
                         </div>
-                        <button
-                          type="button"
-                          className="btn btn-link text-decoration-none text-secondary small fw-bold mb-3"
-                          onClick={() => setShowPersonal(false)}
-                        >
-                          ← Back to Basic Info
-                        </button>
+                        <div className="col-md-4">
+                          <InputField name="height" placeholder="Height (cm)" />
+                        </div>
+                        <div className="col-md-4">
+                          <InputField name="weight" placeholder="Weight (kg)" />
+                        </div>
                       </div>
-                    )}
-                  </div>
 
-                  <div className="mt-2 stagger-3">
-                    <button
-                      className="btn btn-teal w-100 py-3.5 rounded-4 fw-bold text-white shadow-md hover-scale"
-                      type="submit"
-                      disabled={isLoading}
-                      style={{ background: 'linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)', letterSpacing: '0.5px' }}
-                    >
-                      {isLoading ? "Creating Account..." : "Create Account"}
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        className="btn btn-link text-muted fw-bold mt-3"
+                        onClick={() => setShowPersonal(false)}
+                      >
+                        ← Back to Basic Info
+                      </button>
+                    </>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="btn w-100 py-3 fw-bold rounded-4 mt-4 text-white"
+                    style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Creating Account..." : "Create Account"}
+                  </button>
                 </form>
 
-                <div className="text-center mt-5 stagger-4">
-                  <span className="text-secondary small">Already have an account? </span>
-                  <Link to="/login" className="text-teal fw-bold text-decoration-none hover-underline">Login here</Link>
+                <div className="text-center mt-4">
+                  <span className="text-muted small">Already have an account?</span>{" "}
+                  <Link to="/login" className="fw-bold" style={{ color: "#0b5c63" }}>
+                    Login here
+                  </Link>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
-        <div className="text-center mt-4 stagger-5">
-          <Link to="/" className="text-decoration-none text-white opacity-75 small fw-bold hover-opacity">← Back to Home</Link>
+
+        <div className="text-center mt-4">
+          <Link to="/" className="text-decoration-none text-muted fw-bold">
+            ← Back to Home
+          </Link>
         </div>
       </div>
     </div>
