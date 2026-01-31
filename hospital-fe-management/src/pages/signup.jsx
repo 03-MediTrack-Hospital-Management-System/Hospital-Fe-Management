@@ -9,6 +9,21 @@ import {
 } from "react-icons/fa";
 import hospitalImg from "../assets/hospital1.jpg";
 
+const InputField = ({ icon: Icon, name, value, onChange, ...props }) => (
+  <div className="input-group mb-3">
+    <span className="input-group-text bg-light border-0">
+      {Icon && <Icon className="text-secondary opacity-75" />}
+    </span>
+    <input
+      className="form-control bg-light border-0 py-3"
+      name={name}
+      value={value}
+      onChange={onChange}
+      {...props}
+    />
+  </div>
+);
+
 function Signup() {
   const [showPersonal, setShowPersonal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,27 +80,13 @@ function Signup() {
     }, 1000);
   };
 
-  const InputField = ({ icon: Icon, name, ...props }) => (
-    <div className="input-group mb-3">
-      <span className="input-group-text bg-light border-0">
-        {Icon && <Icon className="text-secondary opacity-75" />}
-      </span>
-      <input
-        className="form-control bg-light border-0 py-3"
-        name={name}
-        value={formData[name]}
-        onChange={handleChange}
-        {...props}
-      />
-    </div>
-  );
-
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5">
-
       {showSuccess && (
-        <div className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-          style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}>
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
+          style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}
+        >
           <div className="bg-white text-success rounded-circle d-flex align-items-center justify-content-center mb-4 fs-1 fw-bold">
             ✓
           </div>
@@ -97,7 +98,6 @@ function Signup() {
       <div className="container">
         <div className="card border-0 shadow-lg rounded-5 overflow-hidden">
           <div className="row g-0">
-
             <div
               className="col-lg-5 d-none d-lg-flex flex-column justify-content-center p-5 text-white"
               style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}
@@ -132,22 +132,50 @@ function Signup() {
 
                 <form onSubmit={handleSubmit}>
                   <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-                    <h6 className="fw-bold text-uppercase small mb-0"
-                      style={{ color: "#0b5c63" }}>
+                    <h6 className="fw-bold text-uppercase small mb-0" style={{ color: "#0b5c63" }}>
                       {showPersonal ? "Step 2: Personal Details" : "Step 1: Basic Information"}
                     </h6>
-                    <span className="badge rounded-pill text-white"
-                      style={{ backgroundColor: "#2aa7a1" }}>
+                    <span className="badge rounded-pill text-white" style={{ backgroundColor: "#2aa7a1" }}>
                       {showPersonal ? "2 / 2" : "1 / 2"}
                     </span>
                   </div>
 
                   {!showPersonal && (
                     <>
-                      <InputField icon={FaUser} name="fullName" placeholder="Full Name" required autoFocus />
-                      <InputField icon={FaEnvelope} name="email" type="email" placeholder="Email Address" required />
-                      <InputField icon={FaPhone} name="phone" placeholder="Phone Number" required />
-                      <InputField icon={FaLock} name="password" type="password" placeholder="Create Password" required />
+                      <InputField
+                        icon={FaUser}
+                        name="fullName"
+                        placeholder="Full Name"
+                        required
+                        value={formData.fullName}
+                        onChange={handleChange}
+                      />
+                      <InputField
+                        icon={FaEnvelope}
+                        name="email"
+                        type="email"
+                        placeholder="Email Address"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                      <InputField
+                        icon={FaPhone}
+                        name="phone"
+                        placeholder="Phone Number"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                      />
+                      <InputField
+                        icon={FaLock}
+                        name="password"
+                        type="password"
+                        placeholder="Create Password"
+                        required
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
 
                       <button
                         type="button"
@@ -164,7 +192,13 @@ function Signup() {
                     <>
                       <div className="row g-3">
                         <div className="col-md-6">
-                          <InputField icon={FaCalendarAlt} type="date" name="dob" />
+                          <InputField
+                            icon={FaCalendarAlt}
+                            type="date"
+                            name="dob"
+                            value={formData.dob}
+                            onChange={handleChange}
+                          />
                         </div>
                         <div className="col-md-6">
                           <select
@@ -180,13 +214,28 @@ function Signup() {
                           </select>
                         </div>
                         <div className="col-md-4">
-                          <InputField name="bloodGroup" placeholder="Blood Group" />
+                          <InputField
+                            name="bloodGroup"
+                            placeholder="Blood Group"
+                            value={formData.bloodGroup}
+                            onChange={handleChange}
+                          />
                         </div>
                         <div className="col-md-4">
-                          <InputField name="height" placeholder="Height (cm)" />
+                          <InputField
+                            name="height"
+                            placeholder="Height (cm)"
+                            value={formData.height}
+                            onChange={handleChange}
+                          />
                         </div>
                         <div className="col-md-4">
-                          <InputField name="weight" placeholder="Weight (kg)" />
+                          <InputField
+                            name="weight"
+                            placeholder="Weight (kg)"
+                            value={formData.weight}
+                            onChange={handleChange}
+                          />
                         </div>
                       </div>
 
@@ -218,7 +267,6 @@ function Signup() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
