@@ -32,7 +32,6 @@ function Signup() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    phone: "",
     password: "",
     dob: "",
     gender: "",
@@ -158,14 +157,6 @@ function Signup() {
                         placeholder="Email Address"
                         required
                         value={formData.email}
-                        onChange={handleChange}
-                      />
-                      <InputField
-                        icon={FaPhone}
-                        name="phone"
-                        placeholder="Phone Number"
-                        required
-                        value={formData.phone}
                         onChange={handleChange}
                       />
                       <InputField

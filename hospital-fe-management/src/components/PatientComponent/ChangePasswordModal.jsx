@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaLock, FaEye, FaEyeSlash, FaTimesCircle } from 'react-icons/fa';
-import "../../styles/modal.css";
+import "../../styles/modal.css"
 
 export default function ChangePasswordModal({ onClose }) {
     const [formData, setFormData] = useState({

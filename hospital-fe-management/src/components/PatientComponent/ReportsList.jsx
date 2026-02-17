@@ -18,7 +18,7 @@ export default function ReportsList() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
 
-  
+
   const reports = [
     {
       id: 1,
@@ -96,7 +96,7 @@ export default function ReportsList() {
 
   return (
     <div className="reports-container">
-      
+
       <div className="reports-controls">
         <div className="filter-tabs">
           {categories.map(cat => (
@@ -146,11 +146,11 @@ export default function ReportsList() {
             <div className="report-meta">
               <div className="meta-item">
                 <FaCalendarAlt />
-                {new Date(report.date).toLocaleDateString()}
+                <span>{new Date(report.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</span>
               </div>
               <div className="meta-item doctor-meta">
-                <FaUserMd className="dr-avatar-mini" />
-                {report.doctor}
+                <FaUserCircle className="dr-avatar-mini" />
+                <span>{report.doctor}</span>
               </div>
             </div>
 
