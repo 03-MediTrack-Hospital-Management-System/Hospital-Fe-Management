@@ -28,7 +28,9 @@ import AdminAddDoctor from "./pages/AdminPages/AdminAddDoctor";
 
 import ReceptionDashboard from "./pages/ReceptionPages/ReceptionDashboard";
 import Inventory from "./pages/AdminPages/Inventory";
+import AdminAddMedicine from "./pages/AdminPages/AdminAddMedicine";
 import UserProfilePage from "./pages/PatientPages/UserProfile";
+import AdminLayout from "./components/Layouts/AdminLayout";
 import SpecialtyPage from "./pages/SpecialtyPage";
 
 function App() {
@@ -132,54 +134,24 @@ function App() {
         />
 
 
+        {/* Admin Portal with Persistent Layout */}
         <Route
           path="/admin"
           element={
             <ProtectedRoute role="ADMIN">
-              <Admin />
+              <AdminLayout />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/admin/doctors"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminDoctors />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/patients"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminPatients />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/settings"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminSettings />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/doctors/add"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminAddDoctor />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/inventory"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <Inventory />
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route index element={<Admin />} />
+          <Route path="doctors" element={<AdminDoctors />} />
+          <Route path="doctors/add" element={<AdminAddDoctor />} />
+          <Route path="patients" element={<AdminPatients />} />
+          <Route path="settings" element={<AdminSettings />} />
+          <Route path="inventory" element={<Inventory />} />
+          <Route path="inventory/add" element={<AdminAddMedicine />} />
+        </Route>
+
 
 
         <Route

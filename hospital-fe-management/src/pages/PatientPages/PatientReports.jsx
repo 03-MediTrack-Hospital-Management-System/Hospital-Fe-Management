@@ -5,15 +5,17 @@ import "../../styles/reception.css";
 export default function PatientReports() {
   return (
     <PatientLayout>
-      <div style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '36px', color: '#0b5c63', fontWeight: '800', marginBottom: '8px', letterSpacing: '-0.5px' }}>
-          Medical Reports
-        </h1>
-        <p style={{ margin: 0, fontSize: '18px', color: '#64748b', fontWeight: '500' }}>
-          Access and download your medical history documents.
-        </p>
+      <div className="container-fluid p-4 p-lg-5">
+        <div className="mb-5 pb-3 border-bottom border-light">
+          <h1 className="display-4 fw-extrabold mb-2" style={{ color: '#0b5c63', letterSpacing: '-1px' }}>
+            Medical Reports
+          </h1>
+          <p className="lead text-secondary opacity-75">
+            Access and download your specialised medical history documents and clinical findings.
+          </p>
+        </div>
+        <ReportsList />
       </div>
-      <ReportsList />
     </PatientLayout>
   );
 }

@@ -28,148 +28,148 @@ export default function AdminAddDoctor() {
     };
 
     return (
-        <div className="admin-container">
-            <AdminSidebar />
-            <main className="admin-main">
-                <div className="admin-header-enhanced">
-                    <div className="admin-info">
-                        <button onClick={() => navigate("/admin/doctors")} className="btn-ghost" style={{ paddingLeft: 0, marginBottom: '10px' }}>
-                            <FaArrowLeft /> Back to Doctors
-                        </button>
-                        <h1>Add New Doctor</h1>
-                        <p>Onboard a new medical staff member</p>
-                    </div>
+        <>
+            <div className="mb-4">
+                <button
+                    onClick={() => navigate("/admin/doctors")}
+                    className="btn btn-sm btn-outline-secondary mb-3 d-flex align-items-center gap-2"
+                >
+                    <FaArrowLeft /> Back to Doctors
+                </button>
+                <div className="admin-info">
+                    <h2 className="fw-bold mb-1">Add New Doctor</h2>
+                    <p className="text-muted mb-0">Onboard a new medical staff member</p>
                 </div>
+            </div>
 
-                <div className="card dashboard-card" style={{ maxWidth: '800px' }}>
-                    <form onSubmit={handleSubmit}>
-                        <div style={{ display: 'flex', gap: '30px', marginBottom: '30px' }}>
-                            <div style={{ width: '120px', textAlign: 'center' }}>
-                                <div style={{
-                                    width: '120px',
-                                    height: '120px',
-                                    borderRadius: '50%',
-                                    background: '#f1f5f9',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    border: '2px dashed #cbd5e1',
-                                    marginBottom: '10px',
-                                    cursor: 'pointer'
-                                }}>
-                                    <FaCamera size={30} color="#94a3b8" />
-                                </div>
-                                <span style={{ fontSize: '13px', color: '#64748b' }}>Upload Photo</span>
+            <div className="card shadow-sm border-0 rounded-4 p-4 p-md-5" style={{ maxWidth: '900px' }}>
+                <form onSubmit={handleSubmit}>
+                    <div className="row g-4 mb-5">
+                        <div className="col-lg-3 text-center">
+                            <div className="mx-auto" style={{
+                                width: '120px',
+                                height: '120px',
+                                borderRadius: '50%',
+                                background: '#f8fafc',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                border: '2px dashed #cbd5e1',
+                                marginBottom: '15px',
+                                cursor: 'pointer'
+                            }}>
+                                <FaCamera size={30} color="#94a3b8" />
                             </div>
+                            <span className="text-secondary small fw-medium">Upload Photo</span>
+                        </div>
 
-                            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                                <div className="form-group">
-                                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>First Name</label>
+                        <div className="col-lg-9">
+                            <div className="row g-3">
+                                <div className="col-md-6 text-start">
+                                    <label className="form-label fw-semibold text-dark">First Name</label>
                                     <input
                                         type="text"
                                         name="firstName"
                                         value={formData.firstName}
                                         onChange={handleChange}
-                                        className="search-input"
+                                        className="form-control form-control-lg bg-light border-0"
                                         required
-                                        style={{ background: '#fff' }}
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>Last Name</label>
+                                <div className="col-md-6 text-start">
+                                    <label className="form-label fw-semibold text-dark">Last Name</label>
                                     <input
                                         type="text"
                                         name="lastName"
                                         value={formData.lastName}
                                         onChange={handleChange}
-                                        className="search-input"
+                                        className="form-control form-control-lg bg-light border-0"
                                         required
-                                        style={{ background: '#fff' }}
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>Email Address</label>
+                                <div className="col-md-6 text-start">
+                                    <label className="form-label fw-semibold text-dark">Email Address</label>
                                     <input
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="search-input"
+                                        className="form-control form-control-lg bg-light border-0"
                                         required
-                                        style={{ background: '#fff' }}
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>Phone Number</label>
+                                <div className="col-md-6 text-start">
+                                    <label className="form-label fw-semibold text-dark">Phone Number</label>
                                     <input
                                         type="tel"
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="search-input"
-                                        style={{ background: '#fff' }}
+                                        className="form-control form-control-lg bg-light border-0"
                                     />
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <hr style={{ border: 'none', borderTop: '1px solid #e2e8f0', margin: '30px 0' }} />
-
-                        <h3 className="section-title">Professional Information</h3>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '30px' }}>
-                            <div className="form-group">
-                                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>Specialization</label>
-                                <select
-                                    name="specialization"
-                                    value={formData.specialization}
-                                    onChange={handleChange}
-                                    className="search-input"
-                                    style={{ background: '#fff' }}
-                                >
-                                    <option>General</option>
-                                    <option>Cardiology</option>
-                                    <option>Neurology</option>
-                                    <option>Orthopedics</option>
-                                    <option>Pediatrics</option>
-                                    <option>Dermatology</option>
-                                </select>
-                            </div>
-                            <div className="form-group">
-                                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>Experience (Years)</label>
-                                <input
-                                    type="number"
-                                    name="experience"
-                                    value={formData.experience}
-                                    onChange={handleChange}
-                                    className="search-input"
-                                    style={{ background: '#fff' }}
-                                />
-                            </div>
-                            <div className="form-group" style={{ gridColumn: 'span 2' }}>
-                                <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500', color: '#334155' }}>Qualifications</label>
-                                <input
-                                    type="text"
-                                    name="qualification"
-                                    value={formData.qualification}
-                                    onChange={handleChange}
-                                    className="search-input"
-                                    placeholder="e.g. MBBS, MD, FRCS"
-                                    style={{ background: '#fff' }}
-                                />
-                            </div>
+                    <h4 className="fw-bold mb-4 pb-2 border-bottom">Professional Information</h4>
+                    <div className="row g-4 mb-5 text-start">
+                        <div className="col-md-6">
+                            <label className="form-label fw-semibold text-dark">Specialization</label>
+                            <select
+                                name="specialization"
+                                value={formData.specialization}
+                                onChange={handleChange}
+                                className="form-select form-control-lg bg-light border-0"
+                            >
+                                <option>General</option>
+                                <option>Cardiology</option>
+                                <option>Neurology</option>
+                                <option>Orthopedics</option>
+                                <option>Pediatrics</option>
+                                <option>Dermatology</option>
+                            </select>
                         </div>
-
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '15px' }}>
-                            <button type="button" onClick={() => navigate("/admin/doctors")} className="btn-outline">
-                                Cancel
-                            </button>
-                            <button type="submit" className="btn-primary">
-                                <FaSave /> Save Doctor
-                            </button>
+                        <div className="col-md-6">
+                            <label className="form-label fw-semibold text-dark">Experience (Years)</label>
+                            <input
+                                type="number"
+                                name="experience"
+                                value={formData.experience}
+                                onChange={handleChange}
+                                className="form-control form-control-lg bg-light border-0"
+                            />
                         </div>
-                    </form>
-                </div>
-            </main>
-        </div>
+                        <div className="col-12">
+                            <label className="form-label fw-semibold text-dark">Qualifications</label>
+                            <input
+                                type="text"
+                                name="qualification"
+                                value={formData.qualification}
+                                onChange={handleChange}
+                                className="form-control form-control-lg bg-light border-0"
+                                placeholder="e.g. MBBS, MD, FRCS"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="d-flex justify-content-end gap-3 pt-4 border-top">
+                        <button
+                            type="button"
+                            onClick={() => navigate("/admin/doctors")}
+                            className="btn btn-lg btn-outline-secondary px-5 rounded-3"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="btn btn-lg btn-primary px-5 rounded-3 shadow-sm d-flex align-items-center gap-2"
+                        >
+                            <FaSave /> Save Doctor
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </>
     );
 }
