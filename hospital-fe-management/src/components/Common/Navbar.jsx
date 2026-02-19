@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { FaHospitalSymbol } from "react-icons/fa";
 
 
 function Navbar() {
@@ -29,8 +30,8 @@ function Navbar() {
       <div className="container">
 
         <div className="navbar-brand d-flex align-items-center gap-3 cursor-pointer hover-scale" onClick={() => navigate("/")} style={{ cursor: 'pointer' }}>
-          <div className="bg-dark text-white rounded-3 d-flex align-items-center justify-content-center shadow-sm" style={{ width: '45px', height: '45px' }}>
-            <span className="fs-5">♥</span>
+          <div className="bg-teal text-white rounded-3 d-flex align-items-center justify-content-center shadow-sm" style={{ width: '45px', height: '45px' }}>
+            <FaHospitalSymbol size={24} />
           </div>
           <div className="d-flex flex-column">
             <h3 className="m-0 fs-4 fw-bold text-dark tracking-tight">VV Care</h3>

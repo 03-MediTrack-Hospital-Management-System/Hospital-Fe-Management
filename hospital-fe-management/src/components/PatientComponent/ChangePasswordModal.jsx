@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaLock, FaEye, FaEyeSlash, FaTimesCircle } from 'react-icons/fa';
+import { FaLock, FaEye, FaEyeSlash, FaTimesCircle, FaCheckCircle } from 'react-icons/fa';
 import "../../styles/modal.css"
 
 export default function ChangePasswordModal({ onClose }) {
@@ -15,6 +15,7 @@ export default function ChangePasswordModal({ onClose }) {
     });
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -53,11 +54,54 @@ export default function ChangePasswordModal({ onClose }) {
 
         // Simulate API call
         setTimeout(() => {
-            alert('Password changed successfully! ✅');
             setIsSubmitting(false);
-            onClose();
+            setIsSuccess(true);
+
+            // Auto close after 3 seconds
+            setTimeout(() => {
+                onClose();
+            }, 3000);
         }, 1500);
     };
+
+    if (isSuccess) {
+        return (
+            <div className="modal-overlay">
+                <div className="modal-card" style={{ textAlign: 'center', padding: '50px 40px' }}>
+                    <div style={{
+                        width: '80px',
+                        height: '80px',
+                        background: '#f0fdf4',
+                        color: '#22c55e',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '40px',
+                        margin: '0 auto 25px',
+                        boxShadow: '0 10px 20px rgba(34, 197, 94, 0.15)'
+                    }}>
+                        <FaCheckCircle />
+                    </div>
+                    <h2 style={{ color: '#1e293b', marginBottom: '12px' }}>Password Updated!</h2>
+                    <p style={{ color: '#64748b', fontSize: '16px', lineHeight: '1.6', marginBottom: '30px' }}>
+                        Your password has been successfully changed. <br />
+                        You can now use your new password to log in.
+                    </p>
+                    <button
+                        className="btn-primary"
+                        onClick={onClose}
+                        style={{ width: '100%', justifyContent: 'center', height: '50px' }}
+                    >
+                        Done
+                    </button>
+                    <p style={{ marginTop: '20px', color: '#94a3b8', fontSize: '13px' }}>
+                        Closing automatically in a few seconds...
+                    </p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="modal-overlay">

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 export default function ReceptionDashboard() {
   const [showPatientPopup, setShowPatientPopup] = useState(false);
   const [showBillsModal, setShowBillsModal] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -28,10 +29,18 @@ export default function ReceptionDashboard() {
       />
 
       <section className="d-flex flex-grow-1 overflow-hidden">
-        <Sidebar
-          onAddPatient={() => setShowPatientPopup(true)}
-          onGenerateBills={() => setShowBillsModal(true)}
-        />
+        <div style={{
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          width: isCollapsed ? '90px' : '260px',
+          flexShrink: 0
+        }}>
+          <Sidebar
+            onAddPatient={() => setShowPatientPopup(true)}
+            onGenerateBills={() => setShowBillsModal(true)}
+            isCollapsed={isCollapsed}
+            onToggle={() => setIsCollapsed(!isCollapsed)}
+          />
+        </div>
 
         <main className="patient-dashboard-content-center flex-grow-1 overflow-y-auto p-4">
           <h1>Reception Dashboard</h1>

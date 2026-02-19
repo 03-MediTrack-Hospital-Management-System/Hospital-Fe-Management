@@ -1,19 +1,96 @@
+import React, { useState, useEffect } from "react";
 import "../../styles/admin.css";
-import { FaEye } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlus, FaExclamationTriangle } from "react-icons/fa";
 import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import Footer from "../../components/Common/Footer";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminPatients() {
-  const patients = [
+  const navigate = useNavigate();
+  const initialPatients = [
     { id: 1, name: "John Smith", age: 45, condition: "Diabetes", status: "Stable" },
     { id: 2, name: "Emily White", age: 52, condition: "Heart Issue", status: "Critical" },
   ];
 
+  const [patients, setPatients] = useState(initialPatients);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [patientToDelete, setPatientToDelete] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("hospital_patients");
+      const parsed = saved ? JSON.parse(saved) : [];
+      const savedPatients = Array.isArray(parsed) ? parsed : [];
+      setPatients([...initialPatients, ...savedPatients]);
+    } catch (error) {
+      console.error("Error loading patients:", error);
+      setPatients(initialPatients);
+    }
+  }, []);
+
+  const handleEdit = (patient) => {
+    setSelectedPatient({ ...patient });
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveEdit = (e) => {
+    e.preventDefault();
+    const updatedPatientsList = patients.map(p => p.id === selectedPatient.id ? selectedPatient : p);
+    setPatients(updatedPatientsList);
+
+    // Update localStorage for non-initial patients
+    const savedPatients = JSON.parse(localStorage.getItem("hospital_patients") || "[]");
+    const updatedSavedPatients = savedPatients.map(p => p.id === selectedPatient.id ? selectedPatient : p);
+    localStorage.setItem("hospital_patients", JSON.stringify(updatedSavedPatients));
+
+    setIsEditModalOpen(false);
+  };
+
+  const handleDeleteRequest = (patient) => {
+    setPatientToDelete(patient);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (!patientToDelete) return;
+
+    const id = patientToDelete.id;
+    const isInitial = initialPatients.some(p => p.id === id);
+
+    if (isInitial) {
+      setPatients(prev => prev.filter(p => p.id !== id));
+    } else {
+      try {
+        const saved = localStorage.getItem("hospital_patients");
+        const parsed = saved ? JSON.parse(saved) : [];
+        const savedPatients = Array.isArray(parsed) ? parsed : [];
+        const updatedPatients = savedPatients.filter(p => p.id !== id);
+        localStorage.setItem("hospital_patients", JSON.stringify(updatedPatients));
+        setPatients([...initialPatients, ...updatedPatients]);
+      } catch (error) {
+        console.error("Error during patient deletion persistence:", error);
+      }
+    }
+
+    setIsDeleteModalOpen(false);
+    setPatientToDelete(null);
+    setSuccessMessage("Patient record deleted successfully!");
+    setTimeout(() => setSuccessMessage(""), 3000);
+  };
+
   return (
     <>
-      <div className="mb-4">
-        <h4 className="mb-0 fw-bold">Patient Records</h4>
-        <small className="text-muted">View registered patients</small>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h4 className="mb-0 fw-bold">Patient Records</h4>
+          <small className="text-muted">View registered patients</small>
+        </div>
+        <button className="btn btn-primary d-flex align-items-center gap-2" onClick={() => navigate("/admin/users/add")}>
+          <FaPlus /> Add Patient
+        </button>
       </div>
 
       <div className="card shadow-sm border-0">
@@ -25,7 +102,7 @@ export default function AdminPatients() {
                 <th>Age</th>
                 <th>Condition</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th style={{ width: "120px" }}>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -35,14 +112,19 @@ export default function AdminPatients() {
                   <td>{p.age}</td>
                   <td>{p.condition}</td>
                   <td>
-                    <span className={`badge ${p.status === "Critical" ? "bg-danger" : "bg-success"}`}>
+                    <span className={`status-pill status-pill-${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
                       {p.status}
                     </span>
                   </td>
                   <td>
-                    <button className="btn btn-sm btn-outline-primary">
-                      <FaEye /> View
-                    </button>
+                    <div className="action-btn-group">
+                      <button className="action-btn action-btn-edit" onClick={() => handleEdit(p)} title="Edit Patient">
+                        <FaEdit />
+                      </button>
+                      <button className="action-btn action-btn-delete" onClick={() => handleDeleteRequest(p)} title="Delete Patient">
+                        <FaTrash />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -50,6 +132,114 @@ export default function AdminPatients() {
           </table>
         </div>
       </div>
+      {/* Edit Modal */}
+      {isEditModalOpen && (
+        <div className="modal d-block show" style={{ background: 'rgba(0,0,0,0.5)', zIndex: 1050 }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 rounded-4 shadow">
+              <div className="modal-header border-bottom-0 pt-4 px-4">
+                <h5 className="modal-title fw-bold">Edit Patient Information</h5>
+                <button type="button" className="btn-close" onClick={() => setIsEditModalOpen(false)}></button>
+              </div>
+              <form onSubmit={handleSaveEdit}>
+                <div className="modal-body p-4">
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Patient Name</label>
+                    <input
+                      type="text"
+                      className="form-control bg-light border-0 px-3 py-2"
+                      value={selectedPatient.name}
+                      onChange={(e) => setSelectedPatient({ ...selectedPatient, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Age</label>
+                    <input
+                      type="number"
+                      className="form-control bg-light border-0 px-3 py-2"
+                      value={selectedPatient.age}
+                      onChange={(e) => setSelectedPatient({ ...selectedPatient, age: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Medical Condition</label>
+                    <input
+                      type="text"
+                      className="form-control bg-light border-0 px-3 py-2"
+                      value={selectedPatient.condition}
+                      onChange={(e) => setSelectedPatient({ ...selectedPatient, condition: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Status</label>
+                    <select
+                      className="form-select bg-light border-0 px-3 py-2"
+                      value={selectedPatient.status}
+                      onChange={(e) => setSelectedPatient({ ...selectedPatient, status: e.target.value })}
+                    >
+                      <option value="Stable">Stable</option>
+                      <option value="Critical">Critical</option>
+                      <option value="Recovered">Recovered</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="modal-footer border-top-0 pb-4 px-4">
+                  <button type="button" className="btn btn-light rounded-3 px-4" onClick={() => setIsEditModalOpen(false)}>Cancel</button>
+                  <button type="submit" className="btn btn-primary rounded-3 px-4">Save Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="modal d-block show" style={{ background: 'rgba(0,0,0,0.6)', zIndex: 1060 }}>
+          <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '400px' }}>
+            <div className="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+              <div className="modal-body p-4 text-center">
+                <div className="mb-4 d-flex justify-content-center">
+                  <div className="rounded-circle bg-danger-light d-flex align-items-center justify-content-center animation-pulse" style={{ width: '70px', height: '70px', background: '#fee2e2' }}>
+                    <FaExclamationTriangle className="text-danger" size={32} />
+                  </div>
+                </div>
+                <h4 className="fw-bold text-dark mb-2">Confirm Deletion</h4>
+                <p className="text-secondary mb-4">
+                  Are you sure you want to delete the record for <strong>{patientToDelete?.name}</strong>? This action cannot be undone.
+                </p>
+                <div className="d-flex gap-2">
+                  <button
+                    type="button"
+                    className="btn btn-light w-100 rounded-3 fw-semibold py-2"
+                    onClick={() => setIsDeleteModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger w-100 rounded-3 fw-semibold py-2 shadow-sm"
+                    onClick={confirmDelete}
+                  >
+                    Delete Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Success Message Toast */}
+      {successMessage && (
+        <div className="success-toast">
+          <div className="rounded-circle bg-white bg-opacity-20 d-flex align-items-center justify-content-center" style={{ width: '28px', height: '28px' }}>
+            <FaPlus style={{ fontSize: '14px', transform: 'rotate(45deg)' }} />
+          </div>
+          <span className="fw-semibold">{successMessage}</span>
+        </div>
+      )}
     </>
   );
 

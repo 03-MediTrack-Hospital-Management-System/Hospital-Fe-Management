@@ -6,13 +6,13 @@ import { FaThLarge, FaUserPlus, FaFileInvoiceDollar } from "react-icons/fa";
 // import GenerateBills from "./GenerateBills";
 import { IoExitOutline } from "react-icons/io5";
 
-export default function Sidebar({ onAddPatient, onGenerateBills }) {
+export default function Sidebar({ onAddPatient, onGenerateBills, isCollapsed, onToggle }) {
   const handleLogout = () => {
     window.location.href = "/login";
   };
 
   const menuItems = [
-    { label: "Dashboard", icon: FaThLarge, isActive: true, onClick: () => { } }, 
+    { label: "Dashboard", icon: FaThLarge, isActive: true, onClick: () => { } },
     { label: "Add Patient", icon: FaUserPlus, onClick: onAddPatient },
     { label: "Generate Bills", icon: FaFileInvoiceDollar, onClick: onGenerateBills },
   ];
@@ -23,6 +23,8 @@ export default function Sidebar({ onAddPatient, onGenerateBills }) {
       role="FRONT DESK"
       menuItems={menuItems}
       onLogout={handleLogout}
+      isCollapsed={isCollapsed}
+      onToggle={onToggle}
     />
   );
 }

@@ -4,8 +4,15 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Controls Section */
@@ -311,5 +318,320 @@
 
     .report-card {
         padding: 24px;
+    }
+}
+
+/* Report Modal Styles */
+.report-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.report-modal-content {
+    background: #f8fafc;
+    width: 100%;
+    max-width: 900px;
+    max-height: 95vh;
+    border-radius: 24px;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.modal-close-icon:hover {
+    background: #ef4444;
+    color: #fff;
+    border-color: #ef4444;
+    transform: rotate(90deg);
+}
+
+.report-paper {
+    background: #fff;
+    margin: 40px;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    min-height: 800px;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.hospital-brand {
+    display: flex;
+    gap: 20px;
+    color: #0b5c63;
+}
+
+.hospital-brand svg {
+    font-size: 48px;
+}
+
+.hospital-brand h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.hospital-brand p {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.report-type-badge {
+    background: #0f172a;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.divider {
+    height: 2px;
+    background: #f1f5f9;
+    margin: 30px 0;
+}
+
+.divider.shadow-line {
+    background: linear-gradient(90deg, #0b5c63, #14b8a6, #0b5c63);
+    height: 4px;
+    border-radius: 2px;
+}
+
+.report-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.info-block label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.info-block p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-block svg {
+    color: #0b5c63;
+    opacity: 0.6;
+}
+
+.report-section {
+    margin-bottom: 40px;
+}
+
+.report-section h3 {
+    font-size: 18px;
+    color: #0f172a;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.report-section h3 svg {
+    color: #0b5c63;
+}
+
+.findings-box {
+    background: #f8fafc;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.findings-box p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    color: #334155;
+}
+
+.status-text {
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.status-text.normal {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-text.attention {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status-text.archived {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.dummy-text {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.dummy-text p {
+    font-style: italic;
+    color: #64748b;
+}
+
+.report-section ul {
+    padding-left: 20px;
+}
+
+.report-section li {
+    margin-bottom: 12px;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.report-footer {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.signature-area {
+    color: #64748b;
+}
+
+.e-signature {
+    margin-bottom: 15px;
+}
+
+.e-signature .dr-name {
+    font-family: 'Dancing Script', cursive, serif;
+    font-size: 28px;
+    color: #0b5c63;
+    margin: 0;
+}
+
+.e-signature span {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.disclaimer {
+    max-width: 300px;
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: right;
+    line-height: 1.5;
+}
+
+.report-actions-fixed {
+    padding: 30px 40px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    position: sticky;
+    bottom: 0;
+}
+
+.report-btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    border: none;
+}
+
+.report-btn.primary {
+    background: #0b5c63;
+    color: #fff;
+}
+
+.report-btn.secondary {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.report-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .report-paper {
+        margin: 10px;
+        padding: 30px;
+    }
+
+    .report-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-header {
+        flex-direction: column;
+        gap: 20px;
     }
 }

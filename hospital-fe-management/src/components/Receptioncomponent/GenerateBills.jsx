@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const doctorsData = [
   {
@@ -36,7 +37,7 @@ export default function GenerateBills() {
 
   const handleGenerateBill = () => {
     if (!selectedPatient || !selectedDoctor) {
-      alert("Please select patient and doctor");
+      toast.error("Please select patient and doctor");
       return;
     }
 
@@ -51,66 +52,66 @@ export default function GenerateBills() {
     };
 
     console.log("Generated Bill:", bill);
-    alert("Bill Generated Successfully ✅");
+    toast.success("Bill Generated Successfully ✅");
 
-    
+
   };
 
   const containerStyle = {
-  maxWidth: "500px",
-  margin: "auto",
-  padding: "25px",
-  borderRadius: "14px",
-  backgroundColor: "#ffffff",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-  fontFamily: "'Poppins', Inter, sans-serif"
-};
+    maxWidth: "500px",
+    margin: "auto",
+    padding: "25px",
+    borderRadius: "14px",
+    backgroundColor: "#ffffff",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+    fontFamily: "'Poppins', Inter, sans-serif"
+  };
 
-const headingStyle = {
-  textAlign: "center",
-  marginBottom: "20px",
-  color: "#0f766e",
-  fontSize: "22px",
-  fontWeight: "600"
-};
+  const headingStyle = {
+    textAlign: "center",
+    marginBottom: "20px",
+    color: "#0f766e",
+    fontSize: "22px",
+    fontWeight: "600"
+  };
 
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  marginBottom: "12px",
-  borderRadius: "8px",
-  border: "1px solid #d1d5db",
-  fontSize: "14px"
-};
+  const inputStyle = {
+    width: "100%",
+    padding: "12px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    fontSize: "14px"
+  };
 
-const infoBox = {
-  padding: "10px",
-  backgroundColor: "#f0fdfa",
-  borderRadius: "8px",
-  marginBottom: "12px",
-  color: "#065f46"
-};
+  const infoBox = {
+    padding: "10px",
+    backgroundColor: "#f0fdfa",
+    borderRadius: "8px",
+    marginBottom: "12px",
+    color: "#065f46"
+  };
 
-const totalBox = {
-  display: "flex",
-  justifyContent: "space-between",
-  padding: "12px",
-  backgroundColor: "#ecfeff",
-  borderRadius: "8px",
-  marginBottom: "15px",
-  fontSize: "16px"
-};
+  const totalBox = {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "12px",
+    backgroundColor: "#ecfeff",
+    borderRadius: "8px",
+    marginBottom: "15px",
+    fontSize: "16px"
+  };
 
-const buttonStyle = {
-  width: "100%",
-  padding: "12px",
-  background: "linear-gradient(90deg, #0f766e, #2563eb)",
-  color: "#fff",
-  border: "none",
-  borderRadius: "10px",
-  fontSize: "16px",
-  cursor: "pointer"
-};
+  const buttonStyle = {
+    width: "100%",
+    padding: "12px",
+    background: "linear-gradient(90deg, #0f766e, #2563eb)",
+    color: "#fff",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "16px",
+    cursor: "pointer"
+  };
 
   return (
     <div style={containerStyle}>

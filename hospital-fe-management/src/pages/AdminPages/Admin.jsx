@@ -6,7 +6,8 @@ import {
   FaUsers,
   FaChartLine,
   FaBoxOpen,
-  FaExclamationTriangle
+  FaExclamationTriangle,
+  FaUserPlus
 } from "react-icons/fa";
 
 export default function Admin() {
@@ -32,11 +33,8 @@ export default function Admin() {
         </div>
 
         <div className="d-flex gap-2 mt-3 mt-md-0">
-          <button className="btn btn-primary" onClick={() => navigate("/admin/doctors")}>
-            Manage Doctors
-          </button>
-          <button className="btn btn-outline-secondary" onClick={() => navigate("/admin/patients")}>
-            Manage Patients
+          <button className="btn btn-primary d-flex align-items-center gap-2 px-4 shadow-sm" onClick={() => navigate("/admin/users/add")}>
+            <FaUserPlus /> Add New User
           </button>
         </div>
       </div>
