@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const PatientRegister = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +33,7 @@ const PatientRegister = () => {
     existingUsers.push(patientUser);
     localStorage.setItem("users", JSON.stringify(existingUsers));
 
-    alert("Patient Enrolled Successfully ✅");
+    toast.success("Patient Enrolled Successfully ✅");
 
     setFormData({
       name: "",
@@ -45,54 +46,54 @@ const PatientRegister = () => {
     });
   };
 
- 
-const containerStyle = {
-  maxWidth: "500px",
-  margin: "auto",
-  padding: "25px",
-  borderRadius: "14px",
-  backgroundColor: "#ffffff",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-  fontFamily: "'Poppins', 'Inter', 'Segoe UI', sans-serif"
-};
 
-const headingStyle = {
-  textAlign: "center",
-  marginBottom: "20px",
-  color: "#0f766e", 
-  fontWeight: "600",
-  fontSize: "22px"
-};
+  const containerStyle = {
+    maxWidth: "500px",
+    margin: "auto",
+    padding: "25px",
+    borderRadius: "14px",
+    backgroundColor: "#ffffff",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+    fontFamily: "'Poppins', 'Inter', 'Segoe UI', sans-serif"
+  };
 
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  marginBottom: "12px",
-  borderRadius: "8px",
-  border: "1px solid #d1d5db",
-  fontSize: "14px",
-  color: "#1f2937",
-  outline: "none"
-};
+  const headingStyle = {
+    textAlign: "center",
+    marginBottom: "20px",
+    color: "#0f766e",
+    fontWeight: "600",
+    fontSize: "22px"
+  };
 
-const textareaStyle = {
-  ...inputStyle,
-  resize: "none",
-  height: "80px"
-};
+  const inputStyle = {
+    width: "100%",
+    padding: "12px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    fontSize: "14px",
+    color: "#1f2937",
+    outline: "none"
+  };
 
-const buttonStyle = {
-  width: "100%",
-  padding: "12px",
-  background: "linear-gradient(90deg, #0f766e, #2563eb)",
-  color: "#ffffff",
-  border: "none",
-  borderRadius: "10px",
-  cursor: "pointer",
-  fontSize: "16px",
-  fontWeight: "500",
-  marginTop: "15px"
-};
+  const textareaStyle = {
+    ...inputStyle,
+    resize: "none",
+    height: "80px"
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "12px",
+    background: "linear-gradient(90deg, #0f766e, #2563eb)",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "500",
+    marginTop: "15px"
+  };
 
 
   return (

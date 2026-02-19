@@ -395,26 +395,115 @@ body {
   border-color: var(--border);
 }
 
-.table-action-btn {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  border-radius: 6px !important;
-  padding: 6px 10px !important;
+/* Action Button Styling */
+.action-btn-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-table td button {
-  position: static !important;
-  width: auto !important;
-  height: auto !important;
-  border-radius: 6px !important;
-  padding: 6px 10px !important;
-  display: inline-flex !important;
+.action-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
-table td .action-buttons {
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.action-btn-edit {
+  background-color: #f0f9ff;
+  color: #0ea5e9;
+}
+
+.action-btn-edit:hover {
+  background-color: #0ea5e9;
+  color: white;
+}
+
+.action-btn-delete {
+  background-color: #fff1f2;
+  color: #f43f5e;
+}
+
+.action-btn-delete:hover {
+  background-color: #f43f5e;
+  color: white;
+}
+
+/* Status Pill Styling */
+.status-pill {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.status-pill-active,
+.status-pill-stable,
+.status-pill-recovered {
+  background-color: #d1fae5;
+  color: #047857;
+  border: 1px solid #10b98133;
+}
+
+.status-pill-leave,
+.status-pill-pending {
+  background-color: #fef3c7;
+  color: #b45309;
+  border: 1px solid #f59e0b33;
+}
+
+.status-pill-inactive,
+.status-pill-critical {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #ef444433;
+}
+
+/* Success Toast Styling */
+.success-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #10b981;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
   display: flex;
-  gap: 8px;
-} */
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  z-index: 1070;
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../../styles/components/ReportsList.css";
+import ReportModal from './ReportModal';
 import {
   FaFileMedical,
   FaFlask,
@@ -13,10 +14,12 @@ import {
   FaUserMd,
   FaUserCircle
 } from 'react-icons/fa';
+import { downloadReportPDF } from '../../utils/downloadUtils';
 
 export default function ReportsList() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedReport, setSelectedReport] = useState(null);
 
 
   const reports = [
@@ -155,10 +158,18 @@ export default function ReportsList() {
             </div>
 
             <div className="report-actions">
-              <button className="action-btn view" title="View Report">
+              <button
+                className="action-btn view"
+                title="View Report"
+                onClick={() => setSelectedReport(report)}
+              >
                 <FaEye /> View
               </button>
-              <button className="action-btn download" title="Download PDF">
+              <button
+                className="action-btn download"
+                title="Download PDF"
+                onClick={() => downloadReportPDF(report)}
+              >
                 <FaDownload /> Download
               </button>
             </div>
@@ -171,6 +182,11 @@ export default function ReportsList() {
           </div>
         )}
       </div>
+
+      <ReportModal
+        report={selectedReport}
+        onClose={() => setSelectedReport(null)}
+      />
     </div>
   );
 }

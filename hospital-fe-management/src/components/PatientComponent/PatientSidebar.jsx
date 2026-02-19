@@ -9,7 +9,7 @@ import {
   FaCommentDots
 } from "react-icons/fa";
 
-export default function PatientSidebar() {
+export default function PatientSidebar({ isCollapsed, onToggle }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -31,6 +31,8 @@ export default function PatientSidebar() {
       role="DASHBOARD"
       menuItems={menuItems}
       onLogout={handleLogout}
+      isCollapsed={isCollapsed}
+      onToggle={onToggle}
     />
   );
 }

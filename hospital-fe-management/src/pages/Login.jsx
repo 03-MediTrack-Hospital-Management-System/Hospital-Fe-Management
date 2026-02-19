@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
-import { FaShieldAlt, FaUserMd, FaClock, FaHeart } from "react-icons/fa";
+import { FaShieldAlt, FaUserMd, FaClock, FaHeart, FaHospitalSymbol } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ function Login() {
               <div className="position-relative z-2 stagger-1">
                 <div className="d-flex align-items-center gap-3 mb-5">
                   <div className="bg-white bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center backdrop-blur-sm shadow-sm" style={{ width: '56px', height: '56px', border: '1px solid rgba(255,255,255,0.2)' }}>
-                    <FaHeart className="text-teal fs-3" />
+                    <FaHospitalSymbol className="text-teal fs-3" />
                   </div>
                   <div>
                     <h3 className="fw-bold m-0 lh-1 tracking-tight">VV Care</h3>
@@ -206,7 +206,7 @@ function Login() {
                 </form>
 
                 <div className="mt-5 text-center stagger-5">
-              
+
 
                   <p className="small text-secondary m-0">
                     Don’t have an account?{" "}

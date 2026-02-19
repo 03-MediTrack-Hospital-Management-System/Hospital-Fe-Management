@@ -3,17 +3,121 @@ import {
   FaBoxOpen,
   FaSearch,
   FaPlus,
-  FaTrash
+  FaTrash,
+  FaEdit,
+  FaSave,
+  FaTimes
 } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import Footer from "../../components/Common/Footer";
 
+function EditMedicineModal({ medicine, onSave, onCancel }) {
+  const [formData, setFormData] = useState({ ...medicine });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
+  return (
+    <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)' }}>
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content border-0 shadow-lg" style={{ borderRadius: '24px', overflow: 'hidden' }}>
+          <div className="modal-header border-0 bg-primary text-white p-4">
+            <h5 className="modal-title fw-bold">Edit Medicine</h5>
+            <button type="button" className="btn-close btn-close-white" onClick={onCancel}></button>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="modal-body p-4">
+              <div className="mb-3">
+                <label className="form-label fw-bold small text-uppercase">Medicine Name</label>
+                <input
+                  type="text"
+                  className="form-control border-0 bg-light p-3"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-bold small text-uppercase">Stock</label>
+                  <input
+                    type="number"
+                    className="form-control border-0 bg-light p-3"
+                    value={formData.stock}
+                    onChange={(e) => setFormData({ ...formData, stock: parseInt(e.target.value) })}
+                    required
+                  />
+                </div>
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-bold small text-uppercase">Min Stock</label>
+                  <input
+                    type="number"
+                    className="form-control border-0 bg-light p-3"
+                    value={formData.min}
+                    onChange={(e) => setFormData({ ...formData, min: parseInt(e.target.value) })}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-bold small text-uppercase">Price ($)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    className="form-control border-0 bg-light p-3"
+                    value={formData.price}
+                    onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
+                    required
+                  />
+                </div>
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-bold small text-uppercase">Category</label>
+                  <input
+                    type="text"
+                    className="form-control border-0 bg-light p-3"
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="mb-3">
+                <label className="form-label fw-bold small text-uppercase">Supplier</label>
+                <input
+                  type="text"
+                  className="form-control border-0 bg-light p-3"
+                  value={formData.supplier}
+                  onChange={(e) => setFormData({ ...formData, supplier: e.target.value })}
+                  required
+                />
+              </div>
+            </div>
+            <div className="modal-footer border-0 p-4 pt-0">
+              <button type="button" className="btn btn-light px-4 py-2 rounded-3 fw-bold" onClick={onCancel}>
+                <FaTimes className="me-2" /> Cancel
+              </button>
+              <button type="submit" className="btn btn-primary px-4 py-2 rounded-3 fw-bold">
+                <FaSave className="me-2" /> Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Inventory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [editingMedicine, setEditingMedicine] = useState(null);
 
   const [medicines, setMedicines] = useState(() => {
     const saved = localStorage.getItem("hospital_inventory");
@@ -37,6 +141,17 @@ export default function Inventory() {
     const updated = medicines.filter(m => m.id !== id);
     setMedicines(updated);
     localStorage.setItem("hospital_inventory", JSON.stringify(updated));
+    setSuccessMessage("Medicine record removed successfully!");
+    setTimeout(() => setSuccessMessage(""), 3000);
+  };
+
+  const handleUpdateMedicine = (updatedMed) => {
+    const updated = medicines.map(m => m.id === updatedMed.id ? updatedMed : m);
+    setMedicines(updated);
+    localStorage.setItem("hospital_inventory", JSON.stringify(updated));
+    setEditingMedicine(null);
+    setSuccessMessage("Medicine updated successfully!");
+    setTimeout(() => setSuccessMessage(""), 3000);
   };
 
 
@@ -105,17 +220,27 @@ export default function Inventory() {
                     <td>{med.min}</td>
                     <td>${med.price}</td>
                     <td>
-                      <span className={`badge ${low ? "bg-danger" : "bg-success"}`}>
-                        {low ? "Low" : "In Stock"}
+                      <span className={`status-pill ${low ? "status-pill-critical" : "status-pill-active"}`} style={{ minWidth: '95px' }}>
+                        {low ? "Low Stock" : "In Stock"}
                       </span>
                     </td>
                     <td>
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => deleteMedicine(med.id)}
-                      >
-                        <FaTrash />
-                      </button>
+                      <div className="action-btn-group">
+                        <button
+                          className="action-btn action-btn-edit"
+                          onClick={() => setEditingMedicine(med)}
+                          title="Edit Medicine"
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="action-btn action-btn-delete"
+                          onClick={() => deleteMedicine(med.id)}
+                          title="Delete Medicine"
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -130,6 +255,20 @@ export default function Inventory() {
           )}
         </div>
       </div>
+
+      {successMessage && (
+        <div className="success-toast">
+          {successMessage}
+        </div>
+      )}
+
+      {editingMedicine && (
+        <EditMedicineModal
+          medicine={editingMedicine}
+          onSave={handleUpdateMedicine}
+          onCancel={() => setEditingMedicine(null)}
+        />
+      )}
     </>
   );
 

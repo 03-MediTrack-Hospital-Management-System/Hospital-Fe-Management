@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import DoctorSidebar from "../../components/DoctorComponent/DoctorSidebar";
 import DoctorOverview from "../../components/DoctorComponent/DoctorOverview";
 import DoctorStats from "../../components/DoctorComponent/DoctorStats";
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function DoctorDashboard() {
   const navigate = useNavigate();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleLogout = () => {
     navigate('/login');
@@ -19,7 +21,13 @@ export default function DoctorDashboard() {
       <GlobalHeader onLogout={handleLogout} />
 
       <div className="d-flex flex-grow-1 overflow-hidden">
-        <DoctorSidebar />
+        <div style={{
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          width: isCollapsed ? '90px' : '260px',
+          flexShrink: 0
+        }}>
+          <DoctorSidebar isCollapsed={isCollapsed} onToggle={() => setIsCollapsed(!isCollapsed)} />
+        </div>
 
         <main className="flex-grow-1 p-4 overflow-y-auto" style={{ background: 'transparent' }}>
           <div style={{ marginBottom: '40px' }}>

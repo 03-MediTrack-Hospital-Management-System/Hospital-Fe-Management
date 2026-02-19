@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 
 import ProtectedRoute from "./components/Common/ProtectedRoute";
@@ -25,6 +26,7 @@ import AdminDoctors from "./pages/AdminPages/AdminDoctors";
 import AdminPatients from "./pages/AdminPages/AdminPatients";
 import AdminSettings from "./pages/AdminPages/AdminSettings";
 import AdminAddDoctor from "./pages/AdminPages/AdminAddDoctor";
+import AdminAddUser from "./pages/AdminPages/AdminAddUser";
 
 import ReceptionDashboard from "./pages/ReceptionPages/ReceptionDashboard";
 import Inventory from "./pages/AdminPages/Inventory";
@@ -37,9 +39,9 @@ function App() {
   useEffect(() => {
     document.body.setAttribute("data-theme", "dark");
   }, []);
-
   return (
     <BrowserRouter>
+      <Toaster position="top-right" reverseOrder={false} />
 
 
       <Routes>
@@ -145,6 +147,7 @@ function App() {
         >
           <Route index element={<Admin />} />
           <Route path="doctors" element={<AdminDoctors />} />
+          <Route path="users/add" element={<AdminAddUser />} />
           <Route path="doctors/add" element={<AdminAddDoctor />} />
           <Route path="patients" element={<AdminPatients />} />
           <Route path="settings" element={<AdminSettings />} />

@@ -7,7 +7,7 @@ import {
     FaUser
 } from "react-icons/fa";
 
-export default function DoctorSidebar() {
+export default function DoctorSidebar({ isCollapsed, onToggle }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -27,6 +27,8 @@ export default function DoctorSidebar() {
             role="MEDICAL STAFF"
             menuItems={menuItems}
             onLogout={handleLogout}
+            isCollapsed={isCollapsed}
+            onToggle={onToggle}
         />
     );
 }

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaUser,
   FaEnvelope,
   FaPhone,
   FaLock,
-  FaCalendarAlt
+  FaCalendarAlt,
+  FaHospitalSymbol
 } from "react-icons/fa";
 import hospitalImg from "../assets/hospital1.jpg";
 
@@ -25,6 +26,7 @@ const InputField = ({ icon: Icon, name, value, onChange, ...props }) => (
 );
 
 function Signup() {
+  const navigate = useNavigate();
   const [showPersonal, setShowPersonal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -45,39 +47,39 @@ function Signup() {
   };
 
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setIsLoading(true);
-
-  setTimeout(() => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const exists = users.find((u) => u.email === formData.email);
-
-    if (exists) {
-      setIsLoading(false);
-      alert("User already exists");
-      return;
-    }
-
-    let role = "PATIENT";
-    if (formData.email === "admin@gmail.com") role = "ADMIN";
-    if (formData.email === "reception@gmail.com") role = "RECEPTION";
-
-    users.push({
-      email: formData.email,
-      password: formData.password,
-      role,
-      profile: formData
-    });
-
-    localStorage.setItem("users", JSON.stringify(users));
-    setIsLoading(false);
-    setShowSuccess(true);
+    e.preventDefault();
+    setIsLoading(true);
 
     setTimeout(() => {
-      navigate("/login");
-    }, 2000);
-  }, 1000);
-};
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const exists = users.find((u) => u.email === formData.email);
+
+      if (exists) {
+        setIsLoading(false);
+        alert("User already exists");
+        return;
+      }
+
+      let role = "PATIENT";
+      if (formData.email === "admin@gmail.com") role = "ADMIN";
+      if (formData.email === "reception@gmail.com") role = "RECEPTION";
+
+      users.push({
+        email: formData.email,
+        password: formData.password,
+        role,
+        profile: formData
+      });
+
+      localStorage.setItem("users", JSON.stringify(users));
+      setIsLoading(false);
+      setShowSuccess(true);
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    }, 1000);
+  };
 
 
   return (
@@ -102,9 +104,16 @@ function Signup() {
               className="col-lg-5 d-none d-lg-flex flex-column justify-content-center p-5 text-white"
               style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}
             >
-              <h6 className="text-uppercase opacity-75 fw-bold">
-                VV Care Hospitals
-              </h6>
+              <div className="d-flex align-items-center gap-3 mb-5">
+                <div className="bg-white bg-opacity-10 rounded-3 d-flex align-items-center justify-content-center backdrop-blur-sm shadow-sm" style={{ width: '56px', height: '56px', border: '1px solid rgba(255,255,255,0.2)' }}>
+                  <FaHospitalSymbol className="text-white fs-3" />
+                </div>
+                <div>
+                  <h3 className="fw-bold m-0 lh-1 tracking-tight">VV Care</h3>
+                  <small className="opacity-75 text-uppercase letter-spacing-2">Hospitals</small>
+                </div>
+              </div>
+
               <h2 className="fw-bold display-5">
                 Your Health,<br />
                 <span className="opacity-75">Our Priority</span>

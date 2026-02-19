@@ -8,7 +8,7 @@ import {
     FaCog
 } from "react-icons/fa";
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ isCollapsed, onToggle }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -29,6 +29,8 @@ export default function AdminSidebar() {
             role="ADMINISTRATOR"
             menuItems={menuItems}
             onLogout={handleLogout}
+            isCollapsed={isCollapsed}
+            onToggle={onToggle}
         />
     );
 }

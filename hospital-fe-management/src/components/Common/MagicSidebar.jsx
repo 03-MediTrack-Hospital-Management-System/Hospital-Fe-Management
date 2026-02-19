@@ -3,15 +3,13 @@ import { NavLink } from 'react-router-dom';
 import '../../styles/components/MagicSidebar.css';
 import { FaHospitalSymbol, FaSignOutAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export default function MagicSidebar({ title, role, menuItems, onLogout }) {
-    const [isCollapsed, setIsCollapsed] = useState(false);
-
+export default function MagicSidebar({ title, role, menuItems, onLogout, isCollapsed, onToggle }) {
     return (
         <aside className={`magic-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
 
             <button
                 className="sidebar-toggle-btn"
-                onClick={() => setIsCollapsed(!isCollapsed)}
+                onClick={onToggle}
                 title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
                 {isCollapsed ? <FaChevronRight size={12} /> : <FaChevronLeft size={12} />}
