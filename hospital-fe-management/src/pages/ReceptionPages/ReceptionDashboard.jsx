@@ -16,15 +16,33 @@ export default function ReceptionDashboard() {
   const [showBillsModal, setShowBillsModal] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
+  const [user, setUser] = useState({ name: "Receptionist", role: "Front Desk" });
+
+  React.useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser);
+        setUser({
+          name: parsed.fullName || parsed.name || "Receptionist",
+          role: parsed.role === "ROLE_RECEPTION" ? "Front Desk" : parsed.role || "Staff"
+        });
+      } catch (e) {
+        console.error("Error parsing user info", e);
+      }
+    }
+  }, []);
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("currentUser");
     navigate('/login');
   };
 
   return (
     <div className="d-flex flex-column min-vh-100 overflow-hidden global-dashboard-bg">
       <GlobalHeader
-        user={{ name: "Receptionist", role: "Front Desk" }}
+        user={user}
         onLogout={handleLogout}
       />
 

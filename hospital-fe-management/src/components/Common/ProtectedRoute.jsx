@@ -8,11 +8,13 @@ export default function ProtectedRoute({ children, role }) {
     return <Navigate to="/login" replace />;
   }
 
-if (role && user.role !== role) {
-  if (user.role === "ADMIN") return <Navigate to="/admin" replace />;
-  if (user.role === "DOCTOR") return <Navigate to="/doctor" replace />;
-  if (user.role === "PATIENT") return <Navigate to="/patient" replace />;
-}
+  const userRole = user.role?.startsWith("ROLE_") ? user.role.substring(5) : user.role;
+
+  if (role && userRole !== role) {
+    if (userRole === "ADMIN") return <Navigate to="/admin" replace />;
+    if (userRole === "DOCTOR") return <Navigate to="/doctor" replace />;
+    if (userRole === "PATIENT") return <Navigate to="/patient" replace />;
+  }
 
 
   return children;

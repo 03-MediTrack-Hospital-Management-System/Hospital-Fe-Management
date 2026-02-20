@@ -4,6 +4,8 @@ import { FaEdit, FaTrash, FaPlus, FaExclamationTriangle } from "react-icons/fa";
 import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import Footer from "../../components/Common/Footer";
 import { useNavigate } from "react-router-dom";
+import { fetchAllDoctors } from "../../utils/api";
+import { toast } from "react-hot-toast";
 
 export default function AdminDoctors() {
   const navigate = useNavigate();
@@ -12,23 +14,67 @@ export default function AdminDoctors() {
     { id: 2, name: "Dr. James Carter", specialization: "Neurology", patients: 80, status: "On Leave" },
   ];
 
-  const [doctors, setDoctors] = useState(initialDoctors);
+  const [doctors, setDoctors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [docToDelete, setDocToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
-  useEffect(() => {
+  const loadDoctors = async () => {
+    setIsLoading(true);
+    let apiData = [];
+    let fetchError = false;
+
     try {
-      const saved = localStorage.getItem("hospital_doctors");
-      const parsed = saved ? JSON.parse(saved) : [];
-      const savedDoctors = Array.isArray(parsed) ? parsed : [];
-      setDoctors([...initialDoctors, ...savedDoctors]);
+      apiData = await fetchAllDoctors();
     } catch (error) {
-      console.error("Error loading doctors:", error);
-      setDoctors(initialDoctors);
+      console.error("Error loading doctors from API:", error);
+      fetchError = true;
     }
+
+    try {
+      const localData = JSON.parse(localStorage.getItem("hospital_doctors") || "[]");
+
+      // Map backend fields to frontend fields
+      const mappedApiData = apiData.map(doc => ({
+        id: doc.id || doc._id || Math.random().toString(36).substr(2, 9),
+        name: doc.name || doc.fullName,
+        specialization: doc.specialization || doc.speciality || "General",
+        patients: doc.patients || 0,
+        status: doc.status || "Active"
+      }));
+
+      // Combine: API first, then Local, then Demo (as final fallback)
+      // We want to remove duplicates but prioritize newer/actual data
+      const combined = [...mappedApiData, ...localData, ...initialDoctors];
+      const unique = combined.reduce((acc, current) => {
+        // Find if we already added a doctor with this name or ID
+        const isDuplicate = acc.find(item =>
+          (item.id && current.id && String(item.id) === String(current.id)) ||
+          (item.name.toLowerCase() === current.name.toLowerCase())
+        );
+        if (!isDuplicate) return acc.concat([current]);
+        return acc;
+      }, []);
+
+      setDoctors(unique);
+
+      // Only show toast if it totally failed and we have no local data beyond demo
+      if (fetchError && localData.length === 0) {
+        toast.error("Connecting to server... showing offline data.", { id: "fetch-warn" });
+      }
+    } catch (error) {
+      console.error("Critical UI error in loadDoctors:", error);
+      setDoctors(initialDoctors);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadDoctors();
   }, []);
 
   const handleEdit = (doctor) => {
@@ -89,7 +135,7 @@ export default function AdminDoctors() {
           <h4 className="mb-0 fw-bold">Manage Doctors</h4>
           <small className="text-muted">View and manage doctors</small>
         </div>
-        <button className="btn btn-primary d-flex align-items-center gap-2" onClick={() => navigate("/admin/users/add")}>
+        <button className="btn btn-primary d-flex align-items-center gap-2" onClick={() => navigate("/admin/users/add?role=Doctor")}>
           <FaPlus /> Add Doctor
         </button>
       </div>
@@ -108,29 +154,46 @@ export default function AdminDoctors() {
             </thead>
 
             <tbody>
-              {doctors.map((doc) => (
-                <tr key={doc.id}>
-                  <td>{doc.name}</td>
-                  <td>{doc.specialization}</td>
-                  <td>{doc.patients}</td>
-                  <td>
-                    <span className={`status-pill status-pill-${doc.status.toLowerCase().replace(/\s+/g, '-')}`}>
-                      {doc.status}
-                    </span>
-                  </td>
-
-                  <td>
-                    <div className="action-btn-group">
-                      <button className="action-btn action-btn-edit" onClick={() => handleEdit(doc)} title="Edit Doctor">
-                        <FaEdit />
-                      </button>
-                      <button className="action-btn action-btn-delete" onClick={() => handleDeleteRequest(doc)} title="Delete Doctor">
-                        <FaTrash />
-                      </button>
+              {isLoading ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-5">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
+                    <p className="mt-2 text-muted">Fetching records from database...</p>
                   </td>
                 </tr>
-              ))}
+              ) : doctors.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-5 text-muted">
+                    No doctors found in the database.
+                  </td>
+                </tr>
+              ) : (
+                doctors.map((doc) => (
+                  <tr key={doc.id}>
+                    <td>{doc.name}</td>
+                    <td>{doc.specialization}</td>
+                    <td>{doc.patients}</td>
+                    <td>
+                      <span className={`status-pill status-pill-${doc.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                        {doc.status}
+                      </span>
+                    </td>
+
+                    <td>
+                      <div className="action-btn-group">
+                        <button className="action-btn action-btn-edit" onClick={() => handleEdit(doc)} title="Edit Doctor">
+                          <FaEdit />
+                        </button>
+                        <button className="action-btn action-btn-delete" onClick={() => handleDeleteRequest(doc)} title="Delete Doctor">
+                          <FaTrash />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

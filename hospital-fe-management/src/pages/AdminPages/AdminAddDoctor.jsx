@@ -3,28 +3,87 @@ import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import { useState } from "react";
 import { FaUserMd, FaArrowLeft, FaSave, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { authenticatedFetch } from "../../utils/api";
 
 export default function AdminAddDoctor() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         email: "",
-        phone: "",
-        specialization: "General",
-        qualification: "",
-        experience: "",
-        status: "Active"
+        password: ""
     });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("Doctor added successfully (Mock)");
-        navigate("/admin/doctors");
+        const loadingToast = toast.loading("Saving doctor details...");
+
+        try {
+            // Generate a unique dummy phone number to avoid backend unique constraint "roll back" errors
+            const uniqueId = Date.now().toString().slice(-6);
+            const dummyMobile = `9000${uniqueId}`;
+
+            const payload = {
+                fullName: formData.fullName,
+                name: formData.fullName,
+                username: formData.email,
+                email: formData.email,
+                password: formData.password,
+                role: "ROLE_DOCTOR",
+                dob: "2000-01-01",
+                gender: "Male",
+                bloodGroup: "O+",
+                height: "170",
+                weight: "70",
+                age: 35,
+                specialization: "General",
+                speciality: "General",
+                condition: "None",
+                address: "Not Provided",
+                phone: dummyMobile,
+                phoneNumber: dummyMobile,
+                mobile: dummyMobile
+            };
+
+            const response = await authenticatedFetch("http://localhost:8081/auth/admin/create-user", {
+                method: "POST",
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                let message = errorText;
+                try {
+                    const parsed = JSON.parse(errorText);
+                    message = parsed.message || (parsed.error ? `${parsed.error}: ${parsed.message}` : errorText);
+                } catch (e) { }
+                throw new Error(message || "Failed to create doctor");
+            }
+
+            toast.success("Doctor added successfully!", { id: loadingToast });
+
+            // Update local storage for UI consistency
+            const existingDoctors = JSON.parse(localStorage.getItem("hospital_doctors") || "[]");
+            const newDoctor = {
+                id: Date.now(),
+                name: formData.fullName.startsWith("Dr. ") ? formData.fullName : `Dr. ${formData.fullName}`,
+                specialization: "General",
+                patients: 0,
+                status: "Active"
+            };
+            localStorage.setItem("hospital_doctors", JSON.stringify([...existingDoctors, newDoctor]));
+
+            setTimeout(() => {
+                navigate("/admin/doctors");
+            }, 2000);
+        } catch (error) {
+            console.error("Error creating doctor:", error);
+            toast.error(error.message, { id: loadingToast });
+        }
     };
 
     return (
@@ -42,113 +101,45 @@ export default function AdminAddDoctor() {
                 </div>
             </div>
 
-            <div className="card shadow-sm border-0 rounded-4 p-4 p-md-5" style={{ maxWidth: '900px' }}>
+            <div className="card shadow-sm border-0 rounded-4 p-4 p-md-5" style={{ maxWidth: '600px' }}>
                 <form onSubmit={handleSubmit}>
-                    <div className="row g-4 mb-5">
-                        <div className="col-lg-3 text-center">
-                            <div className="mx-auto" style={{
-                                width: '120px',
-                                height: '120px',
-                                borderRadius: '50%',
-                                background: '#f8fafc',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                border: '2px dashed #cbd5e1',
-                                marginBottom: '15px',
-                                cursor: 'pointer'
-                            }}>
-                                <FaCamera size={30} color="#94a3b8" />
-                            </div>
-                            <span className="text-secondary small fw-medium">Upload Photo</span>
-                        </div>
-
-                        <div className="col-lg-9">
-                            <div className="row g-3">
-                                <div className="col-md-6 text-start">
-                                    <label className="form-label fw-semibold text-dark">First Name</label>
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        value={formData.firstName}
-                                        onChange={handleChange}
-                                        className="form-control form-control-lg bg-light border-0"
-                                        required
-                                    />
-                                </div>
-                                <div className="col-md-6 text-start">
-                                    <label className="form-label fw-semibold text-dark">Last Name</label>
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        value={formData.lastName}
-                                        onChange={handleChange}
-                                        className="form-control form-control-lg bg-light border-0"
-                                        required
-                                    />
-                                </div>
-                                <div className="col-md-6 text-start">
-                                    <label className="form-label fw-semibold text-dark">Email Address</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="form-control form-control-lg bg-light border-0"
-                                        required
-                                    />
-                                </div>
-                                <div className="col-md-6 text-start">
-                                    <label className="form-label fw-semibold text-dark">Phone Number</label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        className="form-control form-control-lg bg-light border-0"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 className="fw-bold mb-4 pb-2 border-bottom">Professional Information</h4>
-                    <div className="row g-4 mb-5 text-start">
-                        <div className="col-md-6">
-                            <label className="form-label fw-semibold text-dark">Specialization</label>
-                            <select
-                                name="specialization"
-                                value={formData.specialization}
-                                onChange={handleChange}
-                                className="form-select form-control-lg bg-light border-0"
-                            >
-                                <option>General</option>
-                                <option>Cardiology</option>
-                                <option>Neurology</option>
-                                <option>Orthopedics</option>
-                                <option>Pediatrics</option>
-                                <option>Dermatology</option>
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label fw-semibold text-dark">Experience (Years)</label>
-                            <input
-                                type="number"
-                                name="experience"
-                                value={formData.experience}
-                                onChange={handleChange}
-                                className="form-control form-control-lg bg-light border-0"
-                            />
-                        </div>
-                        <div className="col-12">
-                            <label className="form-label fw-semibold text-dark">Qualifications</label>
+                    <div className="d-flex flex-column gap-4 mb-5">
+                        <div className="w-100">
+                            <label className="form-label small fw-bold text-muted text-uppercase mb-2">Full Name</label>
                             <input
                                 type="text"
-                                name="qualification"
-                                value={formData.qualification}
+                                name="fullName"
+                                placeholder="e.g. Dr. Sarah Wilson"
+                                value={formData.fullName}
                                 onChange={handleChange}
-                                className="form-control form-control-lg bg-light border-0"
-                                placeholder="e.g. MBBS, MD, FRCS"
+                                className="form-control form-control-lg bg-light border-0 shadow-none rounded-3 px-4 py-3"
+                                required
+                            />
+                        </div>
+
+                        <div className="w-100">
+                            <label className="form-label small fw-bold text-muted text-uppercase mb-2">Email Address</label>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="example@hospital.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="form-control form-control-lg bg-light border-0 shadow-none rounded-3 px-4 py-3"
+                                required
+                            />
+                        </div>
+
+                        <div className="w-100">
+                            <label className="form-label small fw-bold text-muted text-uppercase mb-2">Access Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Create a secure password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="form-control form-control-lg bg-light border-0 shadow-none rounded-3 px-4 py-3"
+                                required
                             />
                         </div>
                     </div>
@@ -157,13 +148,13 @@ export default function AdminAddDoctor() {
                         <button
                             type="button"
                             onClick={() => navigate("/admin/doctors")}
-                            className="btn btn-lg btn-outline-secondary px-5 rounded-3"
+                            className="btn btn-lg btn-outline-secondary px-5 rounded-pill fw-bold"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="btn btn-lg btn-primary px-5 rounded-3 shadow-sm d-flex align-items-center gap-2"
+                            className="btn btn-lg btn-primary px-5 rounded-pill shadow-sm d-flex align-items-center gap-2 fw-bold"
                         >
                             <FaSave /> Save Doctor
                         </button>

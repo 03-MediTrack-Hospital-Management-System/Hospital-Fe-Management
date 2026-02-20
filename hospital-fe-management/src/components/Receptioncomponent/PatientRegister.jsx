@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { authenticatedFetch } from "../../utils/api";
 
 const PatientRegister = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
-    gender: "",
+    gender: "Male",
     dob: "",
     age: "",
-    reason: ""
+    reason: "",
+    password: "Password@123" // Default password for new patient accounts
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,31 +23,61 @@ const PatientRegister = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    const loadingToast = toast.loading("Enrolling patient in database...");
 
-    const existingUsers =
-      JSON.parse(localStorage.getItem("users")) || [];
+    try {
+      const payload = {
+        fullName: formData.name,
+        name: formData.name,
+        username: formData.email,
+        email: formData.email,
+        password: formData.password,
+        role: "ROLE_PATIENT",
+        dob: formData.dob || "2000-01-01",
+        gender: formData.gender,
+        bloodGroup: "O+",
+        height: "170",
+        weight: "70",
+        age: parseInt(formData.age) || 25,
+        address: "Not Provided",
+        phone: formData.mobile,
+        phoneNumber: formData.mobile,
+        mobile: formData.mobile,
+        condition: formData.reason,
+        reason: formData.reason
+      };
 
-    const patientUser = {
-      ...formData,
-      role: "PATIENT"
-    };
+      const response = await authenticatedFetch("http://localhost:8081/auth/admin/create-user", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
 
-    existingUsers.push(patientUser);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Failed to enroll patient");
+      }
 
-    toast.success("Patient Enrolled Successfully ✅");
+      toast.success("Patient Enrolled Successfully ✅", { id: loadingToast });
 
-    setFormData({
-      name: "",
-      email: "",
-      mobile: "",
-      gender: "",
-      dob: "",
-      age: "",
-      reason: ""
-    });
+      setFormData({
+        name: "",
+        email: "",
+        mobile: "",
+        gender: "Male",
+        dob: "",
+        age: "",
+        reason: "",
+        password: "Password@123"
+      });
+    } catch (error) {
+      console.error("Enrollment error:", error);
+      toast.error(error.message || "Failed to save to database", { id: loadingToast });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
 
