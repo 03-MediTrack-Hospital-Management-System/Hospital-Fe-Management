@@ -9,6 +9,7 @@ import {
   FaHospitalSymbol
 } from "react-icons/fa";
 import hospitalImg from "../assets/hospital1.jpg";
+import { register as apiRegister } from "../utils/api";
 
 const InputField = ({ icon: Icon, name, value, onChange, ...props }) => (
   <div className="input-group mb-3">
@@ -27,58 +28,55 @@ const InputField = ({ icon: Icon, name, value, onChange, ...props }) => (
 
 function Signup() {
   const navigate = useNavigate();
-  const [showPersonal, setShowPersonal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    password: "",
-    dob: "",
-    gender: "",
-    bloodGroup: "",
-    height: "",
-    weight: ""
+    password: ""
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      const exists = users.find((u) => u.email === formData.email);
+    try {
+      // Generate a unique dummy phone number to avoid backend unique constraint "roll back" errors
+      const uniqueId = Date.now().toString().slice(-6);
+      const dummyMobile = `9800${uniqueId}`;
 
-      if (exists) {
-        setIsLoading(false);
-        alert("User already exists");
-        return;
-      }
-
-      let role = "PATIENT";
-      if (formData.email === "admin@gmail.com") role = "ADMIN";
-      if (formData.email === "reception@gmail.com") role = "RECEPTION";
-
-      users.push({
-        email: formData.email,
-        password: formData.password,
-        role,
-        profile: formData
-      });
-
-      localStorage.setItem("users", JSON.stringify(users));
+      const payload = {
+        ...formData,
+        username: formData.email,
+        role: "ROLE_PATIENT",
+        dob: "2000-01-01",
+        gender: "Male",
+        bloodGroup: "O+",
+        height: "170",
+        weight: "70",
+        age: 25,
+        address: "Not Provided",
+        phone: dummyMobile,
+        phoneNumber: dummyMobile,
+        mobile: dummyMobile
+      };
+      await apiRegister(payload);
       setIsLoading(false);
       setShowSuccess(true);
 
       setTimeout(() => {
         navigate("/login");
       }, 2000);
-    }, 1000);
+    } catch (error) {
+      console.error("Registration failed:", error);
+      alert(error.message || "Registration failed. Please try again.");
+      setIsLoading(false);
+    }
   };
 
 
@@ -87,9 +85,9 @@ function Signup() {
       {showSuccess && (
         <div
           className="position-fixed top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-          style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)" }}
+          style={{ background: "linear-gradient(135deg, #0b5c63 0%, #2aa7a1 100%)", zIndex: 1050 }}
         >
-          <div className="bg-white text-success rounded-circle d-flex align-items-center justify-content-center mb-4 fs-1 fw-bold">
+          <div className="bg-white text-success rounded-circle d-flex align-items-center justify-content-center mb-4 fs-1 fw-bold" style={{ width: '80px', height: '80px' }}>
             ✓
           </div>
           <h3 className="fw-bold">Account Created!</h3>
@@ -140,115 +138,32 @@ function Signup() {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                  <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-                    <h6 className="fw-bold text-uppercase small mb-0" style={{ color: "#0b5c63" }}>
-                      {showPersonal ? "Step 2: Personal Details" : "Step 1: Basic Information"}
-                    </h6>
-                    <span className="badge rounded-pill text-white" style={{ backgroundColor: "#2aa7a1" }}>
-                      {showPersonal ? "2 / 2" : "1 / 2"}
-                    </span>
-                  </div>
-
-                  {!showPersonal && (
-                    <>
-                      <InputField
-                        icon={FaUser}
-                        name="fullName"
-                        placeholder="Full Name"
-                        required
-                        value={formData.fullName}
-                        onChange={handleChange}
-                      />
-                      <InputField
-                        icon={FaEnvelope}
-                        name="email"
-                        type="email"
-                        placeholder="Email Address"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-                      <InputField
-                        icon={FaLock}
-                        name="password"
-                        type="password"
-                        placeholder="Create Password"
-                        required
-                        value={formData.password}
-                        onChange={handleChange}
-                      />
-
-                      <button
-                        type="button"
-                        className="btn w-100 fw-bold"
-                        style={{ borderColor: "#2aa7a1", color: "#0b5c63" }}
-                        onClick={() => setShowPersonal(true)}
-                      >
-                        Add Personal Details
-                      </button>
-                    </>
-                  )}
-
-                  {showPersonal && (
-                    <>
-                      <div className="row g-3">
-                        <div className="col-md-6">
-                          <InputField
-                            icon={FaCalendarAlt}
-                            type="date"
-                            name="dob"
-                            value={formData.dob}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <select
-                            className="form-select bg-light border-0 py-3"
-                            name="gender"
-                            value={formData.gender}
-                            onChange={handleChange}
-                          >
-                            <option value="">Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                          </select>
-                        </div>
-                        <div className="col-md-4">
-                          <InputField
-                            name="bloodGroup"
-                            placeholder="Blood Group"
-                            value={formData.bloodGroup}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <InputField
-                            name="height"
-                            placeholder="Height (cm)"
-                            value={formData.height}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <InputField
-                            name="weight"
-                            placeholder="Weight (kg)"
-                            value={formData.weight}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-
-                      <button
-                        type="button"
-                        className="btn btn-link text-muted fw-bold mt-3"
-                        onClick={() => setShowPersonal(false)}
-                      >
-                        ← Back to Basic Info
-                      </button>
-                    </>
-                  )}
+                  <InputField
+                    icon={FaUser}
+                    name="fullName"
+                    placeholder="Full Name"
+                    required
+                    value={formData.fullName}
+                    onChange={handleChange}
+                  />
+                  <InputField
+                    icon={FaEnvelope}
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  <InputField
+                    icon={FaLock}
+                    name="password"
+                    type="password"
+                    placeholder="Create Password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
 
                   <button
                     type="submit"

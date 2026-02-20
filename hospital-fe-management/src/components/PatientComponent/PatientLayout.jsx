@@ -7,15 +7,33 @@ import { useNavigate } from "react-router-dom";
 export default function PatientLayout({ children }) {
     const navigate = useNavigate();
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [user, setUser] = useState({ name: "Patient", role: "Patient" });
+
+    React.useEffect(() => {
+        const storedUser = localStorage.getItem("currentUser");
+        if (storedUser) {
+            try {
+                const parsed = JSON.parse(storedUser);
+                setUser({
+                    name: parsed.fullName || parsed.name || "Patient",
+                    role: "Patient"
+                });
+            } catch (e) {
+                console.error("Error parsing user info", e);
+            }
+        }
+    }, []);
 
     const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("currentUser");
         navigate('/login');
     };
 
     return (
         <div className="d-flex flex-column min-vh-100 global-dashboard-bg overflow-hidden">
             <GlobalHeader
-                user={{ name: "John Doe", role: "Patient" }}
+                user={user}
                 onLogout={handleLogout}
             />
 

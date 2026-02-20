@@ -4,6 +4,8 @@ import { FaEdit, FaTrash, FaPlus, FaExclamationTriangle } from "react-icons/fa";
 import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import Footer from "../../components/Common/Footer";
 import { useNavigate } from "react-router-dom";
+import { fetchAllPatients } from "../../utils/api";
+import { toast } from "react-hot-toast";
 
 export default function AdminPatients() {
   const navigate = useNavigate();
@@ -12,23 +14,64 @@ export default function AdminPatients() {
     { id: 2, name: "Emily White", age: 52, condition: "Heart Issue", status: "Critical" },
   ];
 
-  const [patients, setPatients] = useState(initialPatients);
+  const [patients, setPatients] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [patientToDelete, setPatientToDelete] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
 
-  useEffect(() => {
+  const loadPatients = async () => {
+    setIsLoading(true);
+    let apiData = [];
+    let fetchError = false;
+
     try {
-      const saved = localStorage.getItem("hospital_patients");
-      const parsed = saved ? JSON.parse(saved) : [];
-      const savedPatients = Array.isArray(parsed) ? parsed : [];
-      setPatients([...initialPatients, ...savedPatients]);
+      apiData = await fetchAllPatients();
     } catch (error) {
-      console.error("Error loading patients:", error);
-      setPatients(initialPatients);
+      console.error("Error loading patients from API:", error);
+      fetchError = true;
     }
+
+    try {
+      const localData = JSON.parse(localStorage.getItem("hospital_patients") || "[]");
+
+      // Map backend fields to frontend fields
+      const mappedApiData = apiData.map(p => ({
+        id: p.id || p._id || Math.random().toString(36).substr(2, 9),
+        name: p.fullName || p.name,
+        age: p.age || "N/A",
+        condition: p.condition || p.reason || "General",
+        status: p.status || "Stable"
+      }));
+
+      // Combine: API first, then Local, then Demo (as final fallback)
+      const combined = [...mappedApiData, ...localData, ...initialPatients];
+      const unique = combined.reduce((acc, current) => {
+        const isDuplicate = acc.find(item =>
+          (item.id && current.id && String(item.id) === String(current.id)) ||
+          (item.name.toLowerCase() === current.name.toLowerCase())
+        );
+        if (!isDuplicate) return acc.concat([current]);
+        return acc;
+      }, []);
+
+      setPatients(unique);
+
+      if (fetchError && localData.length === 0) {
+        toast.error("Connecting to server... showing local patient data.", { id: "p-fetch-warn" });
+      }
+    } catch (error) {
+      console.error("Critical UI error in loadPatients:", error);
+      setPatients(initialPatients);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadPatients();
   }, []);
 
   const handleEdit = (patient) => {
@@ -88,7 +131,7 @@ export default function AdminPatients() {
           <h4 className="mb-0 fw-bold">Patient Records</h4>
           <small className="text-muted">View registered patients</small>
         </div>
-        <button className="btn btn-primary d-flex align-items-center gap-2" onClick={() => navigate("/admin/users/add")}>
+        <button className="btn btn-primary d-flex align-items-center gap-2" onClick={() => navigate("/admin/users/add?role=Patient")}>
           <FaPlus /> Add Patient
         </button>
       </div>
@@ -106,28 +149,45 @@ export default function AdminPatients() {
               </tr>
             </thead>
             <tbody>
-              {patients.map(p => (
-                <tr key={p.id}>
-                  <td>{p.name}</td>
-                  <td>{p.age}</td>
-                  <td>{p.condition}</td>
-                  <td>
-                    <span className={`status-pill status-pill-${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
-                      {p.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="action-btn-group">
-                      <button className="action-btn action-btn-edit" onClick={() => handleEdit(p)} title="Edit Patient">
-                        <FaEdit />
-                      </button>
-                      <button className="action-btn action-btn-delete" onClick={() => handleDeleteRequest(p)} title="Delete Patient">
-                        <FaTrash />
-                      </button>
+              {isLoading ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-5">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
+                    <p className="mt-2 text-muted">Fetching patient records...</p>
                   </td>
                 </tr>
-              ))}
+              ) : patients.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-5 text-muted">
+                    No patients found in the database.
+                  </td>
+                </tr>
+              ) : (
+                patients.map(p => (
+                  <tr key={p.id}>
+                    <td>{p.name}</td>
+                    <td>{p.age}</td>
+                    <td>{p.condition}</td>
+                    <td>
+                      <span className={`status-pill status-pill-${p.status.toLowerCase().replace(/\s+/g, '-')}`}>
+                        {p.status}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="action-btn-group">
+                        <button className="action-btn action-btn-edit" onClick={() => handleEdit(p)} title="Edit Patient">
+                          <FaEdit />
+                        </button>
+                        <button className="action-btn action-btn-delete" onClick={() => handleDeleteRequest(p)} title="Delete Patient">
+                          <FaTrash />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

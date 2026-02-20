@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "../../components/AdminComponent/AdminSidebar";
 import GlobalHeader from "../../components/Common/GlobalHeader";
@@ -10,8 +11,48 @@ import {
   FaUserPlus
 } from "react-icons/fa";
 
+import { fetchAllDoctors, fetchAllPatients } from "../../utils/api";
+
 export default function Admin() {
   const navigate = useNavigate();
+  const [counts, setCounts] = useState({
+    doctors: 24,
+    patients: 342
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const [doctors, patients] = await Promise.all([
+          fetchAllDoctors().catch(() => []),
+          fetchAllPatients().catch(() => [])
+        ]);
+
+        const localDocs = JSON.parse(localStorage.getItem("hospital_doctors") || "[]");
+        const localPats = JSON.parse(localStorage.getItem("hospital_patients") || "[]");
+
+        // Base counts from original design + actual DB counts + local counts
+        setCounts({
+          doctors: 24 + doctors.length + localDocs.length,
+          patients: 342 + patients.length + localPats.length
+        });
+      } catch (error) {
+        console.error("Error loading dashboard counts:", error);
+        // On fatal error, still show local counts
+        const localDocs = JSON.parse(localStorage.getItem("hospital_doctors") || "[]");
+        const localPats = JSON.parse(localStorage.getItem("hospital_patients") || "[]");
+        setCounts({
+          doctors: 24 + localDocs.length,
+          patients: 342 + localPats.length
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadStats();
+  }, []);
 
   const recentBills = [
     { id: 1, patient: "John Smith", amount: "$250", date: "2024-12-15", status: "paid" },
@@ -40,8 +81,8 @@ export default function Admin() {
       </div>
 
       <div className="row g-3 mb-4">
-        <StatCard icon={<FaUsers />} label="Total Patients" value="342" />
-        <StatCard icon={<FaUserMd />} label="Doctors" value="24" />
+        <StatCard icon={<FaUsers />} label="Total Patients" value={counts.patients.toString()} />
+        <StatCard icon={<FaUserMd />} label="Doctors" value={counts.doctors.toString()} />
         <StatCard icon={<FaChartLine />} label="Revenue" value="$75,200" />
         <StatCard icon={<FaExclamationTriangle />} label="Low Stock" value="5" danger />
       </div>

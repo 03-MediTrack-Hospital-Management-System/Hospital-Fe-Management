@@ -7,6 +7,7 @@ import { FaSun, FaMoon, FaCloudSun } from 'react-icons/fa';
 export default function PatientDashboard() {
   const [greeting, setGreeting] = useState('');
   const [icon, setIcon] = useState(null);
+  const [userName, setUserName] = useState('Patient');
 
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -22,6 +23,19 @@ export default function PatientDashboard() {
       setGreeting('Good Evening');
       setIcon(<FaMoon className="text-secondary mb-1" />);
     }
+
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser);
+        const fullName = parsed.fullName || parsed.name || "Patient";
+        // Extract first name if possible
+        const firstName = fullName.split(' ')[0];
+        setUserName(firstName);
+      } catch (e) {
+        console.error("Error parsing user info", e);
+      }
+    }
   }, []);
 
   return (
@@ -31,7 +45,7 @@ export default function PatientDashboard() {
           <div>
             <div className="d-flex align-items-center gap-2 mb-1">
               {icon}
-              <h1 className="h3 fw-bold text-dark m-0">{greeting}, <span className="text-teal">John</span></h1>
+              <h1 className="h3 fw-bold text-dark m-0">{greeting}, <span className="text-teal">{userName}</span></h1>
             </div>
             <p className="text-secondary m-0">Here's your health overview for today.</p>
           </div>

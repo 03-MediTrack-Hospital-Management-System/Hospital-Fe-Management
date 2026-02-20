@@ -11,14 +11,32 @@ import { useNavigate } from "react-router-dom";
 export default function DoctorDashboard() {
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [user, setUser] = useState({ name: "Dr. John Doe", role: "Specialist" });
+
+  React.useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser);
+        setUser({
+          name: parsed.fullName || parsed.name || "Doctor",
+          role: parsed.specialization || parsed.role || "Specialist"
+        });
+      } catch (e) {
+        console.error("Error parsing user info", e);
+      }
+    }
+  }, []);
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("currentUser");
     navigate('/login');
   };
 
   return (
     <div className="doctor-dashboard-container d-flex flex-column min-vh-100 overflow-hidden global-dashboard-bg">
-      <GlobalHeader onLogout={handleLogout} />
+      <GlobalHeader user={user} onLogout={handleLogout} />
 
       <div className="d-flex flex-grow-1 overflow-hidden">
         <div style={{
@@ -35,7 +53,7 @@ export default function DoctorDashboard() {
               Doctor Dashboard
             </h1>
             <p style={{ margin: 0, fontSize: '18px', color: '#64748b', fontWeight: '500' }}>
-              Welcome back, Dr. John Doe. Here's your overview for today.
+              Welcome back, {user.name}. Here's your overview for today.
             </p>
           </div>
 

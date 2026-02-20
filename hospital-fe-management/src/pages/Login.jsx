@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 import { FaShieldAlt, FaUserMd, FaClock, FaHeart, FaHospitalSymbol } from "react-icons/fa";
+import { login as apiLogin } from "../utils/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,56 +16,42 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("users"));
-
-    if (!users || users.length === 0) {
-      localStorage.setItem(
-        "users",
-        JSON.stringify([
-          { email: "patient@gmail.com", password: "1234", role: "PATIENT" },
-          { email: "doctor@gmail.com", password: "1234", role: "DOCTOR" },
-          { email: "admin@gmail.com", password: "1234", role: "ADMIN" },
-          { email: "reception@gmail.com", password: "1234", role: "RECEPTION" },
-        ])
-      );
-    }
-  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setLoginError(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    setTimeout(() => {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
+    try {
+      const response = await apiLogin({
+        email: formData.email.trim(),
+        password: formData.password.trim(),
+      });
 
-      const user = users.find(
-        (u) =>
-          u.email === formData.email.trim() &&
-          u.password === formData.password.trim()
-      );
+      // Assuming response contains token and user info (including role)
+      localStorage.setItem("currentUser", JSON.stringify(response));
+      localStorage.setItem("token", response.token);
 
-      if (!user) {
-        setLoginError(true);
-        setIsLoading(false);
-        return;
-      }
-
-      localStorage.setItem("currentUser", JSON.stringify(user));
       setShowSuccess(true);
+      const rawRole = response.role || "PATIENT";
+      const role = rawRole.startsWith("ROLE_") ? rawRole.substring(5) : rawRole;
 
       setTimeout(() => {
-        if (user.role === "PATIENT") navigate("/patient");
-        if (user.role === "DOCTOR") navigate("/doctor");
-        if (user.role === "ADMIN") navigate("/admin");
-        if (user.role === "RECEPTION") navigate("/reception");
+        if (role === "PATIENT") navigate("/patient");
+        if (role === "DOCTOR") navigate("/doctor");
+        if (role === "ADMIN") navigate("/admin");
+        if (role === "RECEPTION") navigate("/reception");
       }, 1500);
-    }, 800);
+    } catch (error) {
+      console.error("Login failed:", error);
+      setLoginError(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
